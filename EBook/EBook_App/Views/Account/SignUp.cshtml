@@ -1,0 +1,224 @@
+﻿@{
+    ViewBag.Title = "Sign-Up";
+    Layout = "~/Views/Shared/_Masterpage.cshtml";
+    ViewBag.IsLoadKendo = false;
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/select2.min.css?ID=@ViewBag.GUID">
+<style>
+    .SignUpContainer {
+        background: url(../img/auth-bg.jpg) no-repeat center center;
+    }
+</style>
+
+
+<!--Wrapper Start -->
+<div class="auth-wrapper d-flex no-block justify-content-center align-items-center SignUpContainer">
+
+    <div id="signupdiv" class="pt-2 container p-4 bg-white rounded">
+        <div class="logo text-center border-bottom">
+            <h3 class="box-title mb-3">SIGN-UP</h3>
+        </div>
+        <!-- Form -->
+        <form class="row form-horizontal mt-3 form-material" id="loginform" asp-controller="Account" asp-action="SignUp">
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="mb-3 row">
+                    <label class="col-form-label col-3 fw-bold">First Name: <span class="text-red">*</span></label>
+                    <div class="col-9">
+                        <input type="text" id="TxtFirstName" name="FirstName" value="" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" class="form-control" placeholder="FirstName" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">Middle Name: </strong>
+                    <div class="col-9">
+                        <input type="text" id="TxtMiddleName" name="MiddleName" value="" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" class="form-control" placeholder="MiddleName" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">Last Name: </strong>
+                    <div class="col-9">
+                        <input type="text" id="TxtLastName" name="LastName" value="" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" class="form-control" placeholder="LastName" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">Email ID: <span class="text-red">*</span></strong>
+                    <div class="col-9">
+                        <input type="text" id="TxtEmailID" name="EmailID" value="" class="form-control" onkeyup="$('#TxtEmailID').val($('#TxtEmailID').val().toLowerCase());$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#TxtEmailID').val($('#TxtEmailID').val().toLowerCase());$('#' + this.id).removeClass('is-invalid')" placeholder="Email ID" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">Department: <span class="text-red">*</span></strong>
+                    <div class="col-9 mt-3">
+                        <select id="txtDepartment" name="D_ID" style="width: 100%" onchange="$('#txtDepartment').removeClass('is-invalid');$('#span_select2-txtDepartment-container').removeClass('is-invalid')" class="form-select select2">
+                            @{
+                                <option value="" selected="selected">[Select Option]</option>
+                                for (int i = 0; i < ViewBag.Departments.Rows.Count; i++)
+                                {
+                                    <option value="@ViewBag.Departments.Rows[i]["ID"].ToString()">@ViewBag.Departments.Rows[i]["Name"].ToString()</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">Address 1: <span class="text-red">*</span></strong>
+                    <div class="col-9">
+                        <input type="text" id="txtAddress1" name="Address1" value="" class="form-control" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" placeholder="Address 1" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">City: </strong>
+                    <div class="col-9">
+                        <input type="text" id="txtCity" name="City" value="" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" class="form-control" placeholder="City" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">State: </strong>
+                    <div class="col-9">
+                        <input type="text" id="txtState" name="State" value="" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" class="form-control" placeholder="State" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">Country: </strong>
+                    <div class="col-9">
+                        <input type="text" id="txtCountry" name="Country" value="" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" class="form-control" placeholder="Country" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">ZipCode: </strong>
+                    <div class="col-9">
+                        <input type="text" id="txtZipCode" name="ZipCode" value="" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" class="form-control" placeholder="ZipCode" autocomplete="off" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">Username: <span class="text-red">*</span></strong>
+                    <div class="col-9">
+                        <input type="text" id="TxtNewUserName" name="NewUserName" value="" class="form-control" onkeyup="$('#TxtNewUserName').val($('#TxtNewUserName').val().toUpperCase());$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#TxtNewUserName').val($('#TxtNewUserName').val().toUpperCase());$('#' + this.id).removeClass('is-invalid')" placeholder="UserName" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">Password: <span class="text-red">*</span></strong>
+                    <div class="col-9">
+                        <input type="password" id="TxtNewPassword" name="NewPassword" value="" onchange="ValidatePassword(this)" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" class="form-control custompassword" placeholder="Password" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">Confirm Password: <span class="text-red">*</span></strong>
+                    <div class="col-9">
+                        <input type="password" id="TxtConfirmNewPassword" name="ConfirmNewPassword" value="" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" class="form-control custompassword" placeholder="Confirm Password" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">Designation: <span class="text-red">*</span></strong>
+                    <div class="col-9">
+                        <input type="text" id="txtDesignation" name="Designation" value="" class="form-control" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" placeholder="Designation" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">Company: </strong>
+                    <div class="col-9">
+                        <input type="text" id="txtCompany" name="Company" value="" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" class="form-control" placeholder="Company" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">Address 2: </strong>
+                    <div class="col-9">
+                        <input type="text" id="txtAddress2" name="Address2" value="" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" class="form-control" placeholder="Address 2" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">Mobile: </strong>
+                    <div class="col-9">
+                        <input type="text" id="txtMobile" name="Mobile" value="" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" class="form-control" placeholder="Mobile" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">Phone: </strong>
+                    <div class="col-9">
+                        <input type="text" id="txtPhone" name="Phone" value="" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" class="form-control" placeholder="Phone" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">Phone Ext: </strong>
+                    <div class="col-9">
+                        <input type="text" id="txtPhoneExt" name="PhoneExt" value="" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" class="form-control" placeholder="Phone Ext" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <strong class="col-form-label col-3 fw-bold">Encrypted Answer: </strong>
+                    <div class="col-9">
+                        <input type="text" id="txtEncryptedAnswer" name="EncryptedAnswer" value="" onkeyup="$('#' + this.id).removeClass('is-invalid')" onkeydown="$('#' + this.id).removeClass('is-invalid')" class="form-control" placeholder="Encrypted Answer" autocomplete="off" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-lg-4 col-md-4 col-sm-4">
+                <div class="d-flex">
+                    <div class="checkbox checkbox-info pt-0">
+                        <<input id="checkbox-isActive" type="checkbox" name="isActive" class="material-inputs chk-col-indigo">
+                        <label for="checkbox-isActive"> Is-Active </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-lg-4 col-md-4 col-sm-4">
+                <div class="d-flex">
+                    <div class="checkbox checkbox-info pt-0">
+                        <input id="checkbox-isApiUser" type="checkbox" name="isApiUser" class="material-inputs chk-col-indigo">
+                        <label for="checkbox-isApiUser"> IsAPIUser </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-lg-4 col-md-4 col-sm-4">
+                <div class="d-flex">
+                    <div class="checkbox checkbox-info pt-0">
+                        <input id="checkbox-isApproved" type="checkbox" name="isApproved" class="material-inputs chk-col-indigo">
+                        <label for="checkbox-isApproved"> IsApproved </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group text-center mt-4 mb-3">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <button class="btn btn-info d-block w-100 waves-effect waves-light" type="submit">
+                        SIGN-UP
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+<!--Wrapper End -->
+
+<script src="~/js/select2.js?ID=@ViewBag.GUID" type="text/javascript"></script>
+@section scripts {
+
+    <script>
+        function isPasswordValid(password, passwordlength) {
+            // Define regular expressions for each criterion
+            const hasCapitalLetter = /[A-Z]/.test(password);
+            const hasSmallLetter = /[a-z]/.test(password);
+            const hasSpecialCharacter = /[!@@#$%^&*()_+{}\[\]:;<>,.?~\\/\-=]/.test(password);
+            const hasNumber = /\d/.test(password);
+            const hasLength = password.length < passwordlength ? false : true;
+
+            // Check if all criteria are met
+            return hasCapitalLetter && hasSmallLetter && hasSpecialCharacter && hasNumber && hasLength;
+        }
+
+        function ValidatePassword(this_) {
+            IsValidPassword = isPasswordValid(this_.value, 8);
+            if (IsValidPassword == false) {
+                $('#TxtNewPassword').addClass('is-invalid');
+            }
+            else {
+                $('#TxtNewPassword').removeClass('is-invalid');
+            }
+        }
+        $(".select2").select2();
+    </script>
+}

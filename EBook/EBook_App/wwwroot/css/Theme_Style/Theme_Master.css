@@ -1,0 +1,702 @@
+﻿.Theme-Darker1 {
+    background-color: #1F6285 !important;
+}
+
+.Theme-Dark1 {
+    background-color: #2778A3 !important;
+}
+
+.Theme-DarkAlt1 {
+    background-color: #2778A3 !important;
+}
+
+.Theme-Primary1 {
+    background-color: #2F90C4 !important;
+}
+
+.Theme-Secondary1 {
+    background-color: #4A9CC8 !important;
+}
+
+.Theme-Tertiary1 {
+    background-color: #86BDDA !important;
+}
+
+.Theme-Light1 {
+    background-color: #AED3E7 !important;
+}
+
+.Theme-Lighter1 {
+    background-color: #D7E9F3 !important;
+}
+
+.Theme-Header1 {
+    background: linear-gradient(to top left, #1F6285 50%, #AED3E7 250%) !important;
+}
+
+.Theme-Header1b {
+    background: linear-gradient(to bottom left, #1F6285 -25%, #AED3E7 50%, #1F6285 115%) !important;
+}
+
+.Theme-Header1t {
+    background: linear-gradient(to top left, #1F6285 -25%, #AED3E7 50%, #1F6285 115%) !important;
+}
+
+.Theme-Darker2 {
+    background-color: #C32D39 !important;
+}
+
+.Theme-Dark2 {
+    background-color: #D3424D !important;
+}
+
+.Theme-DarkAlt2 {
+    background-color: #D3424D !important;
+}
+
+.Theme-Primary2 {
+    background-color: #DB626C !important;
+}
+
+.Theme-Secondary2 {
+    background-color: #DD737D !important;
+}
+
+.Theme-Tertiary2 {
+    background-color: #E8A1A8 !important;
+}
+
+.Theme-Light2 {
+    background-color: #F0C1C5 !important;
+}
+
+.Theme-Lighter2 {
+    background-color: #F7E0E2 !important;
+}
+
+.Theme-Header2 {
+    background: linear-gradient(to top left, #C32D39 50%, #F0C1C5 250%) !important;
+}
+
+.Theme-Header2b {
+    background: linear-gradient(to bottom left, #C32D39 -25%, #F0C1C5 50%, #C32D39 115%) !important;
+}
+
+.Theme-Header2t {
+    background: linear-gradient(to top left, #C32D39 -25%, #F0C1C5 50%, #C32D39 115%) !important;
+}
+
+.Theme-Darker3 {
+    background-color: #000608 !important;
+}
+
+.Theme-Dark3 {
+    background-color: #041F2A !important;
+}
+
+.Theme-DarkAlt3 {
+    background-color: #083B4E !important;
+}
+
+.Theme-Primary3 {
+    background-color: #246076 !important;
+}
+
+.Theme-Secondary3 {
+    background-color: #3D7083 !important;
+}
+
+.Theme-Tertiary3 {
+    background-color: #7DA0AC !important;
+}
+
+.Theme-Light3 {
+    background-color: #A9BFC8 !important;
+}
+
+.Theme-Lighter3 {
+    background-color: #D4EAEF !important;
+}
+
+.Theme-Header3 {
+    background: linear-gradient(to top left, #000608 50%, #A9BFC8 250%) !important;
+}
+
+.Theme-Header3b {
+    background: linear-gradient(to bottom left, #000608 -25%, #A9BFC8 50%, #000608 115%) !important;
+}
+
+.Theme-Header3t {
+    background: linear-gradient(to top left, #000608 -25%, #A9BFC8 50%, #000608 115%) !important;
+}
+
+.Theme-Darker4 {
+    background-color: #133363 !important;
+}
+
+.Theme-Dark4 {
+    background-color: #1A4382 !important;
+}
+
+.Theme-DarkAlt4 {
+    background-color: #1A4382 !important;
+}
+
+.Theme-Primary4 {
+    background-color: #2055A4 !important;
+}
+
+.Theme-Secondary4 {
+    background-color: #3A68AB !important;
+}
+
+.Theme-Tertiary4 {
+    background-color: #7C9AC7 !important;
+}
+
+.Theme-Light4 {
+    background-color: #A7BCDA !important;
+}
+
+.Theme-Lighter4 {
+    background-color: #E0E7F2 !important;
+}
+
+.Theme-Header4 {
+    background: linear-gradient(to top left, #133363 50%, #A7BCDA 250%) !important;
+}
+
+.Theme-Header4b {
+    background: linear-gradient(to bottom left, #133363 -25%, #A7BCDA 50%, #133363 115%) !important;
+}
+
+.Theme-Header4t {
+    background: linear-gradient(to top left, #133363 -25%, #A7BCDA 50%, #133363 115%) !important;
+}
+
+.Theme-Darker5 {
+    background-color: #4E0D25 !important;
+}
+
+.Theme-Dark5 {
+    background-color: #6E1334 !important;
+}
+
+.Theme-DarkAlt5 {
+    background-color: #6E1334 !important;
+}
+
+.Theme-Primary5 {
+    background-color: #911844 !important;
+}
+
+.Theme-Secondary5 {
+    background-color: #9A3258 !important;
+}
+
+.Theme-Tertiary5 {
+    background-color: #BC768F !important;
+}
+
+.Theme-Light5 {
+    background-color: #D2A4B5 !important;
+}
+
+.Theme-Lighter5 {
+    background-color: #EFDFE5 !important;
+}
+
+.Theme-Header5 {
+    background: linear-gradient(to top left, #4E0D25 50%, #D2A4B5 250%) !important;
+}
+
+.Theme-Header5b {
+    background: linear-gradient(to bottom left, #4E0D25 -25%, #D2A4B5 50%, #4E0D25 115%) !important;
+}
+
+.Theme-Header5t {
+    background: linear-gradient(to top left, #4E0D25 -25%, #D2A4B5 50%, #4E0D25 115%) !important;
+}
+
+.Theme-Darker6 {
+    background-color: #005669 !important;
+}
+
+.Theme-Dark6 {
+    background-color: #00748F !important;
+}
+
+.Theme-DarkAlt6 {
+    background-color: #00748F !important;
+}
+
+.Theme-Primary6 {
+    background-color: #0096B7 !important;
+}
+
+.Theme-Secondary6 {
+    background-color: #2FA1BD !important;
+}
+
+.Theme-Tertiary6 {
+    background-color: #74C0D3 !important;
+}
+
+.Theme-Light6 {
+    background-color: #A2D5E1 !important;
+}
+
+.Theme-Lighter6 {
+    background-color: #D1EAF0 !important;
+}
+
+.Theme-Header6 {
+    background: linear-gradient(to top left, #005669 50%, #A2D5E1 250%) !important;
+}
+
+.Theme-Header6b {
+    background: linear-gradient(to bottom left, #005669 -25%, #A2D5E1 50%, #005669 115%) !important;
+}
+
+.Theme-Header6t {
+    background: linear-gradient(to top left, #005669 -25%, #A2D5E1 50%, #005669 115%) !important;
+}
+
+.Theme-Darker7 {
+    background-color: #D77700 !important;
+}
+
+.Theme-Dark7 {
+    background-color: #F27F03 !important;
+}
+
+.Theme-DarkAlt7 {
+    background-color: #F27F03 !important;
+}
+
+.Theme-Primary7 {
+    background-color: #FF8C00 !important;
+}
+
+.Theme-Secondary7 {
+    background-color: #FD983B !important;
+}
+
+.Theme-Tertiary7 {
+    background-color: #FEBA7C !important;
+}
+
+.Theme-Light7 {
+    background-color: #FED1A8 !important;
+}
+
+.Theme-Lighter7 {
+    background-color: #FFE8D3 !important;
+}
+
+.Theme-Header7 {
+    background: linear-gradient(to top left, #D77700 50%, #FED1A8 250%) !important;
+}
+
+.Theme-Header7b {
+    background: linear-gradient(to bottom left, #D77700 -25%, #FED1A8 50%, #D77700 115%) !important;
+}
+
+.Theme-Header7t {
+    background: linear-gradient(to top left, #D77700 -25%, #FED1A8 50%, #D77700 115%) !important;
+}
+
+.Theme-Darker8 {
+    background-color: #22642D !important;
+}
+
+.Theme-Dark8 {
+    background-color: #2B813B !important;
+}
+
+.Theme-DarkAlt8 {
+    background-color: #2B813B !important;
+}
+
+.Theme-Primary8 {
+    background-color: #369F47 !important;
+}
+
+.Theme-Secondary8 {
+    background-color: #4FA85D !important;
+}
+
+.Theme-Tertiary8 {
+    background-color: #89C593 !important;
+}
+
+.Theme-Light8 {
+    background-color: #B1D8B7 !important;
+}
+
+.Theme-Lighter8 {
+    background-color: #D5EAD9 !important;
+}
+
+.Theme-Header8 {
+    background: linear-gradient(to top left, #22642D 50%, #B1D8B7 250%) !important;
+}
+
+.Theme-Header8b {
+    background: linear-gradient(to bottom left, #22642D -25%, #B1D8B7 50%, #22642D 115%) !important;
+}
+
+.Theme-Header8t {
+    background: linear-gradient(to top left, #22642D -25%, #B1D8B7 50%, #22642D 115%) !important;
+}
+
+.Theme-Darker9 {
+    background-color: #AB1713 !important;
+}
+
+.Theme-Dark9 {
+    background-color: #BA2A1D !important;
+}
+
+.Theme-DarkAlt9 {
+    background-color: #C13422 !important;
+}
+
+.Theme-Primary9 {
+    background-color: #D24726 !important;
+}
+
+.Theme-Secondary9 {
+    background-color: #D7634D !important;
+}
+
+.Theme-Tertiary9 {
+    background-color: #E39182 !important;
+}
+
+.Theme-Light9 {
+    background-color: #EFBFB6 !important;
+}
+
+.Theme-Lighter9 {
+    background-color: #F6DAD5 !important;
+}
+
+.Theme-Header9 {
+    background: linear-gradient(to top left, #AB1713 50%, #EFBFB6 250%) !important;
+}
+
+.Theme-Header9b {
+    background: linear-gradient(to bottom left, #AB1713 -25%, #EFBFB6 50%, #AB1713 115%) !important;
+}
+
+.Theme-Header9t {
+    background: linear-gradient(to top left, #AB1713 -25%, #EFBFB6 50%, #AB1713 115%) !important;
+}
+
+.Theme-Darker10 {
+    background-color: #000000 !important;
+}
+
+.Theme-Dark10 {
+    background-color: #000000 !important;
+}
+
+.Theme-DarkAlt10 {
+    background-color: #000000 !important;
+}
+
+.Theme-Primary10 {
+    background-color: #212121 !important;
+}
+
+.Theme-Secondary10 {
+    background-color: #555555 !important;
+}
+
+.Theme-Tertiary10 {
+    background-color: #999999 !important;
+}
+
+.Theme-Light10 {
+    background-color: #BBBBBB !important;
+}
+
+.Theme-Lighter10 {
+    background-color: #E4E4E4 !important;
+}
+
+.Theme-Header10 {
+    background: linear-gradient(to top left, #000000 50%, #BBBBBB 250%) !important;
+}
+
+.Theme-Header10b {
+    background: linear-gradient(to bottom left, #000000 -25%, #BBBBBB 50%, #000000 115%) !important;
+}
+
+.Theme-Header10t {
+    background: linear-gradient(to top left, #000000 -25%, #BBBBBB 50%, #000000 115%) !important;
+}
+
+.Theme-Darker11 {
+    background-color: #358468 !important;
+}
+
+.Theme-Dark11 {
+    background-color: #459A81 !important;
+}
+
+.Theme-DarkAlt11 {
+    background-color: #459A81 !important;
+}
+
+.Theme-Primary11 {
+    background-color: #5FBCA2 !important;
+}
+
+.Theme-Secondary11 {
+    background-color: #7BC882 !important;
+}
+
+.Theme-Tertiary11 {
+    background-color: #A5D8C9 !important;
+}
+
+.Theme-Light11 {
+    background-color: #BEE3DB !important;
+}
+
+.Theme-Lighter11 {
+    background-color: #D8EEE8 !important;
+}
+
+.Theme-Header11 {
+    background: linear-gradient(to top left, #358468 50%, #BEE3DB 250%) !important;
+}
+
+.Theme-Header11b {
+    background: linear-gradient(to bottom left, #358468 -25%, #BEE3DB 50%, #358468 115%) !important;
+}
+
+.Theme-Header11t {
+    background: linear-gradient(to top left, #358468 -25%, #BEE3DB 50%, #358468 115%) !important;
+}
+
+.Theme-Darker12 {
+    background-color: #1E0001 !important;
+}
+
+.Theme-Dark12 {
+    background-color: #340102 !important;
+}
+
+.Theme-DarkAlt12 {
+    background-color: #3F0102 !important;
+}
+
+.Theme-Primary12 {
+    background-color: #570000 !important;
+}
+
+.Theme-Secondary12 {
+    background-color: #6F2829 !important;
+}
+
+.Theme-Tertiary12 {
+    background-color: #9A6768 !important;
+}
+
+.Theme-Light12 {
+    background-color: #C4A7A7 !important;
+}
+
+.Theme-Lighter12 {
+    background-color: #DDCCCD !important;
+}
+
+.Theme-Header12 {
+    background: linear-gradient(to top left, #1E0001 50%, #C4A7A7 250%) !important;
+}
+
+.Theme-Header12b {
+    background: linear-gradient(to bottom left, #1E0001 -25%, #C4A7A7 50%, #1E0001 115%) !important;
+}
+
+.Theme-Header12t {
+    background: linear-gradient(to top left, #1E0001 -25%, #C4A7A7 50%, #1E0001 115%) !important;
+}
+
+.Theme-Darker13 {
+    background-color: #415322 !important;
+}
+
+.Theme-Dark13 {
+    background-color: #556E2D !important;
+}
+
+.Theme-DarkAlt13 {
+    background-color: #556E2D !important;
+}
+
+.Theme-Primary13 {
+    background-color: #6C8B38 !important;
+}
+
+.Theme-Secondary13 {
+    background-color: #7C9651 !important;
+}
+
+.Theme-Tertiary13 {
+    background-color: #A7B98B !important;
+}
+
+.Theme-Light13 {
+    background-color: #C5D0B1 !important;
+}
+
+.Theme-Lighter13 {
+    background-color: #E2E8D8 !important;
+}
+
+.Theme-Header13 {
+    background: linear-gradient(to top left, #415322 50%, #C5D0B1 250%) !important;
+}
+
+.Theme-Header13b {
+    background: linear-gradient(to bottom left, #415322 -25%, #C5D0B1 50%, #415322 115%) !important;
+}
+
+.Theme-Header13t {
+    background: linear-gradient(to top left, #415322 -25%, #C5D0B1 50%, #415322 115%) !important;
+}
+
+.Theme-Darker14 {
+    background-color: #AB1713 !important;
+}
+
+.Theme-Dark14 {
+    background-color: #BA2A1D !important;
+}
+
+.Theme-DarkAlt14 {
+    background-color: #C13422 !important;
+}
+
+.Theme-Primary14 {
+    background-color: #D24726 !important;
+}
+
+.Theme-Secondary14 {
+    background-color: #D7634D !important;
+}
+
+.Theme-Tertiary14 {
+    background-color: #E39182 !important;
+}
+
+.Theme-Light14 {
+    background-color: #EFBFB6 !important;
+}
+
+.Theme-Lighter14 {
+    background-color: #F6DAD5 !important;
+}
+
+.Theme-Header14 {
+    background: linear-gradient(to top left, #AB1713 50%, #EFBFB6 250%) !important;
+}
+
+.Theme-Header14b {
+    background: linear-gradient(to bottom left, #AB1713 -25%, #EFBFB6 50%, #AB1713 115%) !important;
+}
+
+.Theme-Header14t {
+    background: linear-gradient(to top left, #AB1713 -25%, #EFBFB6 50%, #AB1713 115%) !important;
+}
+
+.Theme-Darker15 {
+    background-color: #D77700 !important;
+}
+
+.Theme-Dark15 {
+    background-color: #F27F03 !important;
+}
+
+.Theme-DarkAlt15 {
+    background-color: #F27F03 !important;
+}
+
+.Theme-Primary15 {
+    background-color: #FF8C00 !important;
+}
+
+.Theme-Secondary15 {
+    background-color: #FD983B !important;
+}
+
+.Theme-Tertiary15 {
+    background-color: #FEBA7C !important;
+}
+
+.Theme-Light15 {
+    background-color: #FED1A8 !important;
+}
+
+.Theme-Lighter15 {
+    background-color: #FFE8D3 !important;
+}
+
+.Theme-Header15 {
+    background: linear-gradient(to top left, #D77700 50%, #FED1A8 250%) !important;
+}
+
+.Theme-Header15b {
+    background: linear-gradient(to bottom left, #D77700 -25%, #FED1A8 50%, #D77700 115%) !important;
+}
+
+.Theme-Header15t {
+    background: linear-gradient(to top left, #D77700 -25%, #FED1A8 50%, #D77700 115%) !important;
+}
+.Theme-Darker16 {
+    background-color: #4a4a4a !important;
+}
+
+.Theme-Dark16 {
+    background-color: #5b5b5b !important;
+}
+
+.Theme-DarkAlt16 {
+    background-color: #5d5d5d !important;
+}
+
+.Theme-Primary16 {
+    background-color: #6f6f6f !important;
+}
+
+.Theme-Secondary16 {
+    background-color: #979797 !important;
+}
+
+.Theme-Tertiary16 {
+    background-color: #c2c2c2 !important;
+}
+
+.Theme-Light16 {
+    background-color: #dfdfdf !important;
+}
+
+.Theme-Lighter16 {
+    background-color: #FCFCFC !important;
+}
+
+.Theme-Header16 {
+    background: linear-gradient(to top left, #4a4a4a 50%, #dfdfdf 250%) !important;
+}
+
+.Theme-Header16b {
+    background: linear-gradient(to bottom left, #4a4a4a -25%, #dfdfdf 50%, #4a4a4a 115%) !important;
+}
+
+.Theme-Header16t {
+    background: linear-gradient(to top left, #4a4a4a -25%, #dfdfdf 50%, #4a4a4a 115%) !important;
+}

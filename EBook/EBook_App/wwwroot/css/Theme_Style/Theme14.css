@@ -1,0 +1,171 @@
+﻿:root {
+    --darker-color: #AB1713;
+    --dark-color: #BA2A1D;
+    --darkalt-color: #C13422;
+    --primary-color: #D24726;
+    --secondary-color: #D7634D;
+    --tertiary-color: #E39182;
+    --light-color: #EFBFB6;
+    --lighter-color: #F6DAD5;
+    --text-color: black;
+    --icon-color: white;
+    --border-color-w: white;
+    --alert-icon-color-hover: red;
+}
+
+thead.k-table-thead tr.k-table-row,
+.sidebar-nav ul .sidebar-item.selected > .sidebar-link {
+    background: var(--secondary-color) !important;
+    /*background: -webkit-linear-gradient(to right, #237A57, var(--primary-color)) !important;
+    background: linear-gradient(to right, #237A57, var(--primary-color)) !important;*/
+    color: var(--text-color1) !important;
+} 
+
+.Theme-Darker {
+    background-color: var(--darker-color) !important;
+}
+
+.Theme-Dark {
+    background-color: var(--dark-color) !important;
+}
+
+.Theme-DarkAlt {
+    background-color: var(--darkalt-color) !important;
+}
+
+.Theme-Primary {
+    background-color: var(--primary-color) !important;
+}
+
+.Theme-Secondary {
+    background-color: var(--secondary-color) !important;
+}
+
+.Theme-Tertiary {
+    background-color: var(--tertiary-color) !important;
+}
+
+.Theme-Light {
+    background-color: var(--light-color) !important;
+}
+
+.Theme-Lighter {
+    background-color: var(--lighter-color) !important;
+}
+
+.Theme-Header {
+    background: linear-gradient(to top left, var(--darker-color) 50%, var(--light-color) 250%) !important;
+}
+
+.Theme-Headerb {
+    background: linear-gradient(to bottom left, var(--darker-color) -25%, var(--light-color) 50%, var(--darker-color) 115%) !important;
+}
+
+.Theme-Headert {
+    background: linear-gradient(to top left, var(--darker-color) -25%, var(--light-color) 50%, var(--darker-color) 115%) !important;
+}
+
+div.dataTables_paginate ul.pagination li.active a {
+    background: linear-gradient(to bottom left, var(--darker-color) -25%, var(--light-color) 100%, var(--darker-color) 200%) !important;
+}
+
+div.dataTables_length label select.Theme-Header option {
+    background-color: var(--tertiary-color) !important;
+    border-color: var(--tertiary-color) !important;
+}
+
+.Theme-icon {
+    color: var(--darkalt-color) !important;
+}
+
+.Theme-icon-hover:hover {
+    color: var(--darker-color) !important;
+}
+
+.Theme-icon:hover {
+    color: var(--darker-color) !important;
+}
+
+.Theme-text-color {
+    color: var(--text-color) !important;
+}
+
+.Theme-button {
+    background-color: var(--darkalt-color) !important;
+    color: var(--icon-color) !important;
+}
+
+    .Theme-button:hover {
+        background-color: var(--darker-color) !important;
+        border-color: var(--darker-color) !important;
+        color: var(--icon-color) !important;
+    }
+
+.Theme-button-hover:hover {
+    background-color: var(--darker-color) !important;
+    border-color: var(--darker-color) !important;
+    color: var(--icon-color) !important;
+}
+
+a.Theme-a {
+    color: var(--primary-color) !important;
+}
+
+    a.Theme-a:hover {
+        color: var(--darker-color) !important;
+    }
+
+.fa-redo:hover {
+    color: var(--darker-color) !important;
+}
+
+.fa-trash-alt:hover {
+    color: var(--alert-icon-color-hover) !important;
+}
+
+.Theme-border {
+    border: 1px solid;
+    border-color: var(--tertiary-color) !important;
+}
+
+.Theme-border-h {
+    border: 1px solid;
+    border-color: var(--border-color-w) !important;
+}
+
+.Theme-border-f {
+    border: 1px solid;
+    border-color: var(--border-color-w) !important;
+}
+
+.Theme-border-right {
+    border-right: 2px solid;
+    border-right-color: var(--tertiary-color) !important;
+}
+
+.overlay {
+    border-top: 12px solid var(--primary-color);
+    border-right: 12px solid var(--secondary-color);
+    border-bottom: 12px solid var(--tertiary-color);
+    border-left: 12px solid var(--light-color);
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    animation: spin 2s linear infinite;
+    opacity: 0.75;
+    align-self: center;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.modal-footer {
+    border-top: 2px solid !important;
+    border-top-color: var(--primary-color) !important;
+}

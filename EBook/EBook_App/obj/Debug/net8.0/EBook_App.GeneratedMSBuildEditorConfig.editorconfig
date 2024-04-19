@@ -1,0 +1,103 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = EBook_App
+build_property.RootNamespace = EBook_App
+build_property.ProjectDir = C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_App\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
+build_property.MSBuildProjectDirectory = C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_App
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/Account/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxIb21lLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/Account/SignUp.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxTaWduVXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/AppSetup/AuditHistory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwU2V0dXBcQXVkaXRIaXN0b3J5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/AppSetup/DepartmentSetup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwU2V0dXBcRGVwYXJ0bWVudFNldHVwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/AppSetup/MasterSetup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwU2V0dXBcTWFzdGVyU2V0dXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/AppSetup/PageChart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwU2V0dXBcUGFnZUNoYXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/AppSetup/PageSetup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwU2V0dXBcUGFnZVNldHVwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/AppSetup/RightsSetup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwU2V0dXBcUmlnaHRzU2V0dXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/AppSetup/RoleSetup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwU2V0dXBcUm9sZVNldHVwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/AppSetup/UserSetup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwU2V0dXBcVXNlclNldHVwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/EBook/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRUJvb2tcRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/Error/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/Shared/_Masterpage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9NYXN0ZXJwYWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hamas.khan/Desktop/Project_Template/EBook/EBook_App/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-fqo6c3rnge

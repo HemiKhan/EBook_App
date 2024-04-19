@@ -1,0 +1,1049 @@
+﻿input[type=number].hidearrow::-webkit-inner-spin-button,
+input[type=number].hidearrow::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#ddl_sel_coulmn option[canremoved="False"] {
+    color: red !important;
+}
+
+.form-control:focus {
+    border:2px solid blue !important;
+}
+
+.ui-autocomplete {
+    font-size: 12px !important;
+    max-height: 290px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+.ui-menu .ui-menu-item {
+    padding: 3px 1em 3px 0.4em;
+}
+
+.cursor-pointer{
+    cursor:pointer;
+}
+
+span.select2-dropdown.select2-dropdown--below[dir="ltr"] {
+    min-width: 150px !important;
+}
+
+.va-top {
+    vertical-align: top !important;
+}
+
+.va-center {
+    vertical-align: central !important;
+}
+
+.va-bottom {
+    vertical-align: bottom !important;
+}
+
+.ui-state-highlight {
+    border: 1px solid #c5c5c5 !important;
+    background: #f6f6f6 !important;
+    font-weight: normal !important;
+    color: #454545 !important;
+}
+
+hlw {
+    color: red !important;
+    font-weight: 900 !important;
+}
+
+.modal-body input[type=number]:read-only {
+    cursor: default;
+    background-color: #f5f5f5 !important;
+    border-color: #f5f5f5 !important;
+}
+
+.strike {
+    text-decoration: line-through !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+i[disabled=disabled].strike, a[disabled=disabled].strike {
+    pointer-events: none !important;
+}
+
+.DT-Blue a, .DT-Blue span {
+    background-color: blue !important;
+    background-image: none !important;
+    color: white !important;
+    pointer-events: visible !important;
+}
+
+.DT-Red a, .DT-Red span {
+    background-color: red !important;
+    background-image: none !important;
+    color: white !important;
+    pointer-events: visible !important;
+}
+
+.DT-Green a, .DT-Green span {
+    background-color: green !important;
+    background-image: none !important;
+    color: white !important;
+    pointer-events: visible !important;
+}
+
+.DT-Orange a, .DT-Orange span {
+    background-color: orange !important;
+    background-image: none !important;
+    color: white !important;
+    pointer-events: visible !important;
+}
+
+input .datepicker {
+    cursor: pointer !important;
+}
+
+div.modal-body span:focus, div.modal-body input:focus, div.modal-body textarea:focus, div.modal-body select:focus {
+    border: 1px solid rgba(81, 203, 238, 1)
+}
+
+#quoteserviceleveloption_val:focus, input.activehighlight:focus, textarea.activehighlight:focus, select.activehighlight:focus {
+    border: 1px solid rgba(81, 203, 238, 1)
+}
+
+div.modal-body span:active, div.modal-body input:active, div.modal-body textarea:active, div.modal-body select:active {
+    border: 1px solid rgba(81, 203, 238, 1)
+}
+
+div.modal-body input[type=checkbox]:focus, div.modal-body input[type=checkbox]:focus, div.modal-body input[type=radio]:focus, div.modal-body input[type=radio]:focus {
+    outline: 1px solid rgba(81, 203, 238, 1);
+}
+
+input.activehighlight[type=checkbox]:focus, input.activehighlight[type=checkbox]:focus, input.activehighlight[type=radio]:focus, input.activehighlight[type=radio]:focus {
+    outline: 1px solid rgba(81, 203, 238, 1);
+}
+
+button:focus, button:active {
+    outline: 3px solid !important
+}
+
+.lightgrey {
+    background-color: #ededed !important;
+    border: 1px solid #dddddd !important;
+}
+
+.lightblue {
+    background-color: #d7efff !important;
+    border: 1px solid #b6ddf7 !important;
+}
+
+.pointerevent-disabled {
+    pointer-events: none !important;
+}
+
+.lightgreen {
+    background-color: #e4f5e4 !important;
+    border: 1px solid #d5f7d5 !important;
+}
+
+.assigndivcolor {
+    background-color: #d7efff !important;
+    border: 1px solid #b6ddf7 !important;
+}
+
+.error-box {
+    background: none !important;
+}
+
+.fa-unlock:hover {
+    color: red !important;
+}
+
+.fa-check.Theme-icon:hover, .fa-check-circle.Theme-icon:hover {
+    color: green !important;
+}
+
+#ui-datepicker-div {
+    line-height: 1.1 !important;
+    font-weight: 600 !important;
+    z-index: 1000 !important;
+}
+
+.datepicker:hover {
+    background-color: #e9eaee !important;
+}
+
+#dynamic-modal {
+    z-index: 100 !important;
+}
+
+user agent stylesheet
+input[type="text1" i] {
+    padding-block: 1px;
+    padding-inline: 2px;
+}
+
+user agent stylesheet
+input[type="password1" i] {
+    -webkit-text-security: disc !important;
+    padding-block: 1px;
+    padding-inline: 2px;
+}
+
+.custompassword {
+    -webkit-text-security: disc !important;
+}
+
+#modal-confirmation-div {
+    z-index: 200 !important;
+}
+
+#modal-message-div {
+    z-index: 300 !important;
+}
+
+#modal-session-div {
+    z-index: 10000 !important;
+}
+
+.form-control:focus {
+    border: 1px solid #00a4e3 !important;
+}
+
+.form-select:focus {
+    border: 1px solid #00a4e3 !important;
+}
+
+.form-control-sm:focus {
+    border: 1px solid #00a4e3 !important;
+}
+
+.form-select-sm:focus {
+    border: 1px solid #00a4e3 !important;
+}
+
+span.select2-selection--single:focus {
+    border: 1px solid #00a4e3 !important;
+}
+
+span.select2-selection--single.is-invalid {
+    border: 2px solid #ff5050;
+}
+
+span.select2-selection--single.is-valid {
+    border: 2px solid #2cd07e;
+}
+
+.form-control-sm.is-invalid, .was-validated .form-control-sm:invalid {
+    border-color: #ff5050;
+    border: 2px solid;
+}
+
+.form-control-sm.is-valid, .was-validated .form-control-sm:valid {
+    border-color: #2cd07e;
+    border: 2px solid;
+}
+
+.form-select-sm.is-invalid {
+    border-color: #ff5050;
+}
+
+.form-control.is-invalid {
+    border-color: #ff5050;
+    border: 2px solid;
+}
+
+.form-select.is-invalid {
+    border-color: #ff5050;
+    border: 2px solid;
+}
+.form-select-sm.is-valid {
+    border-color: #2cd07e;
+    border: 2px solid;
+}
+
+
+.text-red {
+    color: red !important;
+}
+
+.disablepointer {
+    pointer-events: none !important;
+}
+
+.full-height {
+    height: 100% !important
+}
+
+.float-left {
+    float: left !important;
+}
+
+.float-right {
+    float: right !important;
+}
+
+.img-responsive {
+    padding: 0.25rem;
+    background-color: #f7f9ff;
+    border: 1px solid #ccced2;
+    border-radius: 4px;
+    max-width: 100%;
+    height: auto;
+}
+
+@media screen and (min-width: 1600px) {
+    .modal-xl {
+        max-width: 80% !important;
+        max-height: 80% !important;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .modal-xl {
+        max-width: 75% !important;
+        max-height: 80% !important;
+    }
+}
+
+.EntryNoHidden {
+    display: none !important;
+}
+
+br {
+    font-size: 2px;
+}
+
+.even-color {
+    background-color: #f5f5f563 !important; /*#F5F5F5*/
+}
+
+.subtotal-color {
+    background-color: #b2d1f5 !important; /*#F5F5F5*/
+    color: black !important;
+}
+
+.hhh {
+    display: inline-flex !important
+}
+
+.pull-right {
+    float: right !important
+}
+
+th.filterselect span.select2.select2-container.select2-container--default, .modal div table td span.select2.select2-container.select2-container--default {
+    width: 100% !important;
+}
+
+th.filterselect span.select2-selection.select2-selection--single {
+    border: 0px !important;
+}
+
+th.filterselect span.select2-selection__rendered {
+    color: red !important;
+}
+
+    th.filterselect span.select2-selection__rendered[title="[Select Option]"] {
+        color: black !important;
+        opacity: .4 !important;
+    }
+
+.hearder-image {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    padding-left: 5px !important;
+
+    background: #466368;
+    background: linear-gradient(to right, #f6f1d3, #648880 85%, #293f50);
+    border-radius: 6px;
+}
+
+body {
+    line-height: 1.0;
+    font-family: 'Open Sans' sans-serif !important;
+    overflow: auto !important;
+}
+
+a {
+    font-weight: 700;
+    color: #707cd2
+}
+
+.ship-p-0 {
+    padding-left: 0px !important
+}
+
+.lh-18 {
+    line-height: 18px !important;
+    word-break: break-word
+}
+
+.header-color {
+    padding-left: 7px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #6396d0;
+}
+
+.fa-trash-alt {
+    color: red;
+}
+
+.btn-hover:hover {
+    background-color: #2cabe3;
+    border-color: #2cabe3
+}
+
+.green-icon {
+    color: darkgreen !important;
+}
+
+.orange-icon {
+    color: orange !important;
+}
+
+.guid-header {
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    padding-left: 5px !important;
+    background-color: lightgray !important;
+    border-bottom: double !important;
+    border-top: double !important;
+}
+
+.card-header1 {
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+    padding-left: 10px !important;
+    margin-top: 20px;
+}
+
+body[data-theme=dark] .card-header1 {
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+    padding-left: 10px !important;
+    color: white !important;
+    margin-top: 20px;
+}
+
+.text-black {
+    color: black !important;
+}
+
+body[data-theme=dark] .text-black {
+    color: #b2b9bf !important;
+}
+
+body[data-theme=dark] .card-header1 .text-black {
+    color: white !important;
+}
+
+.heading {
+    padding-left: 10px;
+    color: Black !important
+}
+
+tbody, td, tfoot, th, thead, tr {
+    border-color: #c5c5c5 !important;
+}
+
+.card .card-title {
+    font-weight: 700;
+    font-size: 14px !important;
+    font-family: Arial !important;
+}
+
+.fw-light, #maindiv {
+    color: #2e2e2e;
+    font-size: 12px !important;
+    font-family: Arial !important;
+}
+
+.fw-bold {
+    color: #2e2e2e;
+    font-family: Arial !important;
+}
+
+.modal-body table tr td {
+    font-size: 12px !important;
+    font-family: Arial !important;
+}
+
+a.Theme-a {
+    font-family: inherit !important;
+    font-size: inherit !important;
+}
+
+tbody td.fw-light-b {
+    color: #2e2e2e;
+    font-size: 12px !important;
+    font-family: Arial !important;
+}
+
+textarea.fw-light, .modal-body textarea, .modal-body input {
+    line-height: 1rem !important;
+    font-size: 12px !important;
+    font-family: Arial !important;
+}
+
+body[data-theme=dark] tbody td.fw-light-b {
+    color: #b2b9bf !important;
+    font-weight: 600 !important
+}
+
+tbody td.fw-light-b2 {
+    font-weight: 600 !important
+}
+
+td.dataTables_empty {
+    color: black;
+    font-weight: 600 !important
+}
+
+body[data-theme=dark] td.dataTables_empty {
+    color: #b2b9bf !important;
+    font-weight: 600 !important
+}
+
+td.lh {
+    line-height: 1.3em !important;
+    padding-right: 2px !important
+}
+
+th.lh {
+    line-height: 1.3em !important;
+    padding-right: 2px !important
+}
+
+.fa-1ax {
+    font-size: 1.2em;
+}
+
+icon-hover i {
+    font-size: 20px;
+    margin-right: 8px
+}
+
+.icon-hover:hover {
+    background-color: transparent !important;
+    color: #2cabe3
+}
+
+thead.Theme-Header {
+    text-align: center !important;
+}
+
+.table-responsive {
+    overflow-y: hidden !important;
+}
+
+/* TABS START */
+.tabs-container .tab-content {
+    padding: 16px;
+    margin: 0 auto;
+    background: #fff;
+}
+
+.tabs-container section {
+    display: none;
+    padding: 20px 0 0;
+    border-top: 1px solid #ddd;
+}
+
+.tabs-container input[name="tabs"] {
+    display: none;
+}
+
+.tabs-container .tabs-label {
+    display: inline-block;
+    margin: 0 0 -1px;
+    padding: 15px 25px;
+    font-weight: 600;
+    text-align: center;
+    color: #bbb;
+    border: 1px solid transparent;
+}
+
+    .tabs-container .tabs-label:before {
+        font-family: fontawesome;
+        font-weight: normal;
+        margin-right: 10px;
+    }
+
+    .tabs-container .tabs-label:hover {
+        color: #888;
+        cursor: pointer;
+    }
+
+.tabs-container input[name="tabs"]:checked + label {
+    color: #555;
+    border: 1px solid #ddd;
+    border-top: 2px solid orange;
+    border-bottom: 1px solid #fff;
+}
+
+.tabs-container .tabs-label i {
+    display: none;
+}
+
+/* Add this media query for small screens */
+@media screen and (max-width: 650px) {
+    .tabs-container .tabs-label {
+        font-size: 0;
+    }
+
+        .tabs-container .tabs-label i {
+            margin: 0;
+            font-size: 18px;
+            display: block;
+        }
+}
+
+@media screen and (max-width: 400px) {
+    .tabs-container .tabs-label {
+        padding: 15px;
+    }
+}
+/* TABS END */
+
+/* Tree Start */
+
+summary {
+    display: block;
+    cursor: pointer;
+    outline: 0;
+}
+
+    summary::-webkit-details-marker {
+        display: none;
+    }
+
+.treeContainer {
+    background-color: #00151f;
+    color: white;
+    font-size: 1.6rem;
+    font-family: arial;
+    margin: 0;
+    padding: 3rem;
+}
+
+.tree-nav__item {
+    display: block;
+    white-space: nowrap;
+    color: #ccc;
+    position: relative;
+}
+
+    .tree-nav__item.is-expandable::before {
+        border-left: 1px solid #333;
+        content: "";
+        height: 100%;
+        left: 0.8rem;
+        position: absolute;
+        top: 2.4rem;
+        height: calc(100% - 2.4rem);
+    }
+
+    .tree-nav__item .tree-nav__item {
+        margin-left: 2.4rem;
+    }
+
+    .tree-nav__item.is-expandable[open] > .tree-nav__item-title::before {
+        font-family: "ionicons";
+        transform: rotate(90deg);
+    }
+
+    .tree-nav__item.is-expandable > .tree-nav__item-title {
+        padding-left: 2.4rem;
+    }
+
+        .tree-nav__item.is-expandable > .tree-nav__item-title::before {
+            position: absolute;
+            will-change: transform;
+            transition: transform 300ms ease;
+            font-family: "ionicons";
+            color: #fff;
+            font-size: 1.1rem;
+            content: "\f125";
+            left: 0;
+            display: inline-block;
+            width: 1.6rem;
+            text-align: center;
+        }
+
+.tree-nav__item-title {
+    cursor: pointer;
+    display: block;
+    outline: 0;
+    color: #fff;
+    font-size: 1.5rem;
+    line-height: 3.2rem;
+}
+
+    .tree-nav__item-title .icon {
+        display: inline;
+        padding-left: 1.6rem;
+        margin-right: 0.8rem;
+        color: #666;
+        font-size: 1.4rem;
+        position: relative;
+    }
+
+        .tree-nav__item-title .icon::before {
+            top: 0;
+            position: absolute;
+            left: 0;
+            display: inline-block;
+            width: 1.6rem;
+            text-align: center;
+        }
+
+    .tree-nav__item-title::-webkit-details-marker {
+        display: none;
+    }
+/* Tree End */
+
+/* Checkbox Style Start*/
+
+.ModalDark .modal-content {
+    background: #192C35;
+    color: #fff;
+}
+
+.animated_checkbox label {
+    font-size: 18px;
+    /*color: #fff;*/
+    padding-left: 30px;
+    cursor: pointer;
+}
+
+.accordion-item-body .animated_checkbox label {
+    font-size: 13px !important;
+    line-height: 2 !important;
+}
+
+    .animated_checkbox label input {
+        opacity: 0;
+        cursor: pointer;
+    }
+
+.animated_checkbox {
+    position: relative;
+}
+
+    .animated_checkbox label .check {
+        position: absolute;
+        top: 3px;
+        /*left: 0;*/
+        width: 20px;
+        height: 20px;
+        background: transparent;
+        border: 1px solid #999;
+        box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2), inset -5px -5px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 225, 0.1);
+        display: block;
+        box-sizing: border-box;
+        border-radius: 4px;
+        margin-left: -22px;
+    }
+
+        .animated_checkbox label .check:before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            bottom: 3px;
+            background: transparent;
+            /*box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 225, 0.1);*/
+            border-radius: 2px;
+            transition: 0.5s;
+            transform: translateX(228px);
+        }
+
+    .animated_checkbox label input:checked ~ .check:before {
+        box-shadow: inset 5px 5px 5px #1F6285, inset -5px -5px 15px #1F6285;
+        transform: translateX(0px);
+    }
+
+
+ 
+    /* Checkbox Style End*/
+
+    .form-item {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+    .form-item .control-input {
+        display: block;
+        width: 100%;
+        height: 40px;
+        background: transparent;
+        border: solid 1px #ccc;
+        transition: all .3s ease;
+        padding: 0 15px;
+    }
+
+    .form-item .control-label {
+        position: absolute;
+        cursor: text;
+        z-index: 2;
+        top: -6px;
+        left: 10px;
+        font-size: 12px;
+        font-weight: bold;
+        background: #fff;
+        padding: 0 10px;
+        color: #999;
+        transition: all .3s ease;
+    }
+
+    .form-item .control-input:focus + .control-label,
+    .form-item .control-input:valid + .control-label,
+    .form-item .control-select:focus + .control-label,
+    .form-item .control-select:valid + .control-label {
+        font-size: 11px;
+        top: -5px;
+    }
+
+    .form-item .control-input:focus + .control-label,
+    .form-item .control-select:focus + .control-label {
+        color: #226487;
+    }
+
+    .form-item .control-input:focus .control-label,
+    .form-item .control-select:focus .control-label {
+        color: #226487;
+    }
+
+    .form-item .control-select {
+        width: 100%;
+        height: 40px;
+        background: transparent;
+        border: solid 1px #ccc;
+        transition: all .3s ease;
+        padding: 0 15px;
+    }
+
+    /* Adjust the position of the label for select */
+    .form-item .control-label + .control-select {
+        top: 13px;
+    }
+  .control-input.is-invalid {
+    border-color: #ff5050;
+    border: solid 2px #ff5050;
+}
+
+#loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    margin-left: 250px;
+    margin-top: 250px;
+}
+
+.center {
+    text-align: center;
+}
+
+.center-me{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Accordian Style Start */
+.accordion-container {
+    width: 100%;
+    margin-bottom: 30px;
+    /*max-width: 1000px;*/
+    /*margin: 2rem auto;*/
+}
+
+    .accordion-container .accordion-item {
+        background-color: #fff;
+        color: #111;
+        margin: 1rem 0;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    .accordion-container .accordion-item-header {
+        padding: 0.5rem 3rem 0.5rem 1rem;
+        min-height: 3.5rem;
+        line-height: 1.25rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+    }
+
+        .accordion-container .accordion-item-header::after {
+            content: "\002B";
+            font-size: 2rem;
+            position: absolute;
+            right: 1rem;
+        }
+
+        .accordion-container .accordion-item-header.active::after {
+            content: "\2212";
+        }
+
+    .accordion-container .accordion-item-body {
+        max-height: 0;
+        overflow: auto;
+        transition: max-height 0.2s ease-out;
+    }
+
+    .accordion-container .accordion-item-body-content {
+        padding: 1rem;
+        line-height: 1.5rem;
+        border-top: 1px solid;
+        border-image: linear-gradient(to right, transparent, #34495e, transparent) 1;
+    }
+/* Accordian Style End */
+
+/* Tree Chart Start */
+#tree-chart {
+    display: inline-block;
+    padding: 10px;
+}
+
+    #tree-chart * {
+        box-sizing: border-box;
+    }
+
+    #tree-chart .branch {
+        padding: 5px 0 5px 20px;
+    }
+
+        #tree-chart .branch:not(:first-child) {
+            margin-left: 170px;
+        }
+
+            #tree-chart .branch:not(:first-child):after {
+                content: "";
+                width: 20px;
+                border-top: 1px solid #ccc;
+                position: absolute;
+                left: 150px;
+                top: 50%;
+                margin-top: 1px;
+            }
+
+.entry {
+    position: relative;
+    min-height: 42px;
+    display: block;
+}
+
+    .entry:before {
+        content: "";
+        height: 100%;
+        border-left: 1px solid #ccc;
+        position: absolute;
+        left: -20px;
+    }
+
+    .entry:first-child:after {
+        height: 10px;
+        border-radius: 10px 0 0 0;
+    }
+
+    .entry:first-child:before {
+        width: 10px;
+        height: 50%;
+        top: 50%;
+        margin-top: 1px;
+        border-radius: 10px 0 0 0;
+    }
+
+    .entry:after {
+        content: "";
+        width: 20px;
+        transition: border 0.5s;
+        border-top: 1px solid #ccc;
+        position: absolute;
+        left: -20px;
+        top: 50%;
+        margin-top: 1px;
+    }
+
+    .entry:last-child:before {
+        width: 10px;
+        height: 50%;
+        border-radius: 0 0 0 10px;
+    }
+
+    .entry:last-child:after {
+        height: 10px;
+        border-top: none;
+        transition: border 0.5s;
+        border-bottom: 1px solid #ccc;
+        border-radius: 0 0 0 10px;
+        margin-top: -9px;
+    }
+
+    .entry:only-child:after {
+        width: 10px;
+        height: 0px;
+        margin-top: 1px;
+        border-radius: 0px;
+    }
+
+    .entry:only-child:before {
+        display: none;
+    }
+
+    .entry span {
+        border: 1px solid #ccc;
+        display: block;
+        min-width: 150px;
+        padding: 5px 10px;
+        line-height: 20px;
+        text-align: center;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -15px;
+        color: #666;
+        font-family: arial, verdana, tahoma;
+        width: 40% !important;
+        font-size: 12px;
+        font-weight: 700;
+        display: inline-block;
+        border-radius: 5px;
+        transition: all 0.5s;
+    }
+
+#tree-chart .entry span:hover,
+#tree-chart .entry span:hover + .branch .entry span {
+    cursor:pointer;
+    background: #22642D;
+    color: #fff;
+    border-color: #fff;
+}
+
+    #tree-chart-chart .entry span:hover + .branch .entry::after,
+    #tree-chart .entry span:hover + .branch .entry::before,
+    #tree-chart .entry span:hover + .branch::before,
+    #tree-chart .entry span:hover + .branch .branch::before {
+        border-color: #a6a6a6;
+    }
+/* Tree Chart End */
+
+/*required field*/
+.requiredField {
+    color: red;
+    vertical-align: top;
+}
+
+
+ 

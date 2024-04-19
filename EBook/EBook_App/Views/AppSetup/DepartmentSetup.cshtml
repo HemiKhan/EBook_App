@@ -1,0 +1,405 @@
+﻿@{
+    ViewBag.Title = "DepartmentSetup";
+    Layout = "~/Views/Shared/_Masterpage.cshtml";
+    ViewBag.IsLoadKendo = true;
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/select2.min.css?ID=@ViewBag.GUID">
+
+<style>
+    .tabs-container #tab2:checked ~ #content2,
+    .tabs-container #tab1:checked ~ #content1 {
+        display: block;
+    }
+</style>
+
+<!--Wrapper Start -->
+<div class="container-fluid p-4 bg-white rounded">
+
+    <div class="logo text-center border-bottom">
+        <h3 class="box-title mb-3">Department SETUP</h3>
+    </div>
+
+    <div class="row tabs-container">
+        <div class="col-lg-12 col-md-12 col-sm-12 tab-content">
+            @if (ViewBag.RightsListObj.IsView)
+            {
+                <input id="tab1" type="radio" name="tabs" checked>
+                <label for="tab1" class="tabs-label"><i>PG</i>Department</label>
+            }
+            @Html.Hidden("RightsList", (object)ViewBag.RightsList)
+
+            <section id="content1">
+                <div class="row">
+                    <div class="col-lg-12" style="font-size:0.75em" id="tablerecord">
+                        <div class="w-100 text-right">
+                            <div class="button-group">
+                                <button type="button" class="btn btn-lg px-4 fs-4 font-weight-medium Theme-button" style="display: none" id="departmentsetupbutton" onclick="GetAddEditDepartmentSetupModal(0);">+ Add New Department</button>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="panel box box-info">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div id="grid"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+</div>
+<!--Wrapper End -->
+
+<script src="~/js/GridFilter2.js?ID=@ViewBag.GUID"></script>
+<script src="~/js/select2.js?ID=@ViewBag.GUID" type="text/javascript"></script>
+<script src="~/js/custom-Validation.js?ID=@ViewBag.GUID"></script>
+@section scripts {
+    @* Intialization *@
+    <script>
+        var RightsList = JSON.parse($("#RightsList").val());
+        var Dept_pageSize = 30;
+        var requiredFields;
+
+        $(".kendoDatePicker").kendoDatePicker({
+            animation: false,
+            format: "MM/dd/yyyy",
+            open: function (e) {
+
+                var clearbuttonContainer = e.sender.dateView.calendar.element.find(".clear-button-container");
+
+                if (!clearbuttonContainer.length) {
+                    // Create a container for custom buttons
+                    clearbuttonContainer = $('<div class="k-footer clear-button-container"></div>');
+
+                    // Create custom button (Clear Date) and append it to the container
+                    var clearbutton = $('<button tabindex="-1" class="k-button custom-clear-button k-flex k-button-md k-button-flat k-button-flat-primary k-rounded-md" title="Clear Date"><span style="color:red" class="k-button-text">Clear Date</span></button>');
+                    clearbuttonContainer.append(clearbutton);
+
+                    // Append the custom buttons container to the DatePicker popup
+                    e.sender.dateView.calendar.element.append(clearbuttonContainer);
+
+                    // Handle click events for the custom button
+                    clearbutton.on("click", function () {
+                        // Clear the selected date
+                        e.sender.value(new Date());
+                        e.sender.value(null);
+                        // Close the DatePicker
+                        e.sender.close();
+                    });
+                }
+            }
+        });
+        $(".select2").select2();
+        SetPageRights();
+        //Load Grids
+        if (RightsList.IsView) {
+            DepartmentGridLoad();
+            $("#tab1").change(function () {
+                if ($(this).is(":checked")) {
+                    if ($("#grid").data("kendoGrid")) {
+                        return;
+                    }
+                    DepartmentGridLoad();
+                }
+            });
+        }
+
+        function SetPageRights() {
+            if (RightsList.IsAdd) {
+                $('#departmentsetupbutton').show();
+            }
+        }
+
+        //Set Global Options
+        var DeptOptions;
+        function SetGlobalOption(id, option) {
+            if (id == 'grid') {
+                DeptOptions = option;
+            }
+        }
+
+        //Department Add Edit Model and Remove Confirmation Message
+        function DepartmentGridLoad() {
+            $("#PageLoader").show();
+            $("#grid").empty();
+            var Deptfieldstype = {
+                rowno: { type: KendoFilterTypes.Number, srtype: SRVTypes.Int },
+                D_ID: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                DepartmentName: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                Sort_: { type: KendoFilterTypes.Number, srtype: SRVTypes.Int },
+                IsHidden: { type: KendoFilterTypes.Boolean, srtype: SRVTypes.Boolean },
+                IsActive: { type: KendoFilterTypes.Boolean, srtype: SRVTypes.Boolean },
+            }
+            var _griddatasource = GetGridDataSourceAjaxCommon('grid', Dept_pageSize, "/Account/GetFilterData_Department_List", true, true, true, Deptfieldstype, false, false);
+            $("#grid").kendoGrid({
+                dataSource: _griddatasource,
+                responsive: false,
+                pageable: {
+                    alwaysVisible: true,
+                    refresh: true,
+                    pageSizes: [30, 50, 100, 500, 1000, 5000],
+                    messages: {
+                        display: "{0} - {1} of {2} items &nbsp;&nbsp;|&nbsp;&nbsp; Export:&nbsp;<img id='grid_exportExcel' title='Click here to export to excel file' src='/icon/excel_icon.jpg' style='width:23px; height:23px; cursor:pointer' onclick='onClickDeptExportExcel(this)' /> ",
+                        empty: "No data found",
+                    }
+                },
+                sortable: true,
+                resizable: false,
+                reorderable: false,
+                noRecords: true,
+                filterable: {
+                    extra: true,
+                    //operators: KendoOperatorListOfString,
+                },
+                dataBound: onDataBound,
+                dataBinding: function (e) {
+                    $("#PageLoader").hide();
+                },
+                columns: [
+                    {
+                        field: "rowno",
+                        title: "#",
+                        width: 100,
+                        filterable: false,
+                        sortable: false,
+                    },
+                    {
+                        field: "D_ID",
+                        title: "Department ID",
+                        width: 170,
+                        // hidden: true,
+                    },
+                    {
+                        field: "D_ID",
+                        title: "Department Name",
+                        originalfield: "DepartmentName",
+                        width: 250,
+                        template: function (dataItem) {
+                            return dataItem.DepartmentName;
+                        },
+                    },
+                    {
+                        field: "Sort_",
+                        title: "Sort_",
+                        width: 170,
+                    },
+                    {
+                        field: "IsHidden",
+                        title: "IsHidden",
+                        width: 160,
+                    },
+                    {
+                        field: "IsActive",
+                        title: "IsActive",
+                        width: 130,
+                        template: function (dataItem) {
+                            if (RightsList.IsEdit) {
+                                if (dataItem.IsActive) {
+                                    return '<img src="../icon/tick.png" alt="Active" class="cursor-pointer" onclick="Department_Remove(this,' + dataItem.D_ID + ',' + dataItem.IsActive + ');"/>';
+                                } else {
+                                    return '<img src="../icon/cross.png" alt="Inactive" class="cursor-pointer" onclick="Department_Remove(this,' + dataItem.D_ID + ',' + dataItem.IsActive + ');"/>';
+                                }
+                            }
+                            else {
+                                if (dataItem.IsActive) {
+                                    return '<img src="../icon/tick.png" alt="Active"/>';
+                                } else {
+                                    return '<img src="../icon/cross.png" alt="Inactive"/>';
+                                }
+                            }
+                        },
+                        attributes: {
+                            style: "text-align: center;"
+                        }
+                    },
+                    {
+                        title: "Action",
+                        width: 100,
+                        filterable: false,
+                        template: function (dataItem) {
+                            var actionfield = ''
+                            if (RightsList.IsEdit) {
+                                actionfield = '<a><i class="fa fa-edit Theme-icon fa-1x ms-1 cursor-pointer" onclick="GetAddEditDepartmentSetupModal(' + dataItem.D_ID + ');"></i></a>';
+                            }
+                            return actionfield;
+                        }
+                    },
+                ],
+                detailInit: function (e) {
+                    $("#PageLoader").hide();
+                }
+            });
+        }
+        function GetAddEditDepartmentSetupModal(D_ID) {
+            if ((D_ID == 0 && RightsList.IsAdd == true) || (D_ID > 0 && RightsList.IsEdit == true)) {
+                GetAddEditModalAjaxCommon(D_ID, "/Account/GetAddEditDepartmentSetupModal");
+            } else {
+                WarningMessage('No Rights', "You Don't Have Rights To Access.", true, "Ok");
+                $("#PageLoader").hide();
+                return;
+            }
+        }
+        function AddOrEditDepartment() {
+            var ObjJson = new Object();
+            ObjJson.D_ID = $("#modalDepartmentID").val();
+            ObjJson.DepartmentName = $("#modaldsDepartmentName").val();
+            ObjJson.IsHidden = $("#modaldsishide").is(":checked");
+            ObjJson.Active = $("#modaldsisactive").is(":checked");
+            var JsonData = JSON.stringify(ObjJson);
+            requiredFields = ['DepartmentName'];
+            if (!validateRequiredFields(ObjJson, requiredFields)) {
+                return;
+            }
+            AddEditRemoveAjaxCommon(JsonData, "/Account/AddOrEdit_Department", null, false, 'grid');
+        }
+        function Department_Remove(this_, D_ID, IsActive) {
+            if (RightsList.IsDelete) {
+                if ($(this_).attr("disabled") == "disabled") {
+                    return;
+                }
+                $(this_).attr("disabled", "disabled");
+                IsActiveEditCommon(D_ID, "/Account/Remove_Department", DepartmentGridRefresh, D_ID, IsActive, "Department ID");
+            } else {
+                WarningMessage('No Rights', "You Don't Have Rights To Access.", true, "Ok");
+                $("#PageLoader").hide();
+                return;
+            }
+        }
+
+        function DepartmentGridRefresh() {
+            RefreshGridData('grid')
+        }
+
+        // Kendo Grid Scripts onDataBound, onCustomFilterValidate, onClickExportExcel, onCustomFilter, onSpecificFilter, customreportFilterObjectList, onColumnShowHideObject, onReset
+        function onDataBound() {
+            var wrapper = this.wrapper,
+                header = wrapper.find(".k-grid-header");
+
+            function resizeFixed() {
+                var paddingRight = parseInt(header.css("padding-right"));
+                header.css("width", wrapper.width() - paddingRight);
+            }
+
+            function scrollFixed() {
+                var offset = $(this).scrollTop(),
+                    tableOffsetTop = wrapper.offset().top,
+                    tableOffsetBottom = tableOffsetTop + wrapper.height() - header.height();
+                if (offset < tableOffsetTop || offset > tableOffsetBottom) {
+                    header.removeClass("fixed-header");
+                } else if (offset >= tableOffsetTop && offset <= tableOffsetBottom && !header.hasClass("fixed")) {
+                    header.addClass("fixed-header");
+                }
+            }
+
+            resizeFixed();
+            $(window).resize(resizeFixed);
+            $(window).scroll(scrollFixed);
+            ShowHideKendoHierarchyCell("grid");
+            $("#PageLoader").hide();
+        }
+
+        function onClickDeptExportExcel(e) {
+            onClickKendoExportExcel(e, "grid", DeptOptions, "PageLoader", "Report", "ExportInExcel_DepartmentDetail", false, false);
+        }
+
+        function onCustomFilterValidate(id) {
+            var resultjson = { issuccess: false, customfilterjson: [] };
+            resultjson = onCustomFilter(false, id);
+            if (resultjson.issuccess) {
+                RefreshGridData(id);
+            }
+        }
+
+        var deptlastcustomreportFilterObjectList = [];
+        var lastcustomreportFilterObjectList = [];
+        function onCustomFilter(IsGetLastSaved, id) {
+
+            IsGetLastSaved = (IsGetLastSaved == undefined ? false : IsGetLastSaved);
+            var customreportFilterObjectList = [];
+            var resultjson = { issuccess: false, customfilterjson: customreportFilterObjectList };
+            var reportFilterObject = { code: "", name: "", isFilterApplied: false, reportFilterObjectArry: [] };
+            var filterobject = new Object();
+
+            var specificreportFilterObjectList = [];
+            var specificreportFilterObject = { code: "", name: "", isFilterApplied: false, reportFilterObjectArry: [] };
+            var specificfilterobject = new Object();
+
+            if (IsGetLastSaved) {
+                resultjson = { issuccess: true, customfilterjson: (id == 'grid' ? deptlastcustomreportFilterObjectList : lastcustomreportFilterObjectList) };
+                return resultjson;
+            }
+
+            if ($('#txtdate').val() != "" && $('#txtenddate').val() != "") {
+                SetCustomFilterValue(customreportFilterObjectList, reportFilterObject, filterobject, "and", $('#txtdate').val(), KendoGridFilterType.isequalorgreather, KendoFilterTypes.Date, SRVTypes.Date, false, 0, "Created_On_Date", "Created_On_Date", false);
+                SetCustomFilterValue(customreportFilterObjectList, reportFilterObject, filterobject, "and", $('#txtenddate').val(), KendoGridFilterType.isequalorless, KendoFilterTypes.Date, SRVTypes.Date, false, 0, "Created_On_Date", "Created_On_Date", true);
+
+                onSpecificFilter(id, specificreportFilterObjectList, specificreportFilterObject, specificfilterobject, "and", $('#txtdate').val()
+                    , KendoGridFilterType.isequalorgreather, KendoFilterTypes.Date, SRVTypes.Date, false, 0, "Created_On_Date", "Created_On_Date", false);
+                onSpecificFilter(id, specificreportFilterObjectList, specificreportFilterObject, specificfilterobject, "and", $('#txtenddate').val()
+                    , KendoGridFilterType.isequalorless, KendoFilterTypes.Date, SRVTypes.Date, false, 0, "Created_On_Date", "Created_On_Date", true);
+            }
+
+            if ($('#txtOrigHub').val() != "") {
+                SetCustomFilterValue(customreportFilterObjectList, reportFilterObject, filterobject, "and", $('#txtOrigHub').val(), KendoGridFilterType.inlistfilter, KendoFilterTypes.String, SRVTypes.UpperString, false, 0, "OrigHub", "OrigHub", false);
+            }
+
+            if (id == 'grid') {
+                deptlastcustomreportFilterObjectList = customreportFilterObjectList;
+            }
+            else {
+                lastcustomreportFilterObjectList = customreportFilterObjectList;
+            }
+            resultjson = { issuccess: true, customfilterjson: customreportFilterObjectList };
+
+            return resultjson;
+        }
+
+        function onSpecificFilter(id, specificreportFilterObjectList, specificreportFilterObject, specificfilterobject, logic, value, filtertype, fieldtype, srvfieldtype, islist, listtype, code, name, isprevioussamecode) {
+            if (code == 'Created_On_Date') {
+                var dateObject = new Date(value)
+                dateObject.setDate(dateObject.getDate() + (isprevioussamecode == false ? -1 : 1));
+                var newvalue = formatDateToDateTime(dateObject, false);
+                SetCustomFilterValue(specificreportFilterObjectList, specificreportFilterObject, specificfilterobject, logic, newvalue, filtertype, fieldtype, srvfieldtype, islist, listtype, "UTC_Created_On_Date", "UTC_Created_On_Date", isprevioussamecode);
+            }
+        }
+
+        var deptcustomreportFilterObjectList = [];
+        var customreportFilterObjectList = [];
+        function onColumnShowHideObject(id) {
+            if (id == 'grid') {
+                return deptcustomreportFilterObjectList = [];
+            }
+            else {
+                return customreportFilterObjectList = [];
+            }
+
+            return customreportFilterObjectList;
+        }
+
+        function onReset() {
+            $("#dvProg").show();
+            $('#txtdate').val($("#originalstartdate").val());
+            $('#txtenddate').val($("#originalenddate").val());
+            $('#txtOrigHub').html($("#hublist").html());
+            $('#txtDestHub').html($("#hublist").html());
+            $('#txtCurrentHub').html($("#hublist").html());
+            $('#txtReturnStatus').html($("#returnstatuslist").html());
+            $('#txtDispStatus').html($("#dispstatuslist").html());
+            $('#txtReasonReturn').html($("#returnreasonlist").html());
+            $('#txtPendingDayFrom').val('');
+            $('#txtPendingDayTo').val('');
+            $('#txtReturnNo').val('');
+            $('#txtClientID').html($("#clientlist").html())
+            $(".select2").select2();
+            $("#dvProg").hide();
+        }
+    </script>
+}

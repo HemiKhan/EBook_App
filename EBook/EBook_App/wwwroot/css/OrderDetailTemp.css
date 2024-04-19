@@ -1,0 +1,1540 @@
+﻿/*.old-color {
+
+      }  */
+
+.hidethis {
+    display: none !important;
+}
+
+input[type=number].hidearrow::-webkit-inner-spin-button,
+input[type=number].hidearrow::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.ui-autocomplete {
+    font-size: 12px !important;
+    max-height: 290px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+.ui-menu .ui-menu-item {
+    padding: 3px 1em 3px 0.4em;
+}
+
+span.select2-dropdown.select2-dropdown--below[dir="ltr"] {
+    min-width: 150px !important;
+}
+
+.va-top {
+    vertical-align: top !important;
+}
+
+.va-center {
+    vertical-align: central !important;
+}
+
+.va-bottom {
+    vertical-align: bottom !important;
+}
+/*#itemdetailtablemodal_body tr td {
+    border:0px !important;
+}
+*/
+.ui-state-highlight {
+    border: 1px solid #c5c5c5 !important;
+    background: #f6f6f6 !important;
+    font-weight: normal !important;
+    color: #454545 !important;
+}
+
+hlw {
+    color: red !important;
+    font-weight: 900 !important;
+}
+
+.modal-body input[type=number]:read-only {
+    cursor: default;
+    background-color: #f5f5f5 !important;
+    border-color: #f5f5f5 !important;
+}
+
+.strike {
+    text-decoration: line-through !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+i[disabled=disabled].strike, a[disabled=disabled].strike {
+    pointer-events: none !important;
+}
+
+.ItemModal-Is-Delete-Row.pt-0, .ItemModal-Barcode.pt-0, .ItemModal-ID.pt-0 {
+    padding-top: 6px !important
+}
+
+.DT-Blue a, .DT-Blue span {
+    background-color: blue !important;
+    background-image: none !important;
+    color: white !important;
+    pointer-events: visible !important;
+}
+
+.DT-Red a, .DT-Red span {
+    background-color: red !important;
+    background-image: none !important;
+    color: white !important;
+    pointer-events: visible !important;
+}
+
+.DT-Green a, .DT-Green span {
+    background-color: green !important;
+    background-image: none !important;
+    color: white !important;
+    pointer-events: visible !important;
+}
+
+.DT-Orange a, .DT-Orange span {
+    background-color: orange !important;
+    background-image: none !important;
+    color: white !important;
+    pointer-events: visible !important;
+}
+
+input .datepicker {
+    cursor: pointer !important;
+}
+
+div.modal-body span:focus, div.modal-body input:focus, div.modal-body textarea:focus, div.modal-body select:focus {
+    border: 1px solid rgba(81, 203, 238, 1)
+}
+
+#quoteserviceleveloption_val:focus, input.activehighlight:focus, textarea.activehighlight:focus, select.activehighlight:focus {
+    border: 1px solid rgba(81, 203, 238, 1)
+}
+
+div.modal-body span:active, div.modal-body input:active, div.modal-body textarea:active, div.modal-body select:active {
+    border: 1px solid rgba(81, 203, 238, 1)
+}
+
+#quoteserviceleveloption_val:active, input.activehighlight:active, textarea.activehighlight:active, select.activehighlight:active {
+    border: 1px solid rgba(81, 203, 238, 1)
+}
+
+div.modal-body input[type=checkbox]:focus, div.modal-body input[type=checkbox]:focus, div.modal-body input[type=radio]:focus, div.modal-body input[type=radio]:focus {
+    outline: 1px solid rgba(81, 203, 238, 1);
+}
+
+input.activehighlight[type=checkbox]:focus, input.activehighlight[type=checkbox]:focus, input.activehighlight[type=radio]:focus, input.activehighlight[type=radio]:focus {
+    outline: 1px solid rgba(81, 203, 238, 1);
+}
+
+button:focus, button:active {
+    outline: 3px solid !important
+}
+
+#getquote_button:focus, #getquote_button:active {
+    outline: 3px solid green !important
+}
+
+.lightgrey {
+    background-color: #ededed !important;
+    border: 1px solid #dddddd !important;
+}
+
+.lightblue {
+    background-color: #d7efff !important;
+    border: 1px solid #b6ddf7 !important;
+}
+
+.pointerevent-disabled {
+    pointer-events: none !important;
+}
+
+.lightgreen {
+    background-color: #e4f5e4 !important;
+    border: 1px solid #d5f7d5 !important;
+}
+
+.assigndivcolor {
+    background-color: #d7efff !important;
+    border: 1px solid #b6ddf7 !important;
+}
+
+.error-box {
+    background: none !important;
+}
+
+.table-hover > tbody > tr.row-red > td.MapOrders-IsDifferentCustomer {
+    background-color: red !important;
+}
+
+.table-hover > tbody > tr.row-red:hover .MapOrders-IsDifferentCustomer {
+    --bs-table-accent-bg: red !important;
+    /*color:red !important;*/
+}
+
+.MapOrders-CheckBox1 input {
+    cursor: pointer !important;
+}
+
+th.MapOrders-CheckBox1 {
+    cursor: default !important;
+}
+
+.MapOrders-CheckBox1 {
+    min-width: 10px !important;
+    max-width: 50px !important;
+}
+
+.MapOrders-UserOrderNo {
+    min-width: 30px !important;
+    max-width: 50px !important;
+}
+
+.MapOrders-PinnacleOrderNo {
+    min-width: 30px !important;
+    max-width: 50px !important;
+}
+
+.MapOrders-CustomerNo {
+    min-width: 30px !important;
+    max-width: 50px !important;
+}
+
+.MapOrders-CustomerName {
+    min-width: 50px !important;
+    max-width: 120px !important;
+}
+
+.MapOrders-IsDifferentCustomer {
+    min-width: 50px !important;
+    max-width: 60px !important;
+}
+
+.MapOrders-SchDeliveryDate {
+    min-width: 50px !important;
+    max-width: 60px !important;
+}
+
+.MapOrders-OrderStatus {
+    min-width: 30px !important;
+    max-width: 50px !important;
+}
+
+.MapOrders-OriginState {
+    min-width: 30px !important;
+    max-width: 40px !important;
+}
+
+.MapOrders-OriginZip {
+    min-width: 20px !important;
+    max-width: 40px !important;
+}
+
+.MapOrders-DestName {
+    min-width: 70px !important;
+    max-width: 150px !important;
+}
+
+.MapOrders-DestCompany {
+    min-width: 70px !important;
+    max-width: 150px !important;
+}
+
+.MapOrders-DestAddress {
+    min-width: 70px !important;
+    max-width: 150px !important;
+}
+
+.MapOrders-DestCity {
+    min-width: 50px !important;
+    max-width: 60px !important;
+}
+
+.MapOrders-DestState {
+    min-width: 30px !important;
+    max-width: 40px !important;
+}
+
+.MapOrders-DestZip {
+    min-width: 20px !important;
+    max-width: 40px !important;
+}
+
+
+.Invoice-Line-Invoice-Comment {
+    display: none !important;
+}
+
+.fa-unlock:hover {
+    color: red !important;
+}
+
+.fa-check.Theme-icon:hover, .fa-check-circle.Theme-icon:hover {
+    color: green !important;
+}
+
+#ui-datepicker-div {
+    line-height: 1.1 !important;
+    /*opacity: 1 !important;*/
+    font-weight: 600 !important;
+    z-index: 1000 !important;
+}
+
+.datepicker:hover {
+    background-color: #e9eaee !important;
+}
+
+#dynamic-modal {
+    z-index: 100 !important;
+}
+
+#modal-confirmation-div {
+    z-index: 200 !important;
+}
+
+#modal-message-div {
+    z-index: 300 !important;
+}
+
+#modal-session-div {
+    z-index: 10000 !important;
+}
+
+span.select2-selection--single.is-invalid {
+    border-color: #ff5050;
+}
+
+span.select2-selection--single.is-valid {
+    border-color: #2cd07e;
+}
+
+.form-control-sm.is-invalid, .was-validated .form-control-sm:invalid {
+    border-color: #ff5050;
+    /*padding-right: calc(1.5em + 0.75rem);*/
+    /*background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23ff5050'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23ff5050' stroke='none'/%3e%3c/svg%3e);*/
+    /*background-repeat: no-repeat;
+                background-position: right calc(0.375em + 0.1875rem) center;
+                background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);*/
+}
+
+.form-control-sm.is-valid, .was-validated .form-control-sm:valid {
+    border-color: #2cd07e;
+    /*padding-right: calc(1.5em + 0.75rem);*/
+    /*background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%232cd07e' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e);*/
+    /*background-repeat: no-repeat;
+                background-position: right calc(0.375em + 0.1875rem) center;
+                background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);*/
+}
+
+.form-select-sm.is-invalid {
+    border-color: #ff5050;
+    /*padding-right: calc(1.5em + 0.75rem);*/
+    /*background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23ff5050'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23ff5050' stroke='none'/%3e%3c/svg%3e);*/
+    /*background-repeat: no-repeat;
+                background-position: right calc(0.375em + 0.1875rem) center;
+                background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);*/
+}
+
+.form-select-sm.is-valid {
+    border-color: #2cd07e;
+    /*padding-right: calc(1.5em + 0.75rem);*/
+    /*background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%232cd07e' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e);*/
+    /*background-repeat: no-repeat;
+                background-position: right calc(0.375em + 0.1875rem) center;
+                background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);*/
+}
+
+.text-red {
+    color: red !important;
+}
+
+.disablepointer {
+    pointer-events: none !important;
+}
+
+.full-height {
+    height: 100% !important
+}
+
+.float-left {
+    float: left !important;
+}
+
+.float-right {
+    float: right !important;
+}
+
+.img-responsive {
+    padding: 0.25rem;
+    background-color: #f7f9ff;
+    border: 1px solid #ccced2;
+    border-radius: 4px;
+    max-width: 100%;
+    height: auto;
+}
+
+@media screen and (min-width: 1600px) {
+    .modal-xl {
+        max-width: 80% !important;
+        max-height: 80% !important;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .modal-xl {
+        max-width: 75% !important;
+        max-height: 80% !important;
+    }
+}
+
+.EntryNoHidden {
+    display: none !important;
+}
+
+br {
+    /*display: block;
+          margin-bottom: 2px;*/
+    font-size: 2px;
+    /*line-height: 2px;*/
+}
+
+.even-color {
+    background-color: #f5f5f563 !important; /*#F5F5F5*/
+}
+
+.subtotal-color {
+    background-color: #b2d1f5 !important; /*#F5F5F5*/
+    color: black !important;
+}
+
+.hhh {
+    display: inline-flex !important
+}
+
+.pull-right {
+    float: right !important
+}
+
+th.filterselect span.select2.select2-container.select2-container--default, .modal div table td span.select2.select2-container.select2-container--default {
+    width: 100% !important;
+}
+
+th.filterselect span.select2-selection.select2-selection--single {
+    border: 0px !important;
+}
+
+th.filterselect span.select2-selection__rendered {
+    color: red !important;
+}
+
+    th.filterselect span.select2-selection__rendered[title="[Select Option]"] {
+        color: black !important;
+        opacity: .4 !important;
+    }
+
+.hearder-image {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    padding-left: 5px !important;
+    /*background-color: lightgray !important;*/
+    /*border-bottom: double !important;
+        border-top: double !important;*/
+
+    background: #466368;
+    /*background-image: linear-gradient(
+                            140deg
+                            , #EADEDB 0%, #BC70A4 50%, #BFD641 75%);*/
+    background: linear-gradient(to right, #f6f1d3, #648880 85%, #293f50);
+    border-radius: 6px;
+    /*height: 120px;*/
+}
+
+body {
+    line-height: 1.0;
+    font-family: 'Open Sans' sans-serif !important;
+    overflow: auto !important;
+    /*zoom:80%;*/
+}
+
+a {
+    font-weight: 700;
+    color: #707cd2
+}
+
+.ship-p-0 {
+    padding-left: 0px !important
+}
+
+/*#maindiv {
+    zoom: 80%;
+}*/
+
+/*@media screen and (min-width: 1200px) and (max-width: 1700px) {
+    #maindiv {
+        zoom: 75%
+    }
+}*/
+
+@media screen and (max-width: 1091px) {
+    .ship-p-0 {
+        padding-left: 20px !important
+    }
+
+    /*#maindiv {
+                zoom: 100%
+            }*/
+    #orderdetailsearch {
+        display: none
+    }
+
+    #searchdiv {
+        display: normal
+    }
+}
+
+@media screen and (min-width: 1270px) and (max-width: 1290px) {
+    html {
+        zoom: .85;
+    }
+}
+
+@media screen and (min-width: 1090px) and (max-width: 1110px) {
+    html {
+        zoom: .75;
+    }
+}
+
+/*@media screen and (max-width: 767px) {
+    #orderdetailsearch {
+        display: none
+    }
+
+    #searchdiv {
+        display: normal
+    }
+}*/
+
+@media screen and (min-width: 1090px) {
+    #orderdetailsearch {
+        display: normal
+    }
+
+    #searchdiv {
+        display: none
+    }
+}
+
+.lh-18 {
+    line-height: 18px !important;
+    word-break: break-word
+}
+
+.header-color {
+    padding-left: 7px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #6396d0;
+    /*margin-top:20px;*/
+}
+
+.fa-trash-alt {
+    color: red;
+}
+
+.btn-hover:hover {
+    background-color: #2cabe3;
+    border-color: #2cabe3
+}
+
+.green-icon {
+    color: darkgreen !important;
+}
+
+.orange-icon {
+    color: orange !important;
+}
+/*.green-icon:hover {
+            color: blue;
+        }*/
+.guid-header {
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    padding-left: 5px !important;
+    background-color: lightgray !important;
+    border-bottom: double !important;
+    border-top: double !important;
+    /*margin-top:20px;*/
+}
+
+.card-header1 {
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+    padding-left: 10px !important;
+    /*background-color: lightgray !important;*/
+    /*border-bottom: double !important;
+            border-top: double !important;*/
+    margin-top: 20px;
+}
+
+body[data-theme=dark] .card-header1 {
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+    padding-left: 10px !important;
+    color: white !important;
+    /*background-color: lightgray !important;*/
+    /*border-bottom: double !important;
+            border-top: double !important;*/
+    margin-top: 20px;
+}
+
+.text-black {
+    color: black !important;
+}
+
+body[data-theme=dark] .text-black {
+    color: #b2b9bf !important;
+}
+
+body[data-theme=dark] .card-header1 .text-black {
+    color: white !important;
+}
+/*ul li.disabled a {*/
+/*background-color: lightblue !important;*/
+/*display:none;
+        }*/
+div.dataTables_paginate ul li.active a {
+    background-color: #6396d0 !important;
+    /*font-size: 20px*/
+}
+
+.heading {
+    padding-left: 10px;
+    color: Black !important
+}
+
+tbody, td, tfoot, th, thead, tr {
+    border-color: #c5c5c5 !important;
+}
+
+#commentsarchiverecord, #eventsarchiverecord, #barcodescanarchiverecord, #changelogarchiverecord {
+    font-weight: normal !important;
+    font-size: 14px !important;
+    font-family: Arial !important;
+}
+
+.card .card-title {
+    font-weight: 700;
+    font-size: 14px !important;
+    font-family: Arial !important;
+}
+
+.fw-light, #maindiv {
+    color: #2e2e2e;
+    /*font-weight: 600 !important;*/
+    font-size: 12px !important;
+    font-family: Arial !important;
+}
+
+div.dataTables_wrapper .table.table thead.Theme-Header, div.dataTables_wrapper .table.table tfoot.Theme-Header, div.dataTables_wrapper div div, #itemdetailrow_foot {
+    font-size: 12px !important;
+    font-family: Arial !important;
+}
+
+.fw-bold {
+    color: #2e2e2e;
+    font-family: Arial !important;
+}
+
+.modal-body table tr td {
+    font-size: 12px !important;
+    font-family: Arial !important;
+}
+
+a.Theme-a {
+    font-family: inherit !important;
+    font-size: inherit !important;
+}
+
+tbody td.fw-light-b {
+    color: #2e2e2e;
+    /*font-weight: 600 !important;*/
+    font-size: 12px !important;
+    font-family: Arial !important;
+}
+
+textarea.fw-light, .modal-body textarea, .modal-body input {
+    line-height: 1rem !important;
+    font-size: 12px !important;
+    font-family: Arial !important;
+}
+
+body[data-theme=dark] tbody td.fw-light-b {
+    color: #b2b9bf !important;
+    font-weight: 600 !important
+}
+
+tbody td.fw-light-b2 {
+    font-weight: 600 !important
+}
+
+td.dataTables_empty {
+    color: black;
+    font-weight: 600 !important
+}
+
+body[data-theme=dark] td.dataTables_empty {
+    color: #b2b9bf !important;
+    font-weight: 600 !important
+}
+
+td.lh {
+    line-height: 1.3em !important;
+    padding-right: 2px !important
+}
+
+th.lh {
+    line-height: 1.3em !important;
+    padding-right: 2px !important
+}
+
+#itemdetailrow_foot th.lh {
+    line-height: 1.3em !important;
+    padding-right: 2px !important
+}
+
+th.invoiceline_tablefoot {
+    line-height: 1.3em !important;
+    padding-right: 2px !important
+}
+
+/*thead.bg-primary {
+            background-color: #6396d0 !important
+        }*/
+div.dataTables_length label select {
+    cursor: pointer;
+}
+
+
+.fa-1ax {
+    font-size: 1.2em;
+}
+
+icon-hover i {
+    font-size: 20px;
+    margin-right: 8px
+}
+
+.icon-hover:hover {
+    background-color: transparent !important;
+    color: #2cabe3
+}
+
+#itemdetailrow_filter th {
+    padding: 0px !important;
+}
+
+#commentsrow_filter th {
+    padding: 0px !important;
+}
+
+#eventsrow_filter th {
+    padding: 0px !important;
+}
+
+#documentsrow_filter th {
+    padding: 0px !important;
+}
+
+#barcodescanrow_filter th {
+    padding: 0px !important;
+}
+
+#changelogrow_filter th {
+    padding: 0px !important;
+}
+/*.loading-img {
+            background: url(~/icon/loading.gif) center center no-repeat;
+            height: 100%;
+            z-index: 20;
+            opacity: 1;
+        }
+
+        .overlay {
+            background: #ffffff;
+            display: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            opacity: 0.5;
+        }*/
+thead.Theme-Header {
+    text-align: center !important;
+}
+
+.table-responsive {
+    overflow-y: hidden !important;
+}
+
+div.table-responsive table.table#itemdetailtable, div.table-responsive table.table#invoiceheadertable {
+    min-width: 1470px !important;
+}
+
+div.table-responsive table.table#commentstable, div.table-responsive table.table#documentstable, div.table-responsive table.table#eventstable, div.table-responsive table.table#barcodescantable, div.table-responsive table.table#manifesttable, div.table-responsive table.table#proofofpickuptable, div.table-responsive table.table#proofofdeliverytable, div.table-responsive table.table#changelogtable, div.table-responsive table.table#maporderstable {
+    min-width: 1200px !important;
+}
+
+div.table-responsive table.table#accesslogtable {
+    min-width: 1000px !important;
+}
+
+.OrderAccess-Log-ClientTypeName {
+    width: 40px;
+}
+
+.OrderAccess-Log-ViewedBy {
+    width: 80px;
+}
+
+.OrderAccess-Log-ViewedOn {
+    width: 40px;
+}
+
+.OrderAccess-Log-ViewByDepartment {
+    width: 40px;
+}
+
+.OrderAccess-Log-Source {
+    width: 40px;
+}
+
+/*itemdetailtable*/
+.Item-Sr-No {
+    min-width: 20px;
+    max-width: 30px;
+}
+
+.Item-ID {
+    min-width: 50px;
+    max-width: 75px;
+}
+
+.Item-Barcode {
+    min-width: 110px;
+    max-width: 125px
+}
+
+.Item-Type {
+    min-width: 50px;
+    max-width: 100px;
+}
+
+.Item-Item-Code {
+}
+
+.Item-Qty {
+    min-width: 30px;
+    max-width: 50px;
+}
+
+.Item-Desc {
+    max-width: 750px;
+    min-width: 250px;
+}
+
+.Item-Assembly-Time {
+    min-width: 60px;
+    max-width: 75px
+}
+
+.Item-Client-Item-Ref {
+    min-width: 70px;
+    max-width: 150px;
+}
+
+.Item-Sku {
+    min-width: 70px;
+    max-width: 150px;
+}
+
+.Item-Packing-Detail {
+    min-width: 60px;
+    max-width: 150px;
+}
+
+.Item-Packed-By-Shipper {
+}
+
+.Item-Blanket-Service {
+}
+
+.Item-Packing-Required {
+}
+
+.Item-Crating-Required {
+}
+
+.Item-Weight {
+    min-width: 50px;
+    max-width: 100px;
+}
+
+.Item-Dimension {
+    min-width: 70px;
+    max-width: 150px;
+}
+
+.Item-Cubes {
+    min-width: 50px;
+    max-width: 100px;
+}
+
+.Item-Value {
+    min-width: 50px;
+    max-width: 100px;
+}
+
+.Item-Location {
+    min-width: 50px;
+    max-width: 150px;
+}
+
+.Item-Delivery-Status {
+    min-width: 80px;
+    max-width: 150px;
+}
+
+.Item-Warehouse-Name {
+    min-width: 80px;
+    max-width: 150px;
+}
+
+.Item-Item-Pickup-Status {
+    min-width: 75px;
+    max-width: 100px
+}
+
+.Item-Item-Delivery-Status {
+    min-width: 75px;
+    max-width: 100px
+}
+
+.Item-Warehouse-Location-Status {
+    min-width: 80px;
+    max-width: 100px
+}
+
+.Item-Action {
+    min-width: 50px;
+    max-width: 100px
+}
+
+#itemdetailtable {
+    min-width: 1750px !important;
+}
+
+/*barcodescantable*/
+.Barcode-Scan-Time {
+    width: 50px;
+}
+
+.Barcode-Scanned-By {
+    width: 80px;
+}
+
+.Barcode-Barcode-No {
+    width: 50px;
+}
+
+.Barcode-Location {
+    width: 50px;
+}
+
+.Barcode-Device-No {
+    width: 50px;
+}
+
+.Barcode-Warehouse {
+    width: 150px;
+}
+
+.Barcode-Type-of-Scan {
+    width: 80px;
+}
+
+/*itemdetailtable*/
+.ItemModal-ID {
+    min-width: 20px;
+}
+
+.ItemModal-Item-ID {
+    min-width: 50px;
+    display: none !important;
+}
+
+.ItemModal-Barcode {
+    min-width: 50px;
+    /*display: none !important;*/
+}
+
+.ItemModal-Type {
+    min-width: 120px;
+}
+
+.ItemModal-Item-Description-Sku-Ref {
+    min-width: 480px;
+}
+
+.ItemModal-Packing-Detail {
+    min-width: 100px;
+}
+
+.ItemModal-Item-Notes {
+    min-width: 50px;
+}
+
+.ItemModal-Pkg-Qty {
+    min-width: 50px;
+}
+
+.ItemModal-Weight {
+    min-width: 75px;
+}
+
+.ItemModal-Dimension {
+    min-width: 200px;
+}
+
+.ItemModal-Value {
+    min-width: 75px;
+}
+
+.ItemModal-Assembly-Time {
+    min-width: 75px;
+}
+
+.ItemModal-Is-Delete-Row {
+    min-width: 50px;
+}
+
+td.ItemModal-Type,
+td.ItemModal-Item-Description-Sku-Ref,
+td.ItemModal-Packing-Detail,
+td.ItemModal-Item-Notes,
+td.ItemModal-Pkg-Qty,
+td.ItemModal-Weight,
+td.ItemModal-Dimension,
+td.ItemModal-Value,
+td.ItemModal-Assembly-Time {
+    border: 0px !important;
+}
+
+.ItemModal-Packed-by-Shipper,
+.ItemModal-Blanket-Service,
+.ItemModal-Packing-Required,
+.ItemModal-Crating-Required,
+.ItemModal-Item-Notes {
+    display: none !important;
+}
+
+
+/*changelogtable*/
+.Change-Log-Created-On {
+    width: 50px;
+}
+
+.Change-Log-Changed-By {
+    width: 100px;
+}
+
+.Change-Log-Changed-Field {
+    width: 80px;
+}
+
+.Change-Log-Reason-For-Change {
+    width: 100px;
+}
+
+.Change-Log-Previous-Value {
+    width: 100px;
+}
+
+.Change-Log-New-Value {
+    width: 100px;
+}
+
+
+/*commentstable*/
+.Comments-Created-On {
+    /*width: 50px;*/
+    min-width: 150px;
+    max-width: 150px;
+}
+
+.Comments-Modified-Date {
+    /*width: 50px;*/
+    min-width: 150px;
+    max-width: 150px;
+}
+
+.Comments-User {
+    min-width: 200px;
+    max-width: 200px;
+}
+
+.Comments-Public {
+    min-width: 50px;
+    max-width: 50px;
+}
+
+.Comments-Source {
+    min-width: 200px;
+    max-width: 200px;
+}
+
+.Comments-Number {
+}
+
+.Comments-CSR-Status {
+}
+
+.Comments-Follow-Up-Date {
+}
+
+.Comments-Comment {
+    width: 100%;
+    min-width: 500px;
+}
+
+.Comments-Is-Call {
+    min-width: 50px;
+    max-width: 50px;
+}
+
+.Comments-Action {
+    min-width: 100px;
+    max-width: 100px
+}
+
+
+/*documentstable*/
+.Documents-No {
+    width: 50px;
+}
+
+.Documents-Type {
+    width: 50px;
+}
+
+.Documents-Public {
+    width: 50px;
+}
+
+.Documents-Filename {
+    width: 100px;
+}
+
+.Documents-Description {
+    width: 150px;
+}
+
+.Documents-Added-By {
+    width: 50px;
+}
+
+.Documents-Added-On {
+    width: 50px;
+}
+
+.Documents-Action {
+    width: 50px;
+}
+
+
+/*eventstable*/
+.Events-Activity {
+    width: 50px;
+}
+
+.Events-Activity-Code {
+    width: 50px;
+}
+
+.Events-Event {
+    width: 150px;
+}
+
+.Events-Event-Code {
+    width: 50px;
+}
+
+.Events-Date {
+    width: 50px;
+}
+
+.Events-Trigger {
+    width: 50px;
+}
+
+.Events-Initiated {
+    width: 80px;
+}
+
+
+/*manifesttable*/
+.Manifest-No {
+    width: 50px;
+}
+
+.Manifest-Created-By {
+    width: 100px;
+}
+
+.Manifest-Start-Date {
+    width: 80px;
+}
+
+.Manifest-Performed-By {
+    width: 150px;
+}
+
+.Manifest-Type {
+    width: 100px;
+}
+
+.Manifest-Status {
+    width: 80px;
+}
+
+.Manifest-IsPPlusManifest {
+    width: 80px;
+    display: none;
+}
+
+.Manifest-Action {
+    width: 50px;
+}
+
+
+/*proofofdeliverytable*/
+.Proof-of-Delivery-ID {
+    width: 50px;
+}
+
+.Proof-of-Delivery-By {
+    width: 100px;
+}
+
+.Proof-of-Delivery-Date {
+    width: 80px;
+}
+
+.Proof-of-Delivery-Received-By {
+    width: 100px;
+}
+
+.Proof-of-Delivery-Receiving-Location {
+    width: 80px;
+}
+
+.Proof-of-Delivery-IsPublic {
+    width: 50px;
+}
+
+.Proof-of-Delivery-Created-On {
+    width: 80px;
+}
+
+.Proof-of-Delivery-Added-By {
+    width: 100px;
+}
+
+.Proof-of-Delivery-Action {
+    width: 50px;
+}
+
+
+/*proofofpickuptable*/
+.Proof-of-Pickup-ID {
+    width: 50px;
+}
+
+.Proof-of-Pickup-By {
+    width: 100px;
+}
+
+.Proof-of-Pickup-Date {
+    width: 80px;
+}
+
+.Proof-of-Pickup-Customer-Name {
+    width: 100px;
+}
+
+.Proof-of-Pickup-Location {
+    width: 80px;
+}
+
+.Proof-of-Pickup-IsPublic {
+    width: 50px;
+}
+
+.Proof-of-Pickup-Created-On {
+    width: 80px;
+}
+
+.Proof-of-Pickup-Added-By {
+    width: 80px;
+}
+
+.Proof-of-Pickup-Action {
+    width: 50px;
+}
+
+
+/*invoiceheadertable*/
+.Invoice-Header-Expand-Collapse {
+    width: 10px;
+}
+
+.Invoice-Header-Estimate-No {
+    width: 90px;
+}
+
+.Invoice-Header-Posting-Date {
+    width: 80px;
+}
+
+.Invoice-Header-Created-By {
+    width: 80px;
+}
+
+.Invoice-Header-Amount {
+    width: 70px;
+}
+
+.Invoice-Header-Invoice-Status {
+    width: 80px;
+}
+
+.Invoice-Header-Approval-Status {
+    width: 80px;
+}
+
+.Invoice-Header-Approval-Status-Value {
+}
+
+.Invoice-Header-Nav-Invoice-No {
+    width: 80px;
+}
+
+.Invoice-Header-Nav-Invoice-No-Hidden {
+}
+
+.Invoice-Header-Payment-Status {
+    width: 80px;
+}
+
+.Invoice-Header-Credit-Memo-Amount {
+    width: 80px;
+}
+
+.Invoice-Header-Paid-Amount {
+    width: 80px;
+}
+
+.Invoice-Header-Balance {
+    width: 80px;
+}
+
+.Invoice-Header-EDI {
+    width: 80px;
+}
+
+.Invoice-Header-WRDim {
+    width: 50px;
+}
+
+.Invoice-Header-SLDim {
+    width: 30px;
+}
+
+.Invoice-Header-BLDim {
+    width: 80px;
+}
+
+.Invoice-Header-Action {
+    width: 80px;
+}
+
+/*invoiceheaderwithcosttable*/
+.Invoice-Header-With-Cost-Expand-Collapse {
+    width: 10px;
+}
+
+.Invoice-Header-With-Cost-Amount {
+    width: 80px;
+}
+
+.Invoice-Header-With-Cost-Invoice-Status {
+    width: 80px;
+}
+
+.Invoice-Header-With-Cost-Cost {
+    width: 80px;
+}
+
+.Invoice-Header-With-Cost-Profit {
+    width: 80px;
+}
+
+.Invoice-Header-With-Cost-Profit_Percentage {
+    width: 80px;
+}
+
+.Invoice-Header-With-Cost-Nav-Invoice-No {
+    width: 80px;
+}
+
+.Invoice-Header-With-Cost-WRDim {
+    width: 50px;
+    display: none;
+}
+
+.Invoice-Header-With-Cost-SLDim {
+    width: 30px;
+    display: none;
+}
+
+.Invoice-Header-With-Cost-BLDim {
+    width: 80px;
+    display: none;
+}
+
+/*invoicelinewithcosttable*/
+.Invoice-Line-With-Cost-Charge-Type {
+    width: 120px;
+}
+
+.Invoice-Line-With-Cost-Description {
+    width: 200px;
+}
+
+.Invoice-Line-With-Cost-Type {
+    width: 120px;
+}
+
+.Invoice-Line-With-Cost-WRDim {
+    width: 80px;
+}
+
+.Invoice-Line-With-Cost-SLDim {
+    width: 80px;
+}
+
+.Invoice-Line-With-Cost-BLDim {
+    width: 80px;
+}
+
+.Invoice-Line-With-Cost-Amount {
+    width: 80px;
+}
+
+.Invoice-Line-With-Cost-Cost {
+    width: 80px;
+}
+
+.Invoice-Line-With-Cost-Profit {
+    width: 80px;
+}
+
+.Invoice-Line-With-Cost-Profit-Percentage {
+    width: 80px;
+}
+
+.Invoice-Line-With-Cost-Percentage-of-TotalCost {
+    width: 80px;
+}
+
+/*invoicelinetable*/
+.Invoice-Line-Charge-Type {
+    width: 100px;
+}
+
+.Invoice-Line-Quantity {
+    width: 30px;
+}
+
+.Invoice-Line-Description {
+    width: 200px;
+}
+
+.Invoice-Line-Added-By {
+    width: 80px;
+}
+
+.Invoice-Line-Added-On {
+    width: 80px;
+}
+
+.Invoice-Line-Modified-By {
+    width: 80px;
+}
+
+.Invoice-Line-Modified-On {
+    width: 80px;
+}
+
+.Invoice-Line-WRDim {
+    width: 80px;
+}
+
+.Invoice-Line-SLDim {
+    width: 50px;
+}
+
+.Invoice-Line-BLDim {
+    width: 80px;
+}
+
+.Invoice-Line-Invoice-Comment {
+}
+
+.Invoice-Line-Amount {
+    width: 80px;
+}
+
+.Invoice-Line-Action {
+    width: 80px;
+}
+
+.APICall-Datecreated {
+    width: 25%;
+}
+
+.APICall-APICallID {
+    width: 15%;
+}
+
+.APICall-APICallName {
+    width: 60%;
+}
+
+/*.UnsyncCount {
+            background: #ff0000;
+            border-radius: 50%;
+            text-align: center;
+            color: #fff;
+            padding: 0px 5px 0px 4px;*/
+/*font-size: 10px;
+            font-weight: bold;*/
+/*position: absolute;
+            top: 45px;*/
+/*line-height: 15px !important;*/
+/*}*/

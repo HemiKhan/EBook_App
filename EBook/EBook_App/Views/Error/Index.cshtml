@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.ErrorPageName</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="~/img/IconLogo.png" />
+    <!-- Custom CSS -->
+    <link href="~/css/Ample/style.min.css?ID=@ViewBag.GUID" rel="stylesheet" />
+    <style type="text/css">
+        .error-box {
+            background: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <!-- ============================================================== -->
+        <div class="error-box">
+            <div class="error-body text-center">
+                <h3 class="error-title">@ViewBag.ErrorPageName</h3>
+                <h3 class="text-uppercase error-subtitle">@ViewBag.ErrorMsg</h3>
+                @*<p class="text-muted mt-4 mb-4">YOU SEEM TO BE TRYING TO FIND HIS WAY HOME</p>*@
+                <a href="~/Acount/Home" class="btn btn-info btn-rounded waves-effect waves-light mb-5">Back to Home Page</a>
+                @if (ViewBag.PreviousPageURL != "" && ViewBag.PreviousPageName != "")
+                {
+                    <a href="@ViewBag.PreviousPageURL" class="btn btn-info btn-rounded waves-effect waves-light mb-5">Back to @ViewBag.PreviousPageName Page</a>
+                }
+            </div>
+        </div>
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- All Required js -->
+    <!-- ============================================================== -->
+    <script src="~/js/Ample/perfect-scrollbar.jquery.min.js?ID=@ViewBag.GUID"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js?ID=@ViewBag.GUID"></script>
+    <!-- ============================================================== -->
+</body>
+</html>

@@ -1,0 +1,471 @@
+﻿@{
+    ViewBag.Title = "Log-In";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="~/img/IconLogo.png" />
+    <link rel="stylesheet" href="~/css/Ample/style.min.css?ID=@ViewBag.GUID" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <style>
+        /* Login Start */
+        @@import url("https://fonts.googleapis.com/css?family=Pacifico|Roboto");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Roboto", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #8E0E00; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #1F1C18, #8E0E00); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #1F1C18, #8E0E00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            /* background: #093028 !important;
+            background: -webkit-linear-gradient(to right, #237A57, #093028) !important;
+            background: linear-gradient(to right, #237A57, #093028) !important; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container-fluid {
+            padding: 0px 140px;
+        }
+
+        .main {
+            width: 100%;
+            height: 850px;
+            border-radius: 25px;
+            padding: 0px 13px;
+        }
+
+        .carousel-container {
+            height: 850px;
+            border-top-left-radius: 25px;
+            border-bottom-left-radius: 25px;
+        }
+
+        #MyCarousel {
+            padding: 14px 0px 0px;
+        }
+
+        .carousel-inner img {
+            width: 100%;
+            height: 820px;
+            border-top-left-radius: 25px;
+            border-bottom-left-radius: 25px;
+        }
+
+        .carousel-indicators li {
+            box-sizing: content-box;
+            -ms-flex: 0 1 auto;
+            flex: 0 1 auto;
+            width: 30px;
+            height: 3px;
+            margin-right: 3px;
+            margin-left: 3px;
+            text-indent: -999px;
+            cursor: pointer;
+            background-color: #fff;
+            background-clip: padding-box;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            opacity: 0.5;
+            transition: opacity 0.6s ease;
+        }
+
+        .carousel-indicators .active {
+            opacity: 1;
+        }
+
+        .inputBox {
+            position: relative;
+            width: 100%;
+            margin: auto;
+        }
+
+            .inputBox input {
+                width: 100%;
+                padding: 10px;
+                border: 0px solid transparent;
+                background: #fff;
+                border-radius: 5px;
+                outline: none;
+                color: #111;
+                font-size: 1em;
+                margin-bottom: 20px;
+            }
+
+            .inputBox span {
+                position: absolute;
+                left: 0;
+                padding: 10px;
+                pointer-events: none;
+                font-size: 1em;
+                color: rgb(0, 0, 0);
+                text-transform: uppercase;
+                transition: 0.5s;
+            }
+
+            .inputBox input:valid ~ span,
+            .inputBox input:focus ~ span {
+                color: #fff;
+                transform: translateX(10px) translateY(-7px);
+                font-size: 0.65em;
+                padding: 0 10px;
+                background: #1d2b3a;
+                border-left: 1px solid #111;
+                border-right: 1px solid #111;
+                letter-spacing: 0.2em;
+            }
+
+            .inputBox input:valid,
+            .inputBox input:focus {
+                border: 1px solid #111;
+            }
+
+        .form-container {
+            height: 850px;
+            padding: 0px 19px 0px 0px;
+            border-top-right-radius: 25px;
+            border-bottom-right-radius: 25px;
+            perspective: 1000px;
+            transition: 0.3s ease-in-out;
+        }
+
+        .center-me {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .media-facebook {
+            background-color: #3b5998;
+        }
+
+        .media-facebook {
+            position: relative;
+            display: block;
+            max-width: 100%;
+            height: 46px;
+            padding-left: 64px;
+            color: #fff;
+            font-size: 14px;
+            line-height: 46px;
+            text-decoration: none;
+        }
+
+            .media-facebook .fa-facebook {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 46px;
+                height: 46px;
+                transition: width 0.3s;
+                background-color: rgba(255, 255, 255, 0.12);
+                font-size: 16px;
+                line-height: 46px;
+                text-align: center;
+            }
+
+            .media-facebook:hover .fa-facebook {
+                width: 100%;
+                color: #fff;
+            }
+
+            .media-facebook:hover {
+                color: #3b5998;
+            }
+
+        .media-google {
+            background-color: #dd4b39;
+        }
+
+        .media-google {
+            position: relative;
+            display: block;
+            max-width: 100%;
+            height: 46px;
+            padding-left: 64px;
+            color: #fff;
+            font-size: 14px;
+            line-height: 46px;
+            text-decoration: none;
+        }
+
+            .media-google .fa-google {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 46px;
+                height: 46px;
+                transition: width 0.3s;
+                background-color: rgba(255, 255, 255, 0.12);
+                font-size: 16px;
+                line-height: 46px;
+                text-align: center;
+            }
+
+            .media-google:hover .fa-google {
+                width: 100%;
+                color: #fff;
+            }
+
+            .media-google:hover {
+                color: #dd4b39;
+            }
+
+        /* Media query for small screens */
+        @@media screen and (max-width: 768px) {
+            .carousel-container {
+                display: none;
+            }
+
+            .center-me {
+                margin-top: 70px;
+            }
+        }
+        /* Login End */
+
+        /* Box Shadow Effect*/
+        .box-shadow-inset {
+            box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.25), 10px 10px 70px rgba(0, 0, 0, 0.25), inset 5px 5px 10px rgba(0, 0, 0, 0.5), inset 5px 5px 20px rgba(255, 255, 255, 0.2), inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+        }
+
+        .form-control.box-shadow-inset {
+            box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.25), 10px 10px 70px rgba(0, 0, 0, 0.25), inset 5px 5px 10px rgba(0, 0, 0, 0.5), inset 5px 5px 20px rgba(255, 255, 255, 0.2), inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+            outline: none;
+            border: none;
+            font-weight: bolder;
+        }
+
+        .box-shadow-outset {
+            box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.25), inset 2px 2px 5px rgba(255, 255, 255, 0.25), inset -3px -3px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-control.box-shadow-outset {
+            box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.25), inset 2px 2px 5px rgba(255, 255, 255, 0.25), inset -3px -3px 5px rgba(0, 0, 0, 0.5);
+            outline: none;
+            border: none;
+            font-weight: bolder;
+        }
+
+        .btn-box-shadow-outset {
+            box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.25), inset 2px 2px 5px rgba(255, 255, 255, 0.25), inset -3px -3px 5px rgba(0, 0, 0, 0.5);
+            outline: none;
+            border: none;
+            font-weight: bolder;
+        }
+
+        .btn-box-shadow-inset {
+            box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.25), 10px 10px 70px rgba(0, 0, 0, 0.25), inset 5px 5px 10px rgba(0, 0, 0, 0.5), inset 5px 5px 20px rgba(255, 255, 255, 0.2), inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+            outline: none;
+            border: none;
+            font-weight: bolder;
+        }
+
+            .btn-box-shadow-outset:hover,
+            .btn-box-shadow-inset:hover {
+                filter: brightness(1.1);
+            }
+
+        /*Dark Shadow Effect*/
+        .dark-shadow-inset {
+            box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2), inset -5px -5px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 225, 0.1);
+        }
+
+        .form-control.dark-shadow-inset {
+            box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2), inset -5px -5px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 225, 0.1);
+            outline: none;
+            border: none;
+            font-weight: bolder;
+        }
+
+        .dark-shadow-outset {
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2), -5px -5px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 225, 0.1);
+        }
+
+        .form-control.dark-shadow-outset {
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2), -5px -5px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 225, 0.1);
+            outline: none;
+            border: none;
+            font-weight: bolder;
+        }
+
+        .btn-dark-shadow-outset {
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2), -5px -5px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 225, 0.1);
+            outline: none;
+            border: none;
+            font-weight: bolder;
+        }
+
+        .btn-dark-shadow-inset {
+            box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2), inset -5px -5px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 225, 0.1);
+            outline: none;
+            border: none;
+            font-weight: bolder;
+        }
+
+        .btn-dark-shadow-outset:hover {
+            box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2), inset -5px -5px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 225, 0.1);
+        }
+
+        .btn-dark-shadow-inset:hover {
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2), -5px -5px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 225, 0.1);
+        }
+        /* Light Shadow Effect*/
+
+        .light-shadow-inset {
+            background: #ecf0f3;
+            box-shadow: inset -3px -3px 7px #ffffff, inset 3px 3px 5px #ceced1;
+        }
+
+        .form-control.light-shadow-inset {
+            box-shadow: inset -3px -3px 7px #ffffff, inset 3px 3px 5px #ceced1;
+            outline: none;
+            border: none;
+            font-weight: bolder;
+        }
+
+        .light-shadow-outset {
+            background: #ecf0f3;
+            box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+        }
+
+        .form-control.light-shadow-outset {
+            box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+            outline: none;
+            border: none;
+            font-weight: bolder;
+        }
+
+        .btn-light-shadow-outset {
+            background: #ecf0f3;
+            box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+            outline: none;
+            border: none;
+            font-weight: bolder;
+        }
+
+        .btn-light-shadow-inset {
+            background: #ecf0f3;
+            box-shadow: inset -3px -3px 7px #ffffff, inset 3px 3px 5px #ceced1;
+            outline: none;
+            border: none;
+            font-weight: bolder;
+        }
+
+        .btn-light-shadow-outset:hover {
+            box-shadow: inset -3px -3px 7px #ffffff, inset 3px 3px 5px #ceced1;
+        }
+
+        .btn-light-shadow-inset:hover {
+            box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+        }
+
+        /* Shadow Effect End */
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="main bg-light box-shadow-outset">
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 carousel-container">
+                    <div id="MyCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <ul class="carousel-indicators">
+                            <li data-bs-target="#MyCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></li>
+                            <li data-bs-target="#MyCarousel" data-bs-slide-to="1" class="active" aria-current="true" aria-label="Slide 2"></li>
+                            <li data-bs-target="#MyCarousel" data-bs-slide-to="2" class="active" aria-current="true" aria-label="Slide 3"></li>
+                        </ul>
+                        <div class="carousel-inner">
+                            <div class="carousel-item ">
+                                <img src="~/img/truck1.jpg" />
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/img/truck2.jpg" />
+                            </div>
+                            <div class="carousel-item active">
+                                <img src="~/img/MWD_Warehouse.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 center-me">
+                    <form class="form-horizontal w-100 form-material" id="loginform" asp-controller="Account" asp-action="Login">
+                        <h1 class="text-center mb-5">Log-IN</h1>
+                        <div class="form-group mb-3" style="display:none">
+                            <div class="">
+                                <input class="form-control" type="text" name="RedirectURL" value="@ViewBag.RedirectURL">
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="">
+                                <input class="form-control" type="text" name="UserID" required="" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <div class="">
+                                <input class="form-control" type="password" name="Password" required="" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="d-flex">
+                                <input id="txtRememberMe" type="hidden" name="RememberMe" value="false">
+                                <div class="checkbox checkbox-info pt-0">
+                                    <input id="checkbox-signup" type="checkbox" name="RememberMe1" class="material-inputs chk-col-indigo">
+                                    <label for="checkbox-signup"> Remember me </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-center mt-4 mb-3">
+                            <div class="col-xs-12">
+                                <button class="btn btn-info d-block w-100 waves-effect waves-light" type="submit">
+                                    Log In
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Scripts -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            positionClass: "toast-top-right",
+            timeOut: 3000,
+        };
+        $("#checkbox-signup").change(function () {
+            $("#txtRememberMe").val($("#checkbox-signup").is(":checked"))
+        });
+    </script>
+
+</body>
+
+</html>

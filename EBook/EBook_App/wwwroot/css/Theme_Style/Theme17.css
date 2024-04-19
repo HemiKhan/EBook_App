@@ -1,0 +1,338 @@
+﻿/*Pinnacle2*/
+:root {
+    --darker-color: #FF8C00;
+    --dark-color: #F3B400;
+    --darkalt-color: #FCD9A9;
+    --primary-color: #FCF1B7;
+    --secondary-color: #FBF2DD;
+    --tertiary-color: #E3E3E3;
+    --light-color: #F0F0F0;
+    --lighter-color: #FDFDFD;
+    --text-color: black;
+    --icon-color: white;
+    --border-color-w: white;
+    --alert-icon-color-hover: red;
+}
+
+thead.k-table-thead tr.k-table-row,
+.sidebar-nav ul .sidebar-item.selected > .sidebar-link {
+    background: var(--secondary-color) !important;
+    /*background: -webkit-linear-gradient(to right, #237A57, var(--primary-color)) !important;
+    background: linear-gradient(to right, #237A57, var(--primary-color)) !important;*/
+    color: var(--text-color1) !important;
+} 
+
+.Theme-Darker {
+    background-color: var(--darker-color) !important;
+}
+
+.Theme-Dark {
+    background-color: var(--dark-color) !important;
+}
+
+.Theme-DarkAlt {
+    background-color: var(--darkalt-color) !important;
+}
+
+.Theme-Primary {
+    background-color: var(--primary-color) !important;
+}
+
+.Theme-Secondary {
+    background-color: var(--secondary-color) !important;
+}
+
+.Theme-Tertiary {
+    background-color: var(--tertiary-color) !important;
+}
+
+.Theme-Light {
+    background-color: var(--light-color) !important;
+}
+
+.Theme-Lighter {
+    background-color: var(--secondary-color) !important;
+}
+
+.Theme-Header {
+    background: linear-gradient(#EEBC78, #EEBC78) !important;
+}
+
+    .Theme-Header .text-white {
+        color: black !important;
+    }
+
+aside.Theme-Header {
+    background: linear-gradient(#428BCA, #428BCA) !important;
+}
+
+#recheckinvoicefoot {
+    background: linear-gradient(var(--light-color), var(--light-color)) !important;
+    border: solid 1px var(--tertiary-color) !important;
+    color: black !important;
+    font-weight: 800 !important;
+}
+        thead.Theme-Header {
+            background: linear-gradient(var(--light-color), var(--light-color)) !important;
+            border: solid 1px var(--tertiary-color) !important;
+            color: black !important;
+            font-weight: 800 !important;
+        }
+
+    thead.Theme-Header th {
+        font-weight: 700 !important;
+        line-height: 1.1rem !important;
+    }
+
+tfoot .Theme-Header th {
+    font-weight: 700 !important;
+    line-height: 1.0rem !important;
+}
+
+/*tfoot .border-0 {
+    border: solid 1px var(--tertiary-color) !important;
+}*/
+
+tfoot .Theme-Header, tfoot.Theme-Header.invoiceline_tablefoot {
+    background: linear-gradient(var(--light-color), var(--light-color)) !important;
+    border: solid 1px var(--tertiary-color) !important;
+    color: black !important;
+    font-weight: 800 !important;
+}
+
+.Theme-Headerb {
+    background: linear-gradient(var(--lighter-color) 40%, var(--tertiary-color ) 80%) !important;
+    border-top: solid 4px var(--tertiary-color) !important;
+    border-bottom: solid 3px var(--dark-color) !important;
+    margin-top: 0px !important;
+}
+
+.Theme-Headert {
+    background: linear-gradient(to top, var(--light-color) 100%, var(--light-color) 100%) !important;
+}
+
+/*div.Theme-Header.align-middle {
+    background: linear-gradient(var(--light-color), var(--light-color)) !important;
+    border: solid 1px var(--tertiary-color) !important;
+    color: black !important;
+    font-weight: 700 !important;
+}*/
+
+div.Theme-Header.align-middle, div.Theme-Header.align-middle .text-white select, div.Theme-Header.align-middle .text-white .Theme-Header {
+    background: linear-gradient(var(--light-color), var(--light-color)) !important;
+    border: solid 1px var(--tertiary-color) !important;
+}
+
+div.Theme-Header.align-middle .text-white {
+    color: black !important;
+    font-weight: 700 !important;
+}
+
+div.dataTables_paginate ul.pagination li.active a.Theme-Header {
+    background: var(--darker-color) !important;
+}
+
+div a i.fa-redo {
+    color: #C0B9B8 !important;
+    margin-top: 8px !important;
+    font-size: 16px !important;
+}
+
+/*new*/
+div.Theme-Header div div div.dataTables_info label, div.Theme-Header div div div.dataTables_info {
+    margin-top: 2.5px !important;
+}
+
+div.dataTables_length label {
+    margin-top: 3px !important;
+    font-weight: 600 !important;
+}
+
+option.Theme-Tertiary {
+    background: var(--primary-color) !important;
+    color: black !important;
+    cursor: pointer !important;
+}
+
+select.Theme-Header.text-white {
+    background: var(--darkalt-color) !important;
+    color: black !important;
+}
+
+div.Theme-Header#navbar-log {
+    background: white !important;
+    color: black !important;
+}
+
+div.Theme-Header#navbar-log .text-white {
+    color: black !important;
+}
+
+div.Theme-Header#navbarSupportedContent {
+    background: white !important;
+    color: black !important;
+}
+
+.navbar-dark .navbar-nav .nav-link,
+#changethemediv i {
+    color: black !important;
+}
+
+#search_ordernoheader, #search_orderno, #search_trackingnoheader, #search_trackingno {
+    background: white !important;
+    color: black !important;
+}
+
+#search_buttonheader, #ddlPaymentStatus, #search_button, #maporderssearchbutton {
+    background: #428BCA !important;
+    color: white !important;
+}
+
+    #search_buttonheader:hover, #maporderssearchbutton:hover {
+        background-color: var(--darker-color) !important;
+        border-color: var(--darker-color) !important;
+        color: var(--icon-color) !important;
+    }
+
+#searchdiv div div div div div.Theme-Lighter {
+    background-color: white !important
+}
+/*new*/
+div.dataTables_length label select.Theme-Header option {
+    background-color: var(--secondary-color) !important;
+    border-color: var(--tertiary-color) !important;
+}
+
+.Theme-icon, #headerrelative .fa-window-maximize, #headerfixed .fa-window-maximize {
+    color: #428BCA !important;
+}
+
+.Theme-icon-hover:hover {
+    color: var(--darker-color) !important;
+}
+
+.Theme-icon:hover, a#moonmode .fa-moon:hover, a#sunmode .fa-sun:hover, #headerrelative .fa-window-maximize:hover, #headerfixed .fa-window-maximize:hover {
+    color: var(--darker-color) !important;
+}
+
+header nav div a i.ti-close, header nav div a i.ti-more {
+    /*color: var(--dark-color) !important;*/
+    color: black !important;
+}
+
+.Theme-text-color {
+    color: var(--text-color) !important;
+}
+
+.Theme-button {
+    background-color: #428BCA !important;
+    color: var(--icon-color) !important;
+}
+
+    .Theme-button:hover {
+        background-color: var(--darker-color) !important;
+        border-color: var(--darker-color) !important;
+        color: var(--icon-color) !important;
+    }
+    .Theme-button:focus {
+        outline: 3px solid #0b4d86 !important;
+    }
+    .Theme-button:active {
+        outline: 3px solid #0b4d86 !important;
+    }
+
+.Theme-button-hover:hover {
+    background-color: var(--darker-color) !important;
+    border-color: var(--darker-color) !important;
+    color: var(--icon-color) !important;
+}
+
+a.Theme-a {
+    color: #428BCA !important;
+}
+
+    a.Theme-a:hover {
+        color: var(--darker-color) !important;
+    }
+
+.fa-redo:hover {
+    color: #428BCA !important;
+}
+
+.fa-trash-alt:hover {
+    color: var(--alert-icon-color-hover) !important;
+}
+
+.Theme-border {
+    border: 1px solid;
+    border-color: var(--tertiary-color) !important;
+}
+
+.Theme-border-h {
+    border: 1px solid;
+    border-color: var(--border-color-w) !important;
+}
+
+.Theme-border-f {
+    border: 1px solid;
+    border-color: var(--border-color-w) !important;
+}
+
+.Theme-border-right {
+    border-right: 2px solid;
+    border-right-color: var(--tertiary-color) !important;
+}
+
+.Theme-border-bottom {
+    border-bottom: 1px solid !important;
+    border-right-color: var(--tertiary-color) !important;
+}
+
+.modal-footer {
+    border-top: 2px solid !important;
+    border-top-color: var(--primary-color) !important;
+}
+
+.overlay {
+    border-top: 12px solid var(--primary-color);
+    border-right: 12px solid var(--secondary-color);
+    border-bottom: 12px solid var(--tertiary-color);
+    border-left: 12px solid var(--light-color);
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    animation: spin 2s linear infinite;
+    opacity: 0.75;
+    align-self: center;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.pageoverlay {
+    border-top: 12px solid var(--primary-color);
+    border-right: 12px solid var(--secondary-color);
+    border-bottom: 12px solid var(--tertiary-color);
+    border-left: 12px solid var(--light-color);
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+    opacity: 0.75;
+    align-self: center;
+    width: 75px;
+    height: 75px;
+    top: 0px;
+    position: fixed;
+    z-index: 99999;
+    background: #fff;
+}
+.modal-footer {
+    border-top: 2px solid !important;
+    border-top-color: var(--primary-color) !important;
+}

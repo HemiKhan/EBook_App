@@ -1,0 +1,77 @@
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.csproj.AssemblyReference.cache
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.AssemblyInfoInputs.cache
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.AssemblyInfo.cs
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.csproj.CoreCompileInputs.cache
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\bin\Debug\net8.0\EBook_Services.deps.json
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\bin\Debug\net8.0\EBook_Services.runtimeconfig.json
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\bin\Debug\net8.0\EBook_Services.dll
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\bin\Debug\net8.0\EBook_Services.pdb
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\bin\Debug\net8.0\EBook_Models.dll
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\bin\Debug\net8.0\EBook_Models.pdb
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\obj\Debug\net8.0\EBook_Se.8B6E2012.Up2Date
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.dll
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\obj\Debug\net8.0\refint\EBook_Services.dll
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.pdb
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.genruntimeconfig.cache
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\obj\Debug\net8.0\ref\EBook_Services.dll
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\bin\Debug\net8.0\EBook_Data.dll
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\Project\EBook\EBook_Services\bin\Debug\net8.0\EBook_Data.pdb
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\bin\Debug\net8.0\EBook_Services.deps.json
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\bin\Debug\net8.0\EBook_Services.runtimeconfig.json
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\bin\Debug\net8.0\EBook_Services.dll
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\bin\Debug\net8.0\EBook_Services.pdb
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\bin\Debug\net8.0\EBook_Data.dll
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\bin\Debug\net8.0\EBook_Models.dll
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\bin\Debug\net8.0\EBook_Data.pdb
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\bin\Debug\net8.0\EBook_Models.pdb
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.csproj.AssemblyReference.cache
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.AssemblyInfoInputs.cache
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.AssemblyInfo.cs
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.csproj.CoreCompileInputs.cache
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.csproj.CopyComplete
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.dll
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\refint\EBook_Services.dll
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.pdb
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.genruntimeconfig.cache
+C:\Users\hamas.khan\Desktop\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\ref\EBook_Services.dll
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\bin\Debug\net8.0\EBook_Services.deps.json
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\bin\Debug\net8.0\EBook_Services.runtimeconfig.json
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\bin\Debug\net8.0\EBook_Services.dll
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\bin\Debug\net8.0\EBook_Services.pdb
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\bin\Debug\net8.0\EBook_Data.dll
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\bin\Debug\net8.0\EBook_Models.dll
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\bin\Debug\net8.0\EBook_Data.pdb
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\bin\Debug\net8.0\EBook_Models.pdb
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.csproj.AssemblyReference.cache
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.AssemblyInfoInputs.cache
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.AssemblyInfo.cs
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.csproj.CoreCompileInputs.cache
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Se.8B6E2012.Up2Date
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.dll
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\refint\EBook_Services.dll
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.pdb
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.genruntimeconfig.cache
+C:\Users\Hammas Khan\Desktop\MSPL\Project_Template\EBook\EBook_Services\obj\Debug\net8.0\ref\EBook_Services.dll
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\bin\Debug\net8.0\EBook_Services.deps.json
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\bin\Debug\net8.0\EBook_Services.runtimeconfig.json
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\bin\Debug\net8.0\EBook_Services.dll
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\bin\Debug\net8.0\EBook_Services.pdb
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\bin\Debug\net8.0\EBook_Data.dll
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\bin\Debug\net8.0\EBook_Models.dll
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\bin\Debug\net8.0\EBook_Data.pdb
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\bin\Debug\net8.0\EBook_Models.pdb
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.csproj.AssemblyReference.cache
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.AssemblyInfoInputs.cache
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.AssemblyInfo.cs
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.csproj.CoreCompileInputs.cache
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.sourcelink.json
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\obj\Debug\net8.0\EBook_Se.8B6E2012.Up2Date
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.dll
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\obj\Debug\net8.0\refint\EBook_Services.dll
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.pdb
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\obj\Debug\net8.0\EBook_Services.genruntimeconfig.cache
+C:\Users\Hammas Khan\Desktop\MSPL\EBook_App\EBook\EBook_Services\obj\Debug\net8.0\ref\EBook_Services.dll

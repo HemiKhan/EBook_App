@@ -1,0 +1,671 @@
+﻿@{
+    ViewBag.Title = "Audit History";
+    Layout = "~/Views/Shared/_Masterpage.cshtml";
+    ViewBag.IsLoadKendo = true;
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/select2.min.css?ID=@ViewBag.GUID">
+
+<style>
+    .tabs-container #tab2:checked ~ #content2,
+    .tabs-container #tab1:checked ~ #content1 {
+        display: block;
+    }  
+</style>
+
+<!--Wrapper Start -->
+<div class="container-fluid p-4 bg-white rounded">
+
+    <div class="logo text-center border-bottom">
+        <h3 class="box-title mb-3">Audit History</h3>
+    </div>
+
+    <div class="row tabs-container">
+        <div class="col-lg-12 col-md-12 col-sm-12 tab-content">
+            @if (ViewBag.RightsListObj.IsView)
+            {
+                <input id="tab1" type="radio" name="tabs" checked>
+                <label for="tab1" class="tabs-label"><i>AH</i>Audit History</label>
+                <input id="tab2" type="radio" name="tabs" >
+                <label for="tab2" class="tabs-label"><i>AC</i>Audit Column</label>
+            }
+            @Html.Hidden("RightsList", (object)ViewBag.RightsList)
+            @Html.Hidden("AuditTypeList", (object)ViewBag.AuditTypeList)
+            @Html.Hidden("AuditSourceList", (object)ViewBag.AuditSourceList)
+
+            <section id="content1">
+                <div class="row">
+                    <div class="col-lg-12" style="font-size:0.75em" id="tablerecord">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="panel box box-info">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div id="grid"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="content2">
+                <div class="row">
+                    <div class="col-lg-12" style="font-size:0.75em" id="tableAuditRecord">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="panel box box-info">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div id="grid2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+</div>
+<!--Wrapper End -->
+
+<script src="~/js/GridFilter2.js?ID=@ViewBag.GUID"></script>
+<script src="~/js/select2.js?ID=@ViewBag.GUID" type="text/javascript"></script>
+<script src="~/js/custom-Validation.js?ID=@ViewBag.GUID"></script>
+@section scripts {
+    @* Intialization *@
+    <script>
+        var RightsList = JSON.parse($("#RightsList").val());
+        var AuditTypeList = JSON.parse($("#AuditTypeList").val());
+        var AuditSourceList = JSON.parse($("#AuditSourceList").val());
+
+        KendoDateInitial();
+        Select2Initial();
+
+        //Load Grids
+        AHGridLoad();
+        if (RightsList.IsView) {
+            $("#tab1").change(function () {
+                if ($(this).is(":checked")) {
+                    if ($("#grid").data("kendoGrid")) {
+                        return;
+                    }
+                    AHGridLoad();
+                }
+            });
+            $("#tab2").change(function () {
+                if ($(this).is(":checked")) {
+                    if ($("#grid2").data("kendoGrid")) {
+                        return;
+                    }
+                    ACGridLoad();
+                }
+            });
+        }
+        //Set Global Options
+        var AHOptions;
+        var ACOptions;
+        function SetGlobalOption(id, option) {
+            if (id == 'grid') {
+                AHOptions = option;
+            }
+            if (id == 'grid2') {
+                ACOptions = option;
+            }
+        }
+
+        //Department Add Edit Model and Remove Confirmation Message
+        function AHGridLoad() {
+            var kendogridid = 'grid';
+            var pagesize = 30;
+            $("#PageLoader").show();
+            $("#" + kendogridid).empty();
+            var AHfieldstype = {
+                rowno: { type: KendoFilterTypes.Number, srtype: SRVTypes.Int },
+                AH_ID: { type: KendoFilterTypes.Number, srtype: SRVTypes.Int },
+                AC_ID: { type: KendoFilterTypes.Number, srtype: SRVTypes.Int },
+                AuditType_MTV_ID: { type: KendoFilterTypes.Number, srtype: SRVTypes.Int },
+                Source_MTV_ID: { type: KendoFilterTypes.Number, srtype: SRVTypes.Int },
+                TableName: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                DbName: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                ColumnName: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                REF_NO: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                MasterTypeValueAudit: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                RefNo1: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                RefNo2: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                RefNo3: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                OldValueHidden: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                NewValueHidden: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                OldValue: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                NewValue: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                Reason: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                IsAuto: { type: KendoFilterTypes.Boolean, srtype: SRVTypes.Boolean },
+                MasterTypeValueSource: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                TriggerDebugInfo: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                ChangedBy: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                ChangedOn: { type: KendoFilterTypes.Date, srtype: SRVTypes.Date },
+            }
+            var _griddatasource = GetGridDataSourceAjaxCommon(kendogridid, pagesize, "/Account/GetFilterData_AuditHistory_List", true, true, true, AHfieldstype, false, false);
+            $("#" + kendogridid).kendoGrid({
+                dataSource: _griddatasource,
+                responsive: false,
+                pageable: {
+                    alwaysVisible: true,
+                    refresh: true,
+                    pageSizes: [30, 50, 100, 500, 1000, 5000],
+                    messages: {
+                        display: "{0} - {1} of {2} items &nbsp;&nbsp;|&nbsp;&nbsp; Export:&nbsp;<img id='" + kendogridid + "_exportExcel' title='Click here to export to excel file' src='/icon/excel_icon.jpg' style='width:23px; height:23px; cursor:pointer' onclick='onClickExportExcel(this)' /> ",
+                        empty: "No data found",
+                    }
+                },
+                controllername: "Report", //custom fields for ExportToExcel function
+                controllermethodname: "ExportInExcel_AHDetail", //custom fields for ExportToExcel function
+                sortable: true,
+                resizable: false,
+                reorderable: false,
+                noRecords: true,
+                filterable: {
+                    extra: true,
+                    //operators: KendoOperatorListOfString,
+                },
+                customfixheader: false, //custom fields for onKendoDataBound function
+                pageloaderid: "PageLoader", //custom fields for onKendoDataBound function
+                dataBound: onKendoDataBound,
+                dataBinding: function (e) {
+                    $("#PageLoader").hide();
+                },
+                columns: [
+                    {
+                        field: "rowno",
+                        title: "#",
+                        width: 50,
+                        filterable: false,
+                        sortable: false,
+                    },
+                    {
+                        field: "AH_ID",
+                        title: "AH_ID",
+                        width: 60,
+                        hidden: true,
+                    },
+                    {
+                        field: "AC_ID",
+                        title: "AC_ID",
+                        width: 70,
+                        hidden: true,
+                    },
+                    {
+                        field: "AuditType_MTV_ID",
+                        title: "AuditType_MTV_ID",
+                        width: 60,
+                        hidden: true,
+                    },
+                    {
+                        field: "Source_MTV_ID",
+                        title: "Source_MTV_ID",
+                        width: 60,
+                        hidden: true,
+                    },
+                    {
+                        field: "ChangedBy",
+                        title: "ChangedBy",
+                        width: 170,
+                        filterable: {
+                            operators: {
+                                string: {
+                                    eq: "Equal",
+                                    contains: "Contains"
+                                }
+                            }
+                        },
+                    },
+                    {
+                        field: "ChangedOn",
+                        title: "ChangedOn",
+                        //format: "{0:MM/dd/yyyy hh:mm:ss tt}",
+                        width: 200,
+                        filterable: {
+                            ui: "datepicker"
+                        },
+                        template: function (dataItem) {
+                            return FormatDateTimeWithTimeZone(dataItem.ChangedOn, dataItem.TimeZoneAbbr);
+                        },
+                        excelcolumntype: ExcelColumnTypes.Date_mmddyyyy,
+                    },
+                    {
+                        field: "DbName",
+                        title: "DB Name",
+                        width: 170,
+                        filterable: {
+                            operators: {
+                                string: {
+                                    eq: "Equal",
+                                    contains: "Contains"
+                                }
+                            }
+                        },
+                        hidden: true
+                    },
+                    {
+                        field: "TableName",
+                        title: "Table Name",
+                        width: 250,
+                        filterable: {
+                            operators: {
+                                string: {
+                                    eq: "Equal",
+                                    contains: "Contains"
+                                }
+                            }
+                        },
+                    },
+                    {
+                        field: "ColumnName",
+                        title: "Column Name",
+                        width: 170,
+                        filterable: {
+                            operators: {
+                                string: {
+                                    eq: "Equal",
+                                    contains: "Contains"
+                                }
+                            }
+                        },
+                    },
+                    {
+                        field: "REF_NO",
+                        title: "REF NO",
+                        width: 170,
+                        filterable: {
+                            operators: {
+                                string: {
+                                    eq: "Equal",
+                                    contains: "Contains"
+                                }
+                            }
+                        },
+                    },
+                    {
+                        field: "AuditType_MTV_ID",
+                        title: "Audit Type",
+                        width: 240,
+                        template: function (item) {
+                            return GetString(item.MasterTypeValueAudit);
+                        },
+                        filterable: { multi: true, extra: false, search: true, checkAll: false },
+                        values: AuditTypeList,
+                        aggregates: "MasterTypeValueAudit",
+                    },
+                    {
+                        field: "RefNo1",
+                        title: "Ref No 1",
+                        width: 160,
+                        filterable: {
+                            operators: {
+                                string: {
+                                    eq: "Equal",
+                                    contains: "Contains"
+                                }
+                            }
+                        },
+                    },
+                    {
+                        field: "RefNo2",
+                        title: "Ref No 2",
+                        width: 130,
+                        filterable: {
+                            operators: {
+                                string: {
+                                    eq: "Equal",
+                                    contains: "Contains"
+                                }
+                            }
+                        },
+                    },
+                    {
+                        field: "RefNo3",
+                        title: "Ref No 3",
+                        width: 130,
+                        filterable: {
+                            operators: {
+                                string: {
+                                    eq: "Equal",
+                                    contains: "Contains"
+                                }
+                            }
+                        },
+                    },
+                    {
+                        field: "OldValueHidden",
+                        title: "Old Value 1",
+                        width: 220,
+                        filterable: {
+                            operators: {
+                                string: {
+                                    eq: "Equal",
+                                    contains: "Contains"
+                                }
+                            }
+                        },
+                    },
+                    {
+                        field: "NewValueHidden",
+                        title: "New Value 1",
+                        width: 220,
+                        filterable: {
+                            operators: {
+                                string: {
+                                    eq: "Equal",
+                                    contains: "Contains"
+                                }
+                            }
+                        },
+                    },
+                    {
+                        field: "OldValue",
+                        title: "Old Value",
+                        width: 220,
+                        filterable: {
+                            operators: {
+                                string: {
+                                    eq: "Equal",
+                                    contains: "Contains"
+                                }
+                            }
+                        },
+                    },
+                    {
+                        field: "NewValue",
+                        title: "New Value",
+                        width: 220,
+                        filterable: {
+                            operators: {
+                                string: {
+                                    eq: "Equal",
+                                    contains: "Contains"
+                                }
+                            }
+                        },
+                    },
+                    {
+                        field: "Reason",
+                        title: "Reason",
+                        width: 100,
+                        filterable: {
+                            operators: {
+                                string: {
+                                    contains: "Contains",
+                                    eq: "Equal"
+                                }
+                            }
+                        },
+                    },
+                    {
+                        field: "IsAuto",
+                        title: "IsAuto",
+                        width: 90,
+                    },
+                    {
+                        field: "Source_MTV_ID",
+                        title: "Source",
+                        width: 150,
+                        template: function (item) {
+                            return GetString(item.MasterTypeValueSource);
+                        },
+                        filterable: { multi: true, extra: false, search: true, checkAll: false },
+                        values: AuditSourceList,
+                        originalfield: "MasterTypeValueSource",
+                    },
+                    {
+                        field: "TriggerDebugInfo",
+                        title: "Trigger Info",
+                        width: 150,
+                        filterable: {
+                            operators: {
+                                string: {
+                                    contains: "Contains",
+                                    eq: "Equal"
+                                }
+                            }
+                        },
+                    },
+                ],
+                detailInit: function (e) {
+                    $("#PageLoader").hide();
+                }
+            });
+        }
+        function ACGridLoad() {
+            var kendogridid = 'grid2';
+            var pagesize = 30;
+            $("#PageLoader").show();
+            $("#" + kendogridid).empty();
+            var ACfieldstype = {
+                rowno: { type: SRVTypes.Int, srtype: SRVTypes.Int },
+                AC_ID: { type: SRVTypes.Int, srtype: SRVTypes.Int },
+                TableName: { type: SRVTypes.String, srtype: SRVTypes.String },
+                DbName: { type: SRVTypes.String, srtype: SRVTypes.String },
+                ColumnName: { type: SRVTypes.String, srtype: SRVTypes.String },
+            }
+            var _griddatasource = GetGridDataSourceAjaxCommon(kendogridid, pagesize, "/Account/GetFilterData_AuditColumn_List", true, true, true, ACfieldstype, false, false);
+            $("#" + kendogridid).kendoGrid({
+                dataSource: _griddatasource,
+                responsive: false,
+                pageable: {
+                    alwaysVisible: true,
+                    refresh: true,
+                    pageSizes: [30, 50, 100, 500, 1000, 5000],
+                    messages: {
+                        display: "{0} - {1} of {2} items &nbsp;&nbsp;|&nbsp;&nbsp; Export:&nbsp;<img id='" + kendogridid + "_exportExcel' title='Click here to export to excel file' src='/icon/excel_icon.jpg' style='width:23px; height:23px; cursor:pointer' onclick='onClickExportExcel(this)' /> ",
+                        empty: "No data found",
+                    }
+                },
+                controllername: "Report", //custom fields for ExportToExcel function
+                controllermethodname: "ExportInExcel_ACDetail", //custom fields for ExportToExcel function
+                sortable: true,
+                resizable: false,
+                reorderable: false,
+                noRecords: true,
+                filterable: {
+                    extra: true,
+                    //operators: KendoOperatorListOfString,
+                },
+                customfixheader: false, //custom fields for onKendoDataBound function
+                pageloaderid: "PageLoader", //custom fields for onKendoDataBound function
+                dataBound: onKendoDataBound,
+                dataBinding: function (e) {
+                    $("#PageLoader").hide();
+                },
+                columns: [
+                    {
+                        field: "rowno",
+                        title: "Sr #",
+                        width: 90,
+                        filterable: false,
+                        sortable: false,
+                    },
+                    {
+                        field: "AC_ID",
+                        title: "AC_ID",
+                        width: 60,
+                        hidden: true,
+                    },
+                    {
+                        field: "DbName",
+                        title: "DB Name",
+                        width: 170,
+                        filterable: { extra: false, operators: { string: { contains: "contains" } } }
+                    },
+                    {
+                        field: "TableName",
+                        title: "Table Name",
+                        width: 250,
+                        filterable: { extra: false, operators: { string: { contains: "contains" } } }
+                    },
+                    {
+                        field: "Name",
+                        title: "Name",
+                        width: 170,
+                        filterable: { extra: false, operators: { string: { contains: "contains" } } }
+                    },
+                    {
+                        field: "IsPublic",
+                        title: "Is Public",
+                        width: 90,
+                        filterable: false,
+                        sortable: false,
+
+                    }
+
+                ],
+                detailInit: function (e) {
+                    $("#PageLoader").hide();
+                }
+            });
+        }
+
+        function onCustomFilterValidate(id, IsRun, IsClearFilter) {
+            var resultjson = { issuccess: false, customfilterjson: [] };
+            resultjson = onCustomFilter(false, id);
+            if (resultjson.issuccess) {
+                var grid = $("#" + id).data("kendoGrid");
+                if (grid == undefined && IsRun == false) {
+                    return;
+                }
+                else if (IsRun == true && grid == undefined) {
+                    if (id == "grid") {
+                        AHGridLoad();
+                        return;
+                    }
+                    else if (id == "grid2") {
+                        ACGridLoad();
+                        return;
+                    }
+                }
+
+                if (IsClearFilter == true) {
+                    ResetGridFilter(id);
+                    return;
+                }
+                else {
+                    RefreshGridData(id);
+                    return;
+                }
+            }
+        }
+
+        var lastcustomreportFilterObjectList = [];
+        function onCustomFilter(IsGetLastSaved, id) {
+
+            IsGetLastSaved = (IsGetLastSaved == undefined ? false : IsGetLastSaved);
+            var customreportFilterObjectList = [];
+            var resultjson = { issuccess: false, customfilterjson: customreportFilterObjectList };
+            var reportFilterObject = { code: "", name: "", isFilterApplied: false, reportFilterObjectArry: [] };
+            var filterobject = new Object();
+
+            var specificreportFilterObjectList = [];
+            var specificreportFilterObject = { code: "", name: "", isFilterApplied: false, reportFilterObjectArry: [] };
+            var specificfilterobject = new Object();
+
+            if (IsGetLastSaved) {
+                if (lastcustomreportFilterObjectList.length > 0) {
+                    for (var i = 0; i <= lastcustomreportFilterObjectList.length - 1; i++) {
+                        if (lastcustomreportFilterObjectList[i].id == id) {
+                            resultjson = { issuccess: true, customfilterjson: lastcustomreportFilterObjectList[i].customfilterjson };
+                            break;
+                        }
+                    }
+                }
+                return resultjson;
+            }
+
+            if ($('#txtdate').val() != "" && $('#txtenddate').val() != "") {
+                SetCustomFilterValue(customreportFilterObjectList, reportFilterObject, filterobject, "and", $('#txtdate').val(), KendoGridFilterType.isequalorgreather, KendoFilterTypes.Date, SRVTypes.Date, false, 0, "Created_On_Date", "Created_On_Date", false);
+                SetCustomFilterValue(customreportFilterObjectList, reportFilterObject, filterobject, "and", $('#txtenddate').val(), KendoGridFilterType.isequalorless, KendoFilterTypes.Date, SRVTypes.Date, false, 0, "Created_On_Date", "Created_On_Date", true);
+
+                onSpecificFilter(id, specificreportFilterObjectList, specificreportFilterObject, specificfilterobject, "and", $('#txtdate').val()
+                    , KendoGridFilterType.isequalorgreather, KendoFilterTypes.Date, SRVTypes.Date, false, 0, "Created_On_Date", "Created_On_Date", false);
+                onSpecificFilter(id, specificreportFilterObjectList, specificreportFilterObject, specificfilterobject, "and", $('#txtenddate').val()
+                    , KendoGridFilterType.isequalorless, KendoFilterTypes.Date, SRVTypes.Date, false, 0, "Created_On_Date", "Created_On_Date", true);
+            }
+
+            if ($('#txtOrigHub').val() != "") {
+                SetCustomFilterValue(customreportFilterObjectList, reportFilterObject, filterobject, "and", $('#txtOrigHub').val(), KendoGridFilterType.inlistfilter, KendoFilterTypes.String, SRVTypes.UpperString, false, 0, "OrigHub", "OrigHub", false);
+            }
+
+            if (specificreportFilterObjectList.length > 0) {
+                for (var i = 0; i < specificreportFilterObjectList.length; i++) {
+                    customreportFilterObjectList.push(specificreportFilterObjectList[i]);
+                }
+            }
+
+            if (lastcustomreportFilterObjectList.length > 0) {
+                for (var i = 0; i <= lastcustomreportFilterObjectList.length - 1; i++) {
+                    if (lastcustomreportFilterObjectList[i].id == id) {
+                        resultjson = { issuccess: true, customfilterjson: lastcustomreportFilterObjectList[i].customfilterjson };
+                        break;
+                    }
+                }
+            }
+
+            var isexistscustomfilterjson = false;
+            if (lastcustomreportFilterObjectList.length > 0) {
+                for (var i = 0; i <= lastcustomreportFilterObjectList.length - 1; i++) {
+                    if (lastcustomreportFilterObjectList[i].id == id) {
+                        var lastcustomreportFilterObject = new Object();
+                        lastcustomreportFilterObject.id = id;
+                        lastcustomreportFilterObject.customfilterjson = customreportFilterObjectList;
+                        lastcustomreportFilterObjectList[i] = lastcustomreportFilterObject;
+                        isexistscustomfilterjson = true;
+                        break;
+                    }
+                }
+            }
+            if (isexistscustomfilterjson == false) {
+                var lastcustomreportFilterObject = new Object();
+                lastcustomreportFilterObject.id = id;
+                lastcustomreportFilterObject.customfilterjson = customreportFilterObjectList;
+                lastcustomreportFilterObjectList.push(lastcustomreportFilterObject);
+            }
+
+            resultjson = { issuccess: true, customfilterjson: customreportFilterObjectList };
+
+            return resultjson;
+        }
+
+        function onSpecificFilter(id, specificreportFilterObjectList, specificreportFilterObject, specificfilterobject, logic, value, filtertype, fieldtype, srvfieldtype, islist, listtype, code, name, isprevioussamecode, isgridfilter = false) {
+            if (code == 'ChangedOn' && isgridfilter == false) {
+                var dateObject = new Date(value)
+                dateObject.setDate(dateObject.getDate() + (isprevioussamecode == false ? -1 : 1));
+                var newvalue = formatDateToDateTime(dateObject, false);
+                SetCustomFilterValue(specificreportFilterObjectList, specificreportFilterObject, specificfilterobject, logic, newvalue, filtertype, fieldtype, srvfieldtype, islist, listtype, "UTCChangedOn", "UTCChangedOn", isprevioussamecode);
+            }
+            else if (code == 'ChangedOn' && isgridfilter == true) {
+                var dateObject = new Date(value)
+                dateObject.setDate(dateObject.getDate() - 1);
+                var newvalue = formatDateToDateTime(dateObject, false);
+                SetCustomFilterValue(specificreportFilterObjectList, specificreportFilterObject, specificfilterobject, logic, newvalue, KendoGridFilterType.isequalorgreather, fieldtype, srvfieldtype, islist, listtype, "UTCChangedOn", "UTCChangedOn", isprevioussamecode);
+
+                dateObject = new Date(value)
+                dateObject.setDate(dateObject.getDate() + 1);
+                newvalue = formatDateToDateTime(dateObject, false);
+                SetCustomFilterValue(specificreportFilterObjectList, specificreportFilterObject, specificfilterobject, logic, newvalue, KendoGridFilterType.isequalorless, fieldtype, srvfieldtype, islist, listtype, "UTCChangedOn", "UTCChangedOn", true);
+            }
+        }
+
+        function onReset() {
+            $("#PageLoader").show();
+            $('#txtdate').val($("#originalstartdate").val());
+            $('#txtOrigHub').html($("#hublist").html());
+            $('#txtClientID').html($("#clientlist").html())
+            $("#PageLoader").hide();
+            onCustomFilterValidate('grid', false, true)
+        }
+        
+    </script>
+}

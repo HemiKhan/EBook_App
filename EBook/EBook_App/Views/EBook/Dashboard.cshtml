@@ -1,0 +1,604 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Masterpage.cshtml";
+    ViewBag.IsLoadKendo = true;
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/select2.min.css?ID=@ViewBag.GUID">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.carousel.css?ID=@ViewBag.GUID">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.theme.css?ID=@ViewBag.GUID">
+
+
+<style>
+    .owl-theme .owl-controls .owl-page span {
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        width: 100px;
+        height: 5px;
+        margin-left: 2px;
+        margin-right: 2px;
+        background: #ccc;
+        border: none;
+    }
+
+    .owl-theme .owl-controls .owl-page.active span,
+    .owl-theme .owl-controls.clickable .owl-page:hover span {
+        background: #3F51B5;
+    }
+
+    #carousel {
+        background: #F2F3EE
+    }
+
+    .carousel-slide {
+        width: 100%;
+    }
+
+    .slide-text {
+        width: 40%;
+        font-weight: 900;
+    }
+
+    .slide-image {
+        width: 60%;
+    }
+
+        .slide-image img {
+            width: 100%;
+        }
+
+    .center-me {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .slide-text span {
+        color: #e88c39;
+    }
+
+    .btnShopNow {
+        border-radius: 15px;
+        background: #e88c39;
+        color: #fff;
+        font-weight: 900;
+    }
+
+    h2, h3, h4, h5, p {
+        color: #213e60;
+    }
+
+    .Light .product-card .product-head .product-sale {
+        height: 24px;
+        padding: 0 14px;
+        border-radius: 3px;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: .025em;
+        line-height: 24px;
+        white-space: nowrap;
+        background-color: #f44336;
+    }
+
+    .Light .product-card .product-head .product-rating {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+    }
+
+        .Light .product-card .product-head .product-rating .rating-star {
+            font-family: "Font Awesome 5 Free";
+            font-size: 12px;
+            color: #dc3545;
+        }
+
+            .Light .product-card .product-head .product-rating .rating-star:nth-child(1)::before {
+                content: "\f005";
+                font-weight: 900;
+            }
+
+            .Light .product-card .product-head .product-rating .rating-star:nth-child(2)::before {
+                content: "\f005";
+                font-weight: 900;
+            }
+
+            .Light .product-card .product-head .product-rating .rating-star:nth-child(3)::before {
+                content: "\f005";
+                font-weight: 900;
+            }
+
+            .Light .product-card .product-head .product-rating .rating-star:nth-child(4)::before {
+                content: "\f5c0";
+                font-weight: 900;
+            }
+
+            .Light .product-card .product-head .product-rating .rating-star:nth-child(5)::before {
+                content: "\f005";
+            }
+
+    .Light a {
+        color: #111;
+        text-decoration: none;
+    }
+
+    .Light .product-card .product-img {
+        width: 100%;
+        height: 230px;
+    }
+
+    .Light .product-card .product-category p {
+        transition: color .2s;
+        color: #999;
+        font-size: 12px;
+        font-weight: bolder;
+        margin-bottom: 5px;
+    }
+
+        .Light .product-card .product-category p:hover,
+        .Light .product-card .product-title p:hover {
+            color: #dc3545;
+        }
+
+    .Light .product-card .product-title p {
+        transition: color .2s;
+        color: #232323;
+        font-size: 16px;
+        font-weight: 500;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .Light .product-card .product-price {
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 9px 15px;
+        border-radius: 4px;
+        background-color: #35363b;
+        color: #fff;
+        font-size: 16px;
+        font-weight: normal;
+        text-align: center;
+    }
+
+    .Light .product-card .product-btns {
+        display: table;
+        width: 100%;
+        border-top: 2px solid #999;
+        transition: all .3s;
+        table-layout: fixed;
+    }
+
+        .Light .product-card .product-btns .product-btn:hover {
+            box-shadow: inset -3px -3px 7px #ffffff, inset 3px 3px 5px #ceced1;
+        }
+
+        .Light .product-card .product-btns a {
+            display: table-cell;
+            position: relative;
+            height: 62px;
+            padding: 10px;
+            transition: background-color .3s;
+            border: 0;
+            border-right: 2px solid #999;
+            background: none;
+            color: #505050;
+            overflow: hidden;
+            vertical-align: middle;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .Light .product-card .product-btns i {
+            transition: all .3s;
+        }
+
+        .Light .product-card .product-btns a:hover i {
+            color: #4fdc4a;
+            font-weight: 900;
+        }
+
+        .Light .product-card .product-btns a:hover i {
+            -webkit-transform: translateY(-8px);
+            -ms-transform: translateY(-8px);
+            transform: translateY(-8px);
+        }
+
+        .Light .product-card .product-btns span {
+            display: block;
+            position: absolute;
+            bottom: 9px;
+            left: 0;
+            width: 100%;
+            transition: all .3s;
+            font-size: 12px;
+            font-weight: bolder;
+            white-space: nowrap;
+            -webkit-transform: translateY(12px);
+            -ms-transform: translateY(12px);
+            transform: translateY(12px);
+            opacity: 0;
+        }
+
+        .Light .product-card .product-btns a:hover span {
+            -webkit-transform: translateY(1px);
+            -ms-transform: translateY(1px);
+            transform: translateY(1px);
+            opacity: 1;
+        }
+
+    /* Light Product Card secondcard Style Start */
+    .Light .secondcard .product-card {
+        position: relative;
+        background: #ecf0f3;
+        box-shadow: inset -3px -3px 7px #ffffff, inset 3px 3px 5px #ceced1;
+        width: 270px;
+    }
+
+        .Light .secondcard .product-card::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            transform: skewX(2deg) skewY(4deg);
+            background: linear-gradient(315deg, #4fdc4a, #0e1538, #dc3545);
+            z-index: -10;
+        }
+
+        .Light .secondcard .product-card::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            transform: skewX(2deg) skewY(4deg);
+            background: linear-gradient(315deg, #4fdc4a, #0e1538, #dc3545);
+            filter: blur(5px);
+            z-index: -10;
+        }
+
+        .Light .secondcard .product-card .product-category,
+        .Light .secondcard .product-card .product-title,
+        .Light .secondcard .product-card .card-price {
+            text-align: center;
+        }
+
+    #grid .k-table-thead{
+        display:none;
+    }
+
+    /* Light Product Card secondcard Style End */
+</style>
+<!--Wrapper Start -->
+<div class="container-fluid p-0 bg-white rounded">
+
+    <div id="carousel" class="owl-carousel owl-theme mb-3">
+        <div class="item">
+            <div class="carousel-slide d-flex">
+                <div class="slide-text center-me">
+                    <div>
+                        <h3>New books on <span>SALE!</span></h3>
+                        <p>Limited time only!</p>
+                        <a class="btn btnShopNow">Shop now</a>
+                    </div>
+                </div>
+                <div class="slide-image mr-2">
+                    <img src="http://placehold.it/2000x400/3F51B5/ffffff" />
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="carousel-slide d-flex">
+                <div class="slide-text center-me">
+                    <div>
+                        <h3>New books on <span>SALE!</span></h3>
+                        <p>Limited time only!</p>
+                        <a class="btn btnShopNow">Shop now</a>
+                    </div>
+                </div>
+                <div class="slide-image mr-2">
+                    <img src="http://placehold.it/2000x400/C62828/ffffff" />
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="carousel-slide d-flex">
+                <div class="slide-text center-me">
+                    <div>
+                        <h3>New books on <span>SALE!</span></h3>
+                        <p>Limited time only!</p>
+                        <a class="btn btnShopNow">Shop now</a>
+                    </div>
+                </div>
+                <div class="slide-image mr-2">
+                    <img src="http://placehold.it/2000x400/2196F3/ffffff" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="w-100">
+            <h4>Best Sellers</h4>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 Best-Sellers">
+            <div class="panel box box-info">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 Light">
+                            <div id="grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Wrapper End -->
+
+<script src="~/js/GridFilter2.js?ID=@ViewBag.GUID"></script>
+<script src="~/js/select2.js?ID=@ViewBag.GUID" type="text/javascript"></script>
+<script src="~/js/custom-Validation.js?ID=@ViewBag.GUID"></script>
+<script src="~/js/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.2/owl.carousel.js"></script>
+@section scripts {
+    <script>
+        KendoDateInitial();
+        Select2Initial();
+        $("#carousel").owlCarousel({
+            navigation: false,
+            slideSpeed: 500,
+            paginationSpeed: 800,
+            rewindSpeed: 1000,
+            singleItem: true,
+            autoPlay: true,
+            stopOnHover: true,
+        });
+
+        BestSellers_Data();
+
+        // Load Data UI TMS Function Start
+        function BestSellers_Data() {
+            var kendogridid = 'grid';
+            var pagesize = 5;
+            $("#PageLoader").show();
+            $("#" + kendogridid).empty();
+            var BSfieldstype = {
+                // T1: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                // T2: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+                // T3: { type: KendoFilterTypes.String, srtype: SRVTypes.String },
+            }
+            var _griddatasource = GetGridDataSourceAjaxCommon(kendogridid, pagesize, "/EBook/Get_BestSeller_List", true, true, true, BSfieldstype, false, false);
+            dataSource = _griddatasource
+            $("#" + kendogridid).kendoGrid({
+                dataSource: dataSource,
+                responsive: false,
+                pageable: {
+                    alwaysVisible: true,
+                    refresh: true,
+                    pageSizes: [5, 10, 15, 20, 30],
+                    messages: {
+                        //display: "{0} - {1} of {2} items &nbsp;&nbsp;|&nbsp;&nbsp; Export:&nbsp;<img id='" + kendogridid + "_exportExcel' title='Click here to export to excel file' src='/icon/excel_icon.jpg' style='width:23px; height:23px; cursor:pointer' onclick='onClickExportExcel(this)' /> ",
+                        empty: "No data found",
+                    }
+                },
+                sortable: false,
+                resizable: false,
+                reorderable: false,
+                noRecords: true,
+                filterable: false,
+                customfixheader: false, //custom fields for onKendoDataBound function
+                pageloaderid: "PageLoader", //custom fields for onKendoDataBound function
+                dataBound: onKendoDataBound,
+                dataBinding: function (e) {
+                    $("#PageLoader").hide();
+                },
+                columns: [
+                    {
+                        field: "C1",
+                        width: "33.33%",
+                        template: function (item) {
+                            var html = Get_Cards_Html(item.C1)
+                            return html;
+                        }
+                    },
+                    {
+                        field: "C2",
+                        width: "33.33%",
+                        template: function (item) {
+                            var html = Get_Cards_Html(item.C2)
+                            return html;
+                        }
+                    },
+                    {
+                        field: "C3",
+                        width: "33.33%",
+                        template: function (item) {
+                            var html = Get_Cards_Html(item.C3)
+                            return html;
+                        }
+                    },
+                    {
+                        field: "C4",
+                        width: "33.33%",
+                        template: function (item) {
+                            var html = Get_Cards_Html(item.C3)
+                            return html;
+                        }
+                    },
+                ],
+                detailInit: function (e) {
+                    $("#PageLoader").hide();
+                }
+            });
+        }
+        function Get_Cards_Html(item) {
+            var html = '';
+
+            if (item == null) {
+                return html;
+            }
+
+            html = "<div class='mb-4 secondcard' style='z-index: 1;'>";
+            html += "<div class='Product-Box'>";
+            html += "<div class='product-card boxshadowcard'>";
+            html += "<div class='product-head m-1'>";
+            html += "<div class='d-flex'>";
+            html += "<div class='product-sale mt-1'>Sale</div>";
+            html += "<div class='product-rating ml-auto'>";
+            html += "<span class='rating-star'></span>";
+            html += "<span class='rating-star'></span>";
+            html += "<span class='rating-star'></span>";
+            html += "<span class='rating-star'></span>";
+            html += "<span class='rating-star'></span>";
+            html += "</div>";
+            html += "</div>";
+            html += "</div";
+            html += "<a href='#'>";
+            html += "<img class='product-img' src='../img/truck2.jpg' />";
+            html += "</a>";
+            html += "<div class='product-category mt-2 text-center'>";
+            html += "<a href='#'>Headphone</a>";
+            html += "</div>";
+            html += "<div class='product-title mb-2 text-center'>";
+            html += "<a href='#'>Zeus Bluetooth Headphones</a>";
+            html += "</div>";
+            html += "<div class='text-center'>";
+            html += "<h4 class='product-price'>";
+            html += "<del>$62.00</del> $49.99";
+            html += "</h4>";
+            html += "</div>";
+            html += "<div class='product-btns'>";
+            html += "<a href='#' class='product-btn'>";
+            html += "<i class='fa fa-heart'></i>";
+            html += "<span>Wishlist</span>";
+            html += "</a>";
+            html += "<a href='#' class='product-btn'>";
+            html += "<i class='fa fa-opencart'></i>";
+            html += "<span>Cart</span>";
+            html += "</a>";
+            html += "<a href='#' class='product-btn border-right-0'>";
+            html += "<i class='fa fa-arrow-right'></i>";
+            html += "<span>Details</span>";
+            html += "</a>";
+            html += "</div>";
+            html += "</div>";
+            html += "</div>";
+            html += "</div>";
+
+
+            return html;
+        }
+        // Load Data UI TMS Function End
+
+        function onCustomFilterValidate(id) {
+            var resultjson = { issuccess: false, customfilterjson: [] };
+            resultjson = onCustomFilter(false, id);
+            if (resultjson.issuccess) {
+                RefreshGridData(id);
+            }
+        }
+        var lastcustomreportFilterObjectList = [];
+        function onCustomFilter(IsGetLastSaved, id) {
+
+            IsGetLastSaved = (IsGetLastSaved == undefined ? false : IsGetLastSaved);
+            var customreportFilterObjectList = [];
+            var resultjson = { issuccess: false, customfilterjson: customreportFilterObjectList };
+            var reportFilterObject = { code: "", name: "", isFilterApplied: false, reportFilterObjectArry: [] };
+            var filterobject = new Object();
+
+            var specificreportFilterObjectList = [];
+            var specificreportFilterObject = { code: "", name: "", isFilterApplied: false, reportFilterObjectArry: [] };
+            var specificfilterobject = new Object();
+
+            if (IsGetLastSaved) {
+                if (lastcustomreportFilterObjectList.length > 0) {
+                    for (var i = 0; i <= lastcustomreportFilterObjectList.length - 1; i++) {
+                        if (lastcustomreportFilterObjectList[i].id == id) {
+                            resultjson = { issuccess: true, customfilterjson: lastcustomreportFilterObjectList[i].customfilterjson };
+                            break;
+                        }
+                    }
+                }
+                return resultjson;
+            }
+
+            if ($('#txtdate').val() != "" && $('#txtenddate').val() != "") {
+                SetCustomFilterValue(customreportFilterObjectList, reportFilterObject, filterobject, "and", $('#txtdate').val(), KendoGridFilterType.isequalorgreather, KendoFilterTypes.Date, SRVTypes.Date, false, 0, "Created_On_Date", "Created_On_Date", false);
+                SetCustomFilterValue(customreportFilterObjectList, reportFilterObject, filterobject, "and", $('#txtenddate').val(), KendoGridFilterType.isequalorless, KendoFilterTypes.Date, SRVTypes.Date, false, 0, "Created_On_Date", "Created_On_Date", true);
+
+                onSpecificFilter(id, specificreportFilterObjectList, specificreportFilterObject, specificfilterobject, "and", $('#txtdate').val()
+                    , KendoGridFilterType.isequalorgreather, KendoFilterTypes.Date, SRVTypes.Date, false, 0, "Created_On_Date", "Created_On_Date", false);
+                onSpecificFilter(id, specificreportFilterObjectList, specificreportFilterObject, specificfilterobject, "and", $('#txtenddate').val()
+                    , KendoGridFilterType.isequalorless, KendoFilterTypes.Date, SRVTypes.Date, false, 0, "Created_On_Date", "Created_On_Date", true);
+            }
+
+            if ($('#txtOrigHub').val() != "") {
+                SetCustomFilterValue(customreportFilterObjectList, reportFilterObject, filterobject, "and", $('#txtOrigHub').val(), KendoGridFilterType.inlistfilter, KendoFilterTypes.String, SRVTypes.UpperString, false, 0, "OrigHub", "OrigHub", false);
+            }
+
+            if (specificreportFilterObjectList.length > 0) {
+                for (var i = 0; i < specificreportFilterObjectList.length; i++) {
+                    customreportFilterObjectList.push(specificreportFilterObjectList[i]);
+                }
+            }
+
+            if (lastcustomreportFilterObjectList.length > 0) {
+                for (var i = 0; i <= lastcustomreportFilterObjectList.length - 1; i++) {
+                    if (lastcustomreportFilterObjectList[i].id == id) {
+                        resultjson = { issuccess: true, customfilterjson: lastcustomreportFilterObjectList[i].customfilterjson };
+                        break;
+                    }
+                }
+            }
+
+            var isexistscustomfilterjson = false;
+            if (lastcustomreportFilterObjectList.length > 0) {
+                for (var i = 0; i <= lastcustomreportFilterObjectList.length - 1; i++) {
+                    if (lastcustomreportFilterObjectList[i].id == id) {
+                        var lastcustomreportFilterObject = new Object();
+                        lastcustomreportFilterObject.id = id;
+                        lastcustomreportFilterObject.customfilterjson = customreportFilterObjectList;
+                        lastcustomreportFilterObjectList[i] = lastcustomreportFilterObject;
+                        isexistscustomfilterjson = true;
+                        break;
+                    }
+                }
+            }
+            if (isexistscustomfilterjson == false) {
+                var lastcustomreportFilterObject = new Object();
+                lastcustomreportFilterObject.id = id;
+                lastcustomreportFilterObject.customfilterjson = customreportFilterObjectList;
+                lastcustomreportFilterObjectList.push(lastcustomreportFilterObject);
+            }
+
+            resultjson = { issuccess: true, customfilterjson: customreportFilterObjectList };
+
+            return resultjson;
+        }
+        function onSpecificFilter(id, specificreportFilterObjectList, specificreportFilterObject, specificfilterobject, logic, value, filtertype, fieldtype, srvfieldtype, islist, listtype, code, name, isprevioussamecode) {
+            if (code == 'Created_On_Date') {
+                var dateObject = new Date(value)
+                dateObject.setDate(dateObject.getDate() + (isprevioussamecode == false ? -1 : 1));
+                var newvalue = formatDateToDateTime(dateObject, false);
+                SetCustomFilterValue(specificreportFilterObjectList, specificreportFilterObject, specificfilterobject, logic, newvalue, filtertype, fieldtype, srvfieldtype, islist, listtype, "UTC_Created_On_Date", "UTC_Created_On_Date", isprevioussamecode);
+            }
+        }
+        function onReset() {
+            $("#dvProg").show();
+            $('#txtdate').val($("#originalstartdate").val());
+            $('#txtOrigHub').html($("#hublist").html());
+            $('#txtClientID').html($("#clientlist").html())
+            $("#dvProg").hide();
+        }
+    </script>
+
+    <script type="text/x-kendo-template" id="detail-template">
+        <p>No Detail Available</p>
+    </script>
+}
