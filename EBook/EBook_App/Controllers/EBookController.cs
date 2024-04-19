@@ -96,5 +96,10 @@ namespace EBook_App.Controllers
             }
             return Globals.GetAjaxJsonReturn(reportResponse);
         }
+
+        public IActionResult Home()
+        {
+            return View();
+        }
     }
 }

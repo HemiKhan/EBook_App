@@ -22,7 +22,8 @@ namespace EBook_App.Helper
             //ADO Repo
             services.AddScoped<IADORepository, ADORepository>();
             services.AddScoped<ILogFile, LogFile>();
-            services.AddScoped<IAppSetupService, AppSetupService>();
+
+            //services.AddTransient<IAppSetupService, AppSetupService>();
         }
     }
 }

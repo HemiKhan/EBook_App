@@ -112,7 +112,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=EBook}/{action=Dashboard}/{id?}");
+    pattern: "{controller=EBook}/{action=Home}/{id?}");
 
 app.Use(async (context, next) =>
 {
