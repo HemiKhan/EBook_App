@@ -81,3 +81,4 @@ EBook/EBook_Services/obj/EBook_Services.csproj.nuget.g.targets
 EBook/.vs/EBook/v17/.suo
 EBook/.vs/EBook/v17/DocumentLayout.json
 EBook/.vs/EBook/v17/.suo
+*.vsidx
