@@ -432,8 +432,8 @@ namespace EBook_Data.Dtos
         }
         public struct ApplicationId
         {
-            public const int EBookAppID = 148111;
-            public const int AppID = 148104;
+            public const int AppID = 1;
+            public const int EBookAppID = 1;
         }
         public struct ApplicationName
         {

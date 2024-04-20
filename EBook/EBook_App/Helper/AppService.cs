@@ -1,6 +1,6 @@
 ﻿using EBook_Data.DatabaseContext;
 using EBook_Data.Interfaces;
-using EBook_Services.AppSetupServices;
+using EBook_Services.AccountServices;
 using EBook_Services.GlobalService;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,7 +25,7 @@ namespace EBook_App.Helper
         }
         public static void AddOtherServices(this IServiceCollection services)
         {
-            //services.AddTransient<IAppSetupService, AppSetupService>();
+            services.AddTransient<IAccountService, AccountService>();
         }
     }
 }

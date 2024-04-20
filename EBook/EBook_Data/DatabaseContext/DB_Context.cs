@@ -1,4 +1,5 @@
-﻿using EBook_Models.App_Models;
+﻿using EBook_Data.Dtos;
+using EBook_Models.App_Models;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 

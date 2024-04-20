@@ -116,7 +116,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=EBook}/{action=Home}/{id?}");
+    pattern: "{controller=Account}/{action=Home}/{id?}");
 
 using (var serviceScope = app.Services.CreateScope())
 {

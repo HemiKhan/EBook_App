@@ -15,6 +15,7 @@ using System.Data;
 using System.Reflection;
 using System.Security.Claims;
 using System.Text;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace EBook_Services.GlobalService
 {
@@ -286,6 +287,11 @@ namespace EBook_Services.GlobalService
         {
             return _iscachingenable;
         }
+        public ClaimsPrincipal? GetUserClaim()
+        {
+            ClaimsPrincipal? User = _httpContextAccessor?.HttpContext?.User;
+            return User;
+        }
         public DataRow P_Common_DR_Procedure(string Query, ref List<Dynamic_SP_Params> List_Dynamic_SP_Params)
         {
             DataRow result = null;
@@ -519,7 +525,7 @@ namespace EBook_Services.GlobalService
                     connectionString = _dbStringCollection1.EBook_DB_ConnectionModel_11.ConnectionString;
 
             else
-                connectionString = _dbStringCollection1.EBook_DB_ConnectionModel_11.ConnectionString;
+                connectionString = _dbStringCollection1.EBook_DB_ConnectionModel_10.ConnectionString;
 
             return connectionString;
         }
@@ -1759,19 +1765,29 @@ namespace EBook_Services.GlobalService
         #endregion DB 
 
         #region User
-        public async Task<P_UserLoginQueryModel> GetUserLoginCredentials(string UserName, CancellationToken cancellationToken)
+        public async Task<P_UserLoginPasswordModel> GetUserLoginCredentials(string UserName, CancellationToken cancellationToken)
         {
-            var userNamea_Param = new SqlParameter("@username", UserName.ToUpper());
-            string qry = "SELECT PasswordHash,PasswordSalt FROM [POMS_DB].[dbo].[T_Users] WITH (NOLOCK) WHERE BlockType_MTV_ID=149100 AND UPPER(USERNAME) = @username";
-            var result = new P_UserLoginQueryModel();// await db_Context_13.DBContext_Instance.Set<P_UserLoginQueryModel>().FromSqlRaw(qry, userNamea_Param).FirstOrDefaultAsync();
+            List<Dynamic_SP_Params> parms = new List<Dynamic_SP_Params>()
+            {
+                new Dynamic_SP_Params {ParameterName = "UserName", Val = UserName.ToUpper()}
+            };
+            string query = "SELECT PasswordHash,PasswordSalt FROM [dbo].[T_Users] WITH (NOLOCK) WHERE IsActive = 1 AND UPPER(UserName) = @UserName";
+            var result = P_Get_Generic_SP<P_UserLoginPasswordModel>(query, ref parms, false);
             return result;
 
         }
-        public ClaimsPrincipal? GetUserClaim()
+        public P_Get_User_Info P_Get_User_Info(string UserName, int ApplicationID, MemoryCacheValueType? _MemoryCacheValueType = null)
         {
-            ClaimsPrincipal? User = _httpContextAccessor?.HttpContext?.User;
-            return User;
+            List<Dynamic_SP_Params> parms = new List<Dynamic_SP_Params>()
+            {
+                new Dynamic_SP_Params {ParameterName = "UserName", Val = UserName},
+                new Dynamic_SP_Params {ParameterName = "ApplicationID", Val = ApplicationID},
+            };
+            P_Get_User_Info result = ExecuteSelectSQLMap<P_Get_User_Info>("P_Get_User_Info", true, 0, ref parms);
+            return result;
         }
+
+
         public DataTable P_Get_Role_Rights_From_Username(string Username, int P_ID = 0, int PR_ID = 0, string PageRightType_MTV_CODE = "", MemoryCacheValueType? _MemoryCacheValueType = null)
         {
             string paravalue = $"Username:{Username}|P_ID:{P_ID}|PR_ID:{PR_ID}|PageRightType_MTV_CODE:{PageRightType_MTV_CODE}".ToLower();
@@ -1830,55 +1846,6 @@ namespace EBook_Services.GlobalService
                 }
             }
             return result;
-        }
-        public DataRow? P_Get_User_Info(string UserName, int ApplicationID, MemoryCacheValueType? _MemoryCacheValueType = null)
-        {
-            DataRow? result = null;
-            if (UserName == "")
-                return result;
-
-            string paravalue = $"UserName:{UserName}|ApplicationID:{ApplicationID}".ToLower();
-            _MemoryCacheValueType = (_MemoryCacheValueType == null ? new MemoryCacheValueType() : _MemoryCacheValueType);
-            _MemoryCacheValueType._GetMemoryCacheValueType.setkeyparavalues = paravalue;
-            _MemoryCacheValueType._GetMemoryCacheValueType.subtype = CacheSubType.P_Get_User_Info;
-            _MemoryCacheValueType._SetMemoryCacheValueType.subtype = CacheSubType.P_Get_User_Info;
-            if (MemoryCaches.GetCacheValue(_MemoryCacheValueType, ref result, _cache, _iscachingenable))
-                return result;
-
-            List<Dynamic_SP_Params> Dynamic_SP_Params_List = new List<Dynamic_SP_Params>();
-            Dynamic_SP_Params Dynamic_SP_Params;
-
-            Dynamic_SP_Params = new Dynamic_SP_Params();
-            Dynamic_SP_Params.ParameterName = "UserName";
-            Dynamic_SP_Params.Val = UserName;
-            Dynamic_SP_Params_List.Add(Dynamic_SP_Params);
-
-            Dynamic_SP_Params = new Dynamic_SP_Params();
-            Dynamic_SP_Params.ParameterName = "ApplicationID";
-            Dynamic_SP_Params.Val = ApplicationID;
-            Dynamic_SP_Params_List.Add(Dynamic_SP_Params);
-
-            result = ExecuteStoreProcedureDR("P_Get_User_Info", ref Dynamic_SP_Params_List);
-
-            MemoryCaches.SetCacheValue(_MemoryCacheValueType, result, _cache, _iscachingenable);
-
-            return result;
-        }
-        public P_Get_User_Info P_Get_User_Info_Class(string UserName, int ApplicationID, MemoryCacheValueType? _MemoryCacheValueType = null)
-        {
-            DataRow? DR = null;
-            DR = P_Get_User_Info(UserName, ApplicationID, _MemoryCacheValueType);
-
-            P_Get_User_Info _P_Get_User_Info_Class = new P_Get_User_Info();
-
-            if (DR != null)
-                _P_Get_User_Info_Class = StaticPublicObjects.map.Map<P_Get_User_Info>(DR);
-            {
-                _P_Get_User_Info_Class.ip_address = GetLocalIPAddress();
-                _P_Get_User_Info_Class.userremotedomain = GetRemoteDomain();
-            }
-
-            return _P_Get_User_Info_Class;
         }
         public P_ReturnMessageForJson_Result P_Create_User(string Json, string USERNAME, string IP = "")
         {

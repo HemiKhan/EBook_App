@@ -24,6 +24,7 @@ namespace EBook_Data.Interfaces
         public Task<string> GetRequestBodyString();
         public string GetVirtualDirectory();
         public bool GetIsCachingEnabled();
+        public ClaimsPrincipal? GetUserClaim();
         public DataRow P_Common_DR_Procedure(string Query, ref List<Dynamic_SP_Params> List_Dynamic_SP_Params);
         public P_ReturnMessage_Result P_SP_MultiParm_Result<T>(string Query, T res, string USERNAME, string IP = "");
         public P_ReturnMessage_Result P_SP_SingleParm_Result(string Query, string parmName, object parmValue, string USERNAME, string IP = "");
@@ -92,10 +93,11 @@ namespace EBook_Data.Interfaces
         #endregion IDB 
 
         #region User
-        public Task<P_UserLoginQueryModel> GetUserLoginCredentials(string UserName, CancellationToken cancellationToken);
-        public ClaimsPrincipal? GetUserClaim();
+        public Task<P_UserLoginPasswordModel> GetUserLoginCredentials(string UserName, CancellationToken cancellationToken);
+        public P_Get_User_Info P_Get_User_Info(string UserName, int ApplicationID, MemoryCacheValueType? _MemoryCacheValueType = null);
+        
+        
         public bool P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(string Username, int PR_ID);
-        public P_Get_User_Info P_Get_User_Info_Class(string UserName, int ApplicationID, MemoryCacheValueType? _MemoryCacheValueType = null);
         public P_ReturnMessageForJson_Result P_Create_User(string Json, string USERNAME, string IP = "");
         #endregion User
     }

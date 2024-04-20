@@ -56,7 +56,7 @@ namespace EBook_App.Controllers
 
                 dynamic_SP_Params = new Dynamic_SP_Params();
                 dynamic_SP_Params.ParameterName = "UserType_MTV_CODE";
-                dynamic_SP_Params.Val = _PublicClaimObjects?.P_Get_User_Info_Class?.UserTypeMTVCode;
+                dynamic_SP_Params.Val = _PublicClaimObjects?.P_Get_User_Info?.UserType;
                 List_Dynamic_SP_Params.Add(dynamic_SP_Params);
 
                 List<ReportFilterDropDownList> reportFilterDropDownLists = new List<ReportFilterDropDownList>();
@@ -102,7 +102,7 @@ namespace EBook_App.Controllers
 
                     Dynamic_SP_Params dynamic_SP_Params = new Dynamic_SP_Params();
                     dynamic_SP_Params.ParameterName = "UserType_MTV_CODE";
-                    dynamic_SP_Params.Val = _PublicClaimObjects?.P_Get_User_Info_Class?.UserTypeMTVCode;
+                    dynamic_SP_Params.Val = _PublicClaimObjects?.P_Get_User_Info?.UserType;
                     List_Dynamic_SP_Params.Add(dynamic_SP_Params);
 
                     List<P_Users_Result> ResultList = ado.P_Get_Generic_List_SP<P_Users_Result>("P_Get_Users_List", ref List_Dynamic_SP_Params);

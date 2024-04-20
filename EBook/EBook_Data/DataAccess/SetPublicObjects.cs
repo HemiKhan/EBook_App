@@ -58,7 +58,7 @@ namespace EBook_Data.DataAccess
             _PublicClaimObjects.hosturl = (StaticPublicObjects.ado == null ? "" : StaticPublicObjects.ado.GetHostURL());
             _PublicClaimObjects.remotedomain = (StaticPublicObjects.ado == null ? "" : StaticPublicObjects.ado.GetRemoteDomain());
             //_PublicClaimObjects.remoteurl = (StaticPublicObjects.ado == null ? "" : StaticPublicObjects.ado.GetRemoteURL());
-            _PublicClaimObjects.P_Get_User_Info_Class = (StaticPublicObjects.ado == null ? null : StaticPublicObjects.ado.P_Get_User_Info_Class(_PublicClaimObjects.username, AppEnum.ApplicationId.AppID));
+            _PublicClaimObjects.P_Get_User_Info = (StaticPublicObjects.ado == null ? null : StaticPublicObjects.ado.P_Get_User_Info(_PublicClaimObjects.username, AppEnum.ApplicationId.AppID));
 
             return _PublicClaimObjects;
         }

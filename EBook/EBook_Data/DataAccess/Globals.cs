@@ -733,7 +733,7 @@ namespace EBook_Data.DataAccess
 
             Dynamic_SP_Params = new Dynamic_SP_Params();
             Dynamic_SP_Params.ParameterName = "TimeZoneID";
-            Dynamic_SP_Params.Val = userinfo.TimeZoneID;
+            Dynamic_SP_Params.Val = 0;
             List_Dynamic_SP_Params.Add(Dynamic_SP_Params);
 
             Dynamic_SP_Params = new Dynamic_SP_Params();

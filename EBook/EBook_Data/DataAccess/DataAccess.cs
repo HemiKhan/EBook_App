@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EBook_Data.Common;
+using EBook_Data.Dtos;
 using EBook_Data.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
@@ -32,7 +33,8 @@ namespace EBook_Data.DataAccess
         public string jit { get; set; } = "";
         public string key { get; set; } = "";
         public bool iswebtoken { get; set; } = false;
-        public P_Get_User_Info? P_Get_User_Info_Class { get; set; } = null;
+        public P_Get_User_Info? P_Get_User_Info { get; set; } = null;
+
         private string _appsettingfilename = "appsettings.json";
         public string appsettingfilename
         {
