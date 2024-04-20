@@ -22,7 +22,9 @@ namespace EBook_App.Helper
             //ADO Repo
             services.AddScoped<IADORepository, ADORepository>();
             services.AddScoped<ILogFile, LogFile>();
-
+        }
+        public static void AddOtherServices(this IServiceCollection services)
+        {
             //services.AddTransient<IAppSetupService, AppSetupService>();
         }
     }

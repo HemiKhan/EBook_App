@@ -1,20 +1,5 @@
-﻿using AutoMapper;
-using EBook_Models.Data_Model;
-using EBook_Services.GlobalService;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Logging;
-using Microsoft.VisualBasic;
-using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Http.Extensions;
 using Serilog.Context;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Data;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace EBook_App.Helper
 {

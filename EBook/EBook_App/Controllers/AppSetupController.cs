@@ -4,12 +4,11 @@ using EBook_Data.DataAccess;
 using EBook_Data.Dtos;
 using EBook_Data.Interfaces;
 using EBook_Models.App_Models;
-using EBook_Models.Data_Model;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Data;
-using static EBook_Models.App_Models.AppEnum;
+using static EBook_Data.Dtos.AppEnum;
 
 namespace EBook_App.Controllers
 {

@@ -1,46 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\",
+  "WorkspaceRootPath": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\Project_Template\\EBook_App\\EBook\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|c:\\users\\hammas khan\\desktop\\mspl\\ebook_app\\ebook\\ebook_app\\views\\ebook\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|c:\\users\\hammas khan\\desktop\\mspl\\project_template\\ebook_app\\ebook\\ebook_app\\views\\ebook\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|solutionrelative:ebook_app\\views\\ebook\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|c:\\users\\hammas khan\\desktop\\mspl\\ebook_app\\ebook\\ebook_app\\views\\ebook\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|solutionrelative:ebook_app\\views\\ebook\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|c:\\users\\hammas khan\\desktop\\mspl\\ebook_app\\ebook\\ebook_app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|solutionrelative:ebook_app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|c:\\users\\hammas khan\\desktop\\mspl\\ebook_app\\ebook\\ebook_app\\ebook_app.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|solutionrelative:ebook_app\\ebook_app.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|c:\\users\\hammas khan\\desktop\\mspl\\ebook_app\\ebook\\ebook_app\\controllers\\ebookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|c:\\users\\hammas khan\\desktop\\mspl\\project_template\\ebook_app\\ebook\\ebook_app\\controllers\\ebookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|solutionrelative:ebook_app\\controllers\\ebookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|c:\\users\\hammas khan\\desktop\\mspl\\ebook_app\\ebook\\ebook_app\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|c:\\users\\hammas khan\\desktop\\mspl\\project_template\\ebook_app\\ebook\\ebook_app\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|solutionrelative:ebook_app\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|c:\\users\\hammas khan\\desktop\\mspl\\ebook_app\\ebook\\ebook_app\\helper\\appservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|solutionrelative:ebook_app\\helper\\appservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{073F1E74-38B3-4FBA-8AEE-68D7B03E5ABD}|EBook_Services\\EBook_Services.csproj|c:\\users\\hammas khan\\desktop\\mspl\\ebook_app\\ebook\\ebook_services\\globalservice\\adorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{073F1E74-38B3-4FBA-8AEE-68D7B03E5ABD}|EBook_Services\\EBook_Services.csproj|c:\\users\\hammas khan\\desktop\\mspl\\project_template\\ebook_app\\ebook\\ebook_services\\globalservice\\adorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{073F1E74-38B3-4FBA-8AEE-68D7B03E5ABD}|EBook_Services\\EBook_Services.csproj|solutionrelative:ebook_services\\globalservice\\adorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|c:\\users\\hammas khan\\desktop\\mspl\\ebook_app\\ebook\\ebook_app\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|c:\\users\\hammas khan\\desktop\\mspl\\project_template\\ebook_app\\ebook\\ebook_app\\helper\\appservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|solutionrelative:ebook_app\\helper\\appservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|c:\\users\\hammas khan\\desktop\\mspl\\project_template\\ebook_app\\ebook\\ebook_app\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|solutionrelative:ebook_app\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9E40D7C9-5262-4960-B61A-D123947CE8D8}|EBook_Models\\EBook_Models.csproj|c:\\users\\hammas khan\\desktop\\mspl\\ebook_app\\ebook\\ebook_models\\data_model\\dataclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9E40D7C9-5262-4960-B61A-D123947CE8D8}|EBook_Models\\EBook_Models.csproj|solutionrelative:ebook_models\\data_model\\dataclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|c:\\users\\hammas khan\\desktop\\mspl\\project_template\\ebook_app\\ebook\\ebook_app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47A4A2D4-F02B-4E48-B08F-84A1F710A04B}|EBook_App\\EBook_App.csproj|solutionrelative:ebook_app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,13 +42,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_App\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\Project_Template\\EBook_App\\EBook\\EBook_App\\Program.cs",
               "RelativeDocumentMoniker": "EBook_App\\Program.cs",
-              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_App\\Program.cs",
+              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\Project_Template\\EBook_App\\EBook\\EBook_App\\Program.cs",
               "RelativeToolTip": "EBook_App\\Program.cs",
-              "ViewState": "AQIAADwAAAAAAAAAAAAmwFQAAAAuAAAA",
+              "ViewState": "AQIAADwAAAAAAAAAAAAmwFQAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-16T06:32:41.54Z",
               "IsPinned": true,
@@ -68,117 +56,87 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_App\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\Project_Template\\EBook_App\\EBook\\EBook_App\\appsettings.json",
               "RelativeDocumentMoniker": "EBook_App\\appsettings.json",
-              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_App\\appsettings.json",
+              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\Project_Template\\EBook_App\\EBook\\EBook_App\\appsettings.json",
               "RelativeToolTip": "EBook_App\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAHAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-04-16T06:29:39.239Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "DataClass.cs",
-              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_Models\\Data_Model\\DataClass.cs",
-              "RelativeDocumentMoniker": "EBook_Models\\Data_Model\\DataClass.cs",
-              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_Models\\Data_Model\\DataClass.cs",
-              "RelativeToolTip": "EBook_Models\\Data_Model\\DataClass.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAN0AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-16T06:17:45.183Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "AppService.cs",
-              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_App\\Helper\\AppService.cs",
+              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\Project_Template\\EBook_App\\EBook\\EBook_App\\Helper\\AppService.cs",
               "RelativeDocumentMoniker": "EBook_App\\Helper\\AppService.cs",
-              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_App\\Helper\\AppService.cs",
+              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\Project_Template\\EBook_App\\EBook\\EBook_App\\Helper\\AppService.cs",
               "RelativeToolTip": "EBook_App\\Helper\\AppService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-16T07:57:30.555Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Dashboard.cshtml",
-              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_App\\Views\\EBook\\Dashboard.cshtml",
-              "RelativeDocumentMoniker": "EBook_App\\Views\\EBook\\Dashboard.cshtml",
-              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_App\\Views\\EBook\\Dashboard.cshtml",
-              "RelativeToolTip": "EBook_App\\Views\\EBook\\Dashboard.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAKAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-19T07:48:23.299Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "EBook_App",
-              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_App\\EBook_App.csproj",
-              "RelativeDocumentMoniker": "EBook_App\\EBook_App.csproj",
-              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_App\\EBook_App.csproj",
-              "RelativeToolTip": "EBook_App\\EBook_App.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-04-19T07:37:09.661Z",
+              "Title": "ADORepository.cs",
+              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\Project_Template\\EBook_App\\EBook\\EBook_Services\\GlobalService\\ADORepository.cs",
+              "RelativeDocumentMoniker": "EBook_Services\\GlobalService\\ADORepository.cs",
+              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\Project_Template\\EBook_App\\EBook\\EBook_Services\\GlobalService\\ADORepository.cs",
+              "RelativeToolTip": "EBook_Services\\GlobalService\\ADORepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-18T07:03:56.231Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\Project_Template\\EBook_App\\EBook\\EBook_App\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "EBook_App\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\Project_Template\\EBook_App\\EBook\\EBook_App\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "EBook_App\\Controllers\\AccountController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-18T07:10:51.077Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EBookController.cs",
+              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\Project_Template\\EBook_App\\EBook\\EBook_App\\Controllers\\EBookController.cs",
+              "RelativeDocumentMoniker": "EBook_App\\Controllers\\EBookController.cs",
+              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\Project_Template\\EBook_App\\EBook\\EBook_App\\Controllers\\EBookController.cs",
+              "RelativeToolTip": "EBook_App\\Controllers\\EBookController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGMAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-19T07:23:09.631Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Home.cshtml",
-              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_App\\Views\\EBook\\Home.cshtml",
+              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\Project_Template\\EBook_App\\EBook\\EBook_App\\Views\\EBook\\Home.cshtml",
               "RelativeDocumentMoniker": "EBook_App\\Views\\EBook\\Home.cshtml",
-              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_App\\Views\\EBook\\Home.cshtml",
+              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\Project_Template\\EBook_App\\EBook\\EBook_App\\Views\\EBook\\Home.cshtml",
               "RelativeToolTip": "EBook_App\\Views\\EBook\\Home.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAPAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-04-19T07:23:58.496Z",
+              "IsPinned": true,
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "EBookController.cs",
-              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_App\\Controllers\\EBookController.cs",
-              "RelativeDocumentMoniker": "EBook_App\\Controllers\\EBookController.cs",
-              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_App\\Controllers\\EBookController.cs",
-              "RelativeToolTip": "EBook_App\\Controllers\\EBookController.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAGMAAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-19T07:23:09.631Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_App\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "EBook_App\\Controllers\\AccountController.cs",
-              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_App\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "EBook_App\\Controllers\\AccountController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8BAAAYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-18T07:10:51.077Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ADORepository.cs",
-              "DocumentMoniker": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_Services\\GlobalService\\ADORepository.cs",
-              "RelativeDocumentMoniker": "EBook_Services\\GlobalService\\ADORepository.cs",
-              "ToolTip": "C:\\Users\\Hammas Khan\\Desktop\\MSPL\\EBook_App\\EBook\\EBook_Services\\GlobalService\\ADORepository.cs",
-              "RelativeToolTip": "EBook_Services\\GlobalService\\ADORepository.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAQwKgAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-18T07:03:56.231Z"
             }
           ]
         }

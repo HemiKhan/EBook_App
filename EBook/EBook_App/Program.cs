@@ -1,10 +1,13 @@
+using AutoMapper;
 using EBook_App.Helper;
+using EBook_Data.Common;
 using EBook_Data.DataAccess;
 using EBook_Data.DatabaseContext;
-using EBook_Models.Data_Model;
+using EBook_Data.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
@@ -55,6 +58,7 @@ DbStringCollection dbStringCollection = new DbStringCollection()
 };
 builder.Services.AddSingleton(dbStringCollection);
 builder.Services.AddAppServices(dbStringCollection);
+builder.Services.AddOtherServices();
 
 
 // Add services to the container.
@@ -113,6 +117,25 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=EBook}/{action=Home}/{id?}");
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var serviceProvider = serviceScope.ServiceProvider;
+
+    try
+    {
+        var logFile = serviceProvider.GetService<ILogFile>();
+        var ado = serviceProvider.GetService<IADORepository>();
+        var map = serviceProvider.GetService<IMapper>();
+        var memorycache = serviceProvider.GetService<IMemoryCache>();
+
+        SetPublicObjects.SetStaticPublicObjects(logFile, ado, map, memorycache);
+    }
+    catch (Exception ex)
+    {
+        StaticPublicObjects.logFile.ErrorLog(FunctionName: "Program", SmallMessage: ex.Message, Message: ex.ToString());
+    }
+}
 
 app.Use(async (context, next) =>
 {

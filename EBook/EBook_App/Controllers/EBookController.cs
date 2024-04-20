@@ -2,8 +2,6 @@
 using EBook_Data.DataAccess;
 using EBook_Data.Dtos;
 using EBook_Data.Interfaces;
-using EBook_Models.App_Models;
-using EBook_Models.Data_Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EBook_App.Controllers
@@ -26,6 +24,7 @@ namespace EBook_App.Controllers
         }
         #endregion Controller Constructor
 
+        #region test
         public IActionResult Dashboard()
         {
             return View();
@@ -96,10 +95,49 @@ namespace EBook_App.Controllers
             }
             return Globals.GetAjaxJsonReturn(reportResponse);
         }
+        #endregion test
 
+        #region EBook Pages
         public IActionResult Home()
         {
             return View();
         }
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+        public IActionResult Products()
+        {
+            return View();
+        }
+        public IActionResult ProductDetail()
+        {
+            return View();
+        }
+        public IActionResult Cart()
+        {
+            return View();
+        }
+        public IActionResult EmptyCart()
+        {
+            return View();
+        }
+        public IActionResult Wishlist()
+        {
+            return View();
+        }
+        public IActionResult Checkout()
+        {
+            return View();
+        }
+        public IActionResult Profile()
+        {
+            return View();
+        }
+        #endregion EBook Pages
     }
 }

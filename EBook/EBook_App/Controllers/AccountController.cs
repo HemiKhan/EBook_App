@@ -1,16 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using EBook_Data.DataAccess;
-using EBook_Models.App_Models;
 using EBook_Data.Common;
-using EBook_App.Extension;
-using EBook_Models.Data_Model;
-using static EBook_Models.App_Models.AppEnum;
 using EBook_Data.Interfaces;
+using EBook_Data.Dtos;
 
 namespace EBook_App.Controllers
 {
@@ -275,7 +270,6 @@ namespace EBook_App.Controllers
         //[CustomPageSetupAttribute]
         public IActionResult Home()
         {
-            var resultJson1 = ado.F_Get_Chat_Group_Private_Json(2);
             return View();
         }
         #endregion Home
