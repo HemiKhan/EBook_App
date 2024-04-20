@@ -86,3 +86,6 @@ EBook/.vs/EBook/v17/.suo
 EBook/.vs/EBook/v17/DocumentLayout.json
 /EBook/.vs/EBook/DesignTimeBuild
 /EBook/.vs/EBook/config/applicationhost.config
+/EBook/EBook_App/obj/Debug/net8.0
+/EBook/EBook_Data/obj/Debug/net8.0
+/EBook/EBook_Services/obj/Debug/net8.0
