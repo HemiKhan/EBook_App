@@ -35,6 +35,26 @@ namespace EBook_Data.Dtos
         public virtual P_Get_User_Info? UserInfo { get; set; } = null;
     }
 
+    public class RefreshTokenReq
+    {
+        [Required(AllowEmptyStrings = false, ErrorMessage = "*token* is Required")]
+        public string token { get; set; } = "";
+        [Required(AllowEmptyStrings = false, ErrorMessage = "*refreshtoken* is Required")]
+        public string refreshToken { get; set; } = "";
+        [Required(AllowEmptyStrings = false, ErrorMessage = "*userid* is Required")]
+        public string UserName { get; set; } = "";
+    }
+    public class RefreshTokenRes
+    {
+        public bool ResponseCode { get; set; } = false;
+        public string JWToken { get; set; } = "";
+        public string? JWTokenExpiry { get; set; } = null;
+        public string RefreshToken { get; set; } = "";
+        public string ErrorMsg { get; set; } = "";
+        public string ErrorCode { get; set; } = "";
+        public P_Get_User_Info? UserInfo { get; set; } = null;
+    }
+
     public class P_Get_User_Info
     {
         public int User_ID { get; set; }
@@ -52,6 +72,10 @@ namespace EBook_Data.Dtos
         public int RoleID { get; set; } = 0;
         public bool IsGroupRoleID { get; set; } = false;
         public bool IsApplicationAccessAllowed { get; set; } = false;
+        [JsonIgnore]
+        [IgnoreDataMember]
+        [NotMapped]
+        public string encrypted_key { get; set; } = "";
     }
     public class P_UserLoginPasswordModel
     {

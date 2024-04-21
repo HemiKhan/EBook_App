@@ -21,10 +21,10 @@
     <link href="~/css/Ample/style.min.css?ID=@ViewBag.GUID" rel="stylesheet" />
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js?ID=@ViewBag.GUID"></script>
-    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js?ID=@ViewBag.GUID"></script>   
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js?ID=@ViewBag.GUID"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css?ID=@ViewBag.GUID" />
     <script src="~/js/signalr/signalr.min.js?ID=@ViewBag.GUID"></script>
-    
+
     @if (ViewBag.IsLoadKendo)
     {
         <link href="~/css/Kendo/default-main.css?ID=@ViewBag.GUID" rel="stylesheet" />
@@ -156,7 +156,7 @@
                 }
             }
         }
-        
+
     </script>
 
     <!--Custom JavaScript -->
@@ -187,12 +187,12 @@
         }
 
         /* thead.k-table-thead tr.k-table-row,
-        .sidebar-nav ul .sidebar-item.selected > .sidebar-link {
-            background: #093028 !important; 
-            background: -webkit-linear-gradient(to right, #237A57, #093028) !important;
-            background: linear-gradient(to right, #237A57, #093028) !important;
-            color: white !important;
-        } */
+                .sidebar-nav ul .sidebar-item.selected > .sidebar-link {
+                    background: #093028 !important;
+                    background: -webkit-linear-gradient(to right, #237A57, #093028) !important;
+                    background: linear-gradient(to right, #237A57, #093028) !important;
+                    color: white !important;
+                } */
 
         .k-button-flat-primary {
             color: black;
@@ -300,8 +300,7 @@
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        
-                       @*  @{
+                        @{
                             foreach (System.Data.DataRow dr in ViewBag.PageGroupDT.Rows)
                             {
                                 <li class="sidebar-item @dr["PageGroupSelected"]">
@@ -310,30 +309,30 @@
                                         <span class="hide-menu">@dr["PageGroupName"]</span>
                                     </a>
                                     <ul aria-expanded="false" class="collapse  first-level  @dr["PageGroupActiveIn"]">
-                                                                    @{
+                                        @{
                                             foreach (System.Data.DataRow subdr in ViewBag.PageDT.Rows)
                                             {
                                                 if (dr["PG_ID"].ToString() == subdr["PG_ID"].ToString())
                                                 {
-                                                                                                            <li class="sidebar-item @subdr["PageActive"]">
-                                                                                                                <a href="@subdr["PageURL"]" class="sidebar-link" style="white-space: pre-wrap; word-break: break-word;">
-                                                                                                                    <i class="mdi mdi-adjust"></i>
-                                                                                                                    <span class="hide-menu">@subdr["PageName"]</span>
-                                                                                                                </a>
-                                                                                                            </li>
+                                                    <li class="sidebar-item @subdr["PageActive"]">
+                                                        <a href="@subdr["PageURL"]" class="sidebar-link" style="white-space: pre-wrap; word-break: break-word;">
+                                                            <i class="mdi mdi-adjust"></i>
+                                                            <span class="hide-menu">@subdr["PageName"]</span>
+                                                        </a>
+                                                    </li>
                                                 }
                                             }
-                                                                    }
-                                                                </ul>
-                                                            </li>
-                                                            <div class="devider"></div>
+                                        }
+                                    </ul>
+                                </li>
+                                <div class="devider"></div>
                             }
-                        } *@
+                        }
                         <li class="sidebar-item">
                             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false" style="white-space: pre-wrap; word-break: break-word;">
                                 <i class="mdi mdi-av-timer"></i>
-                                @* <span class="hide-menu">@ViewBag.FullName</span> *@
-                                 <span class="hide-menu">FullName</span>
+                                <span class="hide-menu">@ViewBag.FullName</span>
+                                @* <span class="hide-menu">FullName</span> *@
                             </a>
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item">
@@ -512,7 +511,7 @@
     <script src="~/js/Ample/sparkline.js?ID=@ViewBag.GUID"></script>
     <script src="~/js/Ample/waves.js?ID=@ViewBag.GUID"></script>
     <script src="~/js/Ample/sidebarmenu.js?ID=@ViewBag.GUID"></script>
-    <script src="~/js/sessionexpire.js?ID=@ViewBag.GUID"></script>
+    @* <script src="~/js/sessionexpire.js?ID=@ViewBag.GUID"></script> *@
     <script>
         $("#main-wrapper").show();
 

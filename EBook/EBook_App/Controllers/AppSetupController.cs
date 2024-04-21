@@ -3,7 +3,6 @@ using EBook_Data.Common;
 using EBook_Data.DataAccess;
 using EBook_Data.Dtos;
 using EBook_Data.Interfaces;
-using EBook_Models.App_Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -17,21 +16,19 @@ namespace EBook_App.Controllers
         #region Controller Constructor
         private IConfiguration _config;
         private IHttpContextAccessor _httpContextAccessor;
-        private readonly IADORepository ado;
         private PublicClaimObjects? _PublicClaimObjects
         {
             get
             {
-                return ado.GetPublicClaimObjects();
+                return StaticPublicObjects.ado.GetPublicClaimObjects();
             }
         }
         private readonly string _bodystring = "";
-        public AppSetupController(IConfiguration config, IHttpContextAccessor httpContextAccessor, IADORepository ado)
+        public AppSetupController(IConfiguration config, IHttpContextAccessor httpContextAccessor)
         {
             this._config = config;
             this._httpContextAccessor = httpContextAccessor;
-            this.ado = ado;
-            this._bodystring = ado.GetRequestBodyString().Result;
+            this._bodystring = StaticPublicObjects.ado.GetRequestBodyString().Result;
         }
         #endregion Controller Constructor
 
@@ -39,12 +36,12 @@ namespace EBook_App.Controllers
         [CustomPageSetupAttribute]
         public IActionResult UserSetup()
         {
-            bool IsView = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_View);
+            bool IsView = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_View);
             if (IsView)
             {
-                bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_Add);
-                bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_Edit);
-                bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_Delete);
+                bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_Add);
+                bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_Edit);
+                bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_Delete);
                 ViewBag.RightsListObj = new { IsView = IsView, IsAdd = IsAdd, IsEdit = IsEdit, IsDelete = IsDelete };
                 ViewBag.RightsList = JsonConvert.SerializeObject(ViewBag.RightsListObj);
 
@@ -61,7 +58,7 @@ namespace EBook_App.Controllers
 
                 List<ReportFilterDropDownList> reportFilterDropDownLists = new List<ReportFilterDropDownList>();
                 DataSet DS = new DataSet();
-                DS = ado.ExecuteStoreProcedureDS("P_Get_UserSetup_Dropdown_Lists", ref List_Dynamic_SP_Params);
+                DS = StaticPublicObjects.ado.ExecuteStoreProcedureDS("P_Get_UserSetup_Dropdown_Lists", ref List_Dynamic_SP_Params);
                 ViewBag.UserTypeDT = DS.Tables[0];
                 ViewBag.DepartmentDT = DS.Tables[1];
                 ViewBag.QuestionDT = DS.Tables[2];
@@ -95,7 +92,7 @@ namespace EBook_App.Controllers
             ReportResponse reportResponse = new ReportResponse();
             try
             {
-                if (ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_View))
+                if (StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_View))
                 {
                     List<Dynamic_SP_Params> List_Dynamic_SP_Params = new List<Dynamic_SP_Params>();
                     CustomFunctions.GetKendoFilter(ref _ReportParams, ref List_Dynamic_SP_Params, _PublicClaimObjects, true);
@@ -105,7 +102,7 @@ namespace EBook_App.Controllers
                     dynamic_SP_Params.Val = _PublicClaimObjects?.P_Get_User_Info?.UserType;
                     List_Dynamic_SP_Params.Add(dynamic_SP_Params);
 
-                    List<P_Users_Result> ResultList = ado.P_Get_Generic_List_SP<P_Users_Result>("P_Get_Users_List", ref List_Dynamic_SP_Params);
+                    List<P_Users_Result> ResultList = StaticPublicObjects.ado.P_Get_Generic_List_SP<P_Users_Result>("P_Get_Users_List", ref List_Dynamic_SP_Params);
 
                     reportResponse.TotalRowCount = CustomFunctions.GetValueFromReturnParameter<long>(List_Dynamic_SP_Params, "TotalRowCount", typeof(long));
                     reportResponse.ResultData = ResultList;
@@ -131,8 +128,8 @@ namespace EBook_App.Controllers
         [HttpPost]
         public string GetAddEditUserSetupModal([FromBody] int UserID)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_Edit);
 
             if ((UserID == 0 && IsAdd == false) || (UserID > 0 && IsEdit == false))
                 return "No Rights";
@@ -153,16 +150,16 @@ namespace EBook_App.Controllers
                 Dynamic_SP_Params.Val = UserID;
                 List_Dynamic_SP_Params.Add(Dynamic_SP_Params);
                 string query = "SELECT USER_ID, USERNAME, UserType_MTV_CODE, Password = '', ConfrimPassword = '', D_ID, Designation, FirstName, MiddleName, LastName, Company, Address, Address2, City, State, ZipCode, Country, Email, Mobile, Phone, PhoneExt, SecurityQuestion_MTV_ID, EncryptedAnswer, TIMEZONE_ID, IsApproved, BlockType_MTV_ID, IsAPIUser, IsActive FROM [EBook_DB].[dbo].[T_Users] u with (nolock) WHERE USER_ID = @USER_ID";
-                UserEdit = ado.ExecuteSelectSQLMap<P_AddOrEdit_User_Response>(query, false, 0, ref List_Dynamic_SP_Params);
+                UserEdit = StaticPublicObjects.ado.ExecuteSelectSQLMap<P_AddOrEdit_User_Response>(query, false, 0, ref List_Dynamic_SP_Params);
             }
 
             List<Dynamic_SP_Params> UserTypeList_Params = new List<Dynamic_SP_Params>() { new Dynamic_SP_Params { ParameterName = "MT_ID", Val = 106 } };
-            List<SelectDropDownList> UserTypeList = ado.Get_DropDownList_Result("SELECT code = MTV_CODE, name = Name FROM [EBook_DB].[dbo].[T_Master_Type_Value] with (nolock) WHERE MT_ID = @MT_ID", UserTypeList_Params);
-            List<SelectDropDownList> DepartmentList = ado.Get_DropDownList_Result("SELECT code = D_ID, name = DepartmentName FROM [EBook_DB].[dbo].[T_Department] with (nolock)");
+            List<SelectDropDownList> UserTypeList = StaticPublicObjects.ado.Get_DropDownList_Result("SELECT code = MTV_CODE, name = Name FROM [EBook_DB].[dbo].[T_Master_Type_Value] with (nolock) WHERE MT_ID = @MT_ID", UserTypeList_Params);
+            List<SelectDropDownList> DepartmentList = StaticPublicObjects.ado.Get_DropDownList_Result("SELECT code = D_ID, name = DepartmentName FROM [EBook_DB].[dbo].[T_Department] with (nolock)");
             List<Dynamic_SP_Params> QuestionTypeList_Params = new List<Dynamic_SP_Params>() { new Dynamic_SP_Params { ParameterName = "MT_ID", Val = 150 } };
-            List<SelectDropDownList> QuestionTypeList = ado.Get_DropDownList_Result("SELECT code = MTV_ID, name = Name FROM [EBook_DB].[dbo].[T_Master_Type_Value] with (nolock) WHERE MT_ID = @MT_ID", QuestionTypeList_Params);
+            List<SelectDropDownList> QuestionTypeList = StaticPublicObjects.ado.Get_DropDownList_Result("SELECT code = MTV_ID, name = Name FROM [EBook_DB].[dbo].[T_Master_Type_Value] with (nolock) WHERE MT_ID = @MT_ID", QuestionTypeList_Params);
             List<Dynamic_SP_Params> BlockTypeList_Params = new List<Dynamic_SP_Params>() { new Dynamic_SP_Params { ParameterName = "MT_ID", Val = 149 } };
-            List<SelectDropDownList> BlockTypeList = ado.Get_DropDownList_Result("SELECT code = MTV_ID, name = Name FROM [EBook_DB].[dbo].[T_Master_Type_Value] with (nolock) WHERE MT_ID = @MT_ID", BlockTypeList_Params);
+            List<SelectDropDownList> BlockTypeList = StaticPublicObjects.ado.Get_DropDownList_Result("SELECT code = MTV_ID, name = Name FROM [EBook_DB].[dbo].[T_Master_Type_Value] with (nolock) WHERE MT_ID = @MT_ID", BlockTypeList_Params);
 
             getModalDetail.getmodelsize = GetModalSize.modal_lg;
             getModalDetail.modaltitle = (UserID == 0 ? "Add New User" : "Edit User");
@@ -790,8 +787,8 @@ namespace EBook_App.Controllers
         [HttpPost]
         public IActionResult AddOrEdit_User([FromBody] string JsonData)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_Edit);
 
             if ((IsAdd == false) || (IsEdit == false))
             {
@@ -850,7 +847,7 @@ namespace EBook_App.Controllers
 
                     var modifiedJson = JsonConvert.SerializeObject(obj);
 
-                    P_ReturnMessageForJson_Result SPResponse = ado.P_Create_User(modifiedJson, _PublicClaimObjects.username);
+                    P_ReturnMessageForJson_Result SPResponse = StaticPublicObjects.ado.P_Create_User(modifiedJson, _PublicClaimObjects.username);
                     if (SPResponse.ReturnCode == false)
                     {
                         StaticPublicObjects.logFile.ErrorLog(FunctionName: "P_Create_User", SmallMessage: SPResponse.ReturnText!, Message: SPResponse.ReturnText!);
@@ -884,7 +881,7 @@ namespace EBook_App.Controllers
                 (string Name, object Value)[] ParamsNameValues = new (string, object)[1];
 
                 ParamsNameValues[0] = ("Seller_key", SellerKey);
-                DS = ado.ExecuteStoreProcedureDS("P_GetAllDropdownData_UserSetup", ParamsNameValues);
+                DS = StaticPublicObjects.ado.ExecuteStoreProcedureDS("P_GetAllDropdownData_UserSetup", ParamsNameValues);
 
                 return Content(JsonConvert.SerializeObject(DS));
             }
@@ -903,17 +900,17 @@ namespace EBook_App.Controllers
                 new Dynamic_SP_Params {ParameterName = "@UserID", Val = UserID}
             };
             string query = "SELECT USER_ID, USERNAME, UserType_MTV_CODE, UserType = ut.Name, d.D_ID, d.DepartmentName, Designation, FirstName, MiddleName, LastName, Company, Address, Address2, City, State, ZipCode, Country, Email, Mobile, phone, PhoneExt, SecurityQuestion_MTV_ID, Question = q.Name, EncryptedAnswer, u.TIMEZONE_ID, TIMEZONE = tz.TimeZoneDisplay, IsApproved, BlockType_MTV_ID, BlockType = b.Name, IsAPIUser, u.IsActive FROM [EBook_DB].[dbo].[T_Users] u with (nolock) LEFT JOIN [EBook_DB].[dbo].[T_Master_Type_Value] ut with (nolock) ON u.UserType_MTV_CODE = ut.MTV_CODE LEFT JOIN [EBook_DB].[dbo].[T_Department] d with (nolock) ON u.D_ID = d.D_ID LEFT JOIN [EBook_DB].[dbo].[T_Master_Type_Value] q with (nolock) ON u.SecurityQuestion_MTV_ID = q.MTV_ID LEFT JOIN [EBook_DB].[dbo].[T_Time_Zone_List] tz with (nolock) ON u.TIMEZONE_ID = tz.TIMEZONE_ID LEFT JOIN [EBook_DB].[dbo].[T_Master_Type_Value] b with (nolock) ON u.BlockType_MTV_ID = b.MTV_ID WHERE USER_ID = @UserID";
-            P_Get_User_By_ID response = ado.ExecuteSelectSQLMap<P_Get_User_By_ID>(query, false, 0, ref ParmList);
+            P_Get_User_By_ID response = StaticPublicObjects.ado.ExecuteSelectSQLMap<P_Get_User_By_ID>(query, false, 0, ref ParmList);
             return Content(JsonConvert.SerializeObject(response));
         }
 
         [HttpPost]
         public IActionResult Remove_User([FromBody] int UserID)
         {
-            bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_Delete);
+            bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.User_Setup_Delete);
             if (IsDelete)
             {
-                P_ReturnMessage_Result response = ado.P_SP_SingleParm_Result("P_Remove_User", "UserID", UserID, _PublicClaimObjects.username);
+                P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_SingleParm_Result("P_Remove_User", "UserID", UserID, _PublicClaimObjects.username);
                 if (response.ReturnCode == false)
                     StaticPublicObjects.logFile.ErrorLog(FunctionName: "Remove_User", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
                 return Content(JsonConvert.SerializeObject(response));
@@ -933,7 +930,7 @@ namespace EBook_App.Controllers
             if (UserID != "")
                 Int_UserID = Convert.ToInt32(Crypto.DecryptNumericToStringWithOutNull(UserID));
 
-            string json = ado.P_Get_SingleParm_String_Result("P_Get_UserSetup_Json", "UserID", Int_UserID);
+            string json = StaticPublicObjects.ado.P_Get_SingleParm_String_Result("P_Get_UserSetup_Json", "UserID", Int_UserID);
             if (json != null)
             {
                 return Content(JsonConvert.SerializeObject(json));
@@ -958,7 +955,7 @@ namespace EBook_App.Controllers
                 new Dynamic_SP_Params {ParameterName = "SearchTerm", Val = SearchTerm},
 
             };
-            List<P_Get_SearchUsersName> UserNameList = ado.P_Get_Generic_List_SP<P_Get_SearchUsersName>("P_Get_SearchUsersName", ref parms);
+            List<P_Get_SearchUsersName> UserNameList = StaticPublicObjects.ado.P_Get_Generic_List_SP<P_Get_SearchUsersName>("P_Get_SearchUsersName", ref parms);
 
             if (UserNameList.Count > 0)
             {
@@ -979,12 +976,12 @@ namespace EBook_App.Controllers
         [CustomPageSetupAttribute]
         public IActionResult PageSetup()
         {
-            bool IsView = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_View);
+            bool IsView = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_View);
             if (IsView)
             {
-                bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Add);
-                bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Edit);
-                bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Delete);
+                bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Add);
+                bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Edit);
+                bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Delete);
                 ViewBag.RightsListObj = new { IsView = IsView, IsAdd = IsAdd, IsEdit = IsEdit, IsDelete = IsDelete };
                 ViewBag.RightsList = JsonConvert.SerializeObject(ViewBag.RightsListObj);
 
@@ -1057,7 +1054,7 @@ namespace EBook_App.Controllers
                 DataSet DS = new DataSet();
                 (string Name, object Value)[] ParamsNameValues = new (string, object)[1];
                 ParamsNameValues[0] = ("Username", _PublicClaimObjects.username);
-                DS = ado.ExecuteStoreProcedureDS("P_Get_Page_Setup_DropDown_Lists", ParamsNameValues);
+                DS = StaticPublicObjects.ado.ExecuteStoreProcedureDS("P_Get_Page_Setup_DropDown_Lists", ParamsNameValues);
                 ViewBag.PageGroupList = JsonConvert.SerializeObject(DS.Tables[0]);
                 ViewBag.PageList = JsonConvert.SerializeObject(DS.Tables[1]);
                 ViewBag.ApplicationList = JsonConvert.SerializeObject(DS.Tables[2]);
@@ -1071,19 +1068,19 @@ namespace EBook_App.Controllers
                 return Redirect($"/Error/Index?ID={ID}");
             }
         }
-        [CheckSessionExpiration]
+        //[CheckSessionExpiration]
         [HttpPost]
         public IActionResult GetPageGroupsList([FromBody] ReportParams _ReportParams)
         {
             ReportResponsePageSetup reportResponse = new ReportResponsePageSetup();
             try
             {
-                if (ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_View))
+                if (StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_View))
                 {
                     List<Dynamic_SP_Params> List_Dynamic_SP_Params = new List<Dynamic_SP_Params>();
                     CustomFunctions.GetKendoFilter(ref _ReportParams, ref List_Dynamic_SP_Params, _PublicClaimObjects, true);
 
-                    List<P_PageGroup_Result> ResultList = ado.P_Get_Generic_List_SP<P_PageGroup_Result>("P_Get_PageGroup_List", ref List_Dynamic_SP_Params);
+                    List<P_PageGroup_Result> ResultList = StaticPublicObjects.ado.P_Get_Generic_List_SP<P_PageGroup_Result>("P_Get_PageGroup_List", ref List_Dynamic_SP_Params);
 
                     reportResponse.TotalRowCount = CustomFunctions.GetValueFromReturnParameter<long>(List_Dynamic_SP_Params, "TotalRowCount", typeof(long));
                     reportResponse.ResultData = ResultList;
@@ -1112,12 +1109,12 @@ namespace EBook_App.Controllers
             ReportResponsePageSetup reportResponse = new ReportResponsePageSetup();
             try
             {
-                if (ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_View))
+                if (StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_View))
                 {
                     List<Dynamic_SP_Params> List_Dynamic_SP_Params = new List<Dynamic_SP_Params>();
                     CustomFunctions.GetKendoFilter(ref _ReportParams, ref List_Dynamic_SP_Params, _PublicClaimObjects, true);
 
-                    List<P_Page_Result> ResultList = ado.P_Get_Generic_List_SP<P_Page_Result>("P_Get_Page_List", ref List_Dynamic_SP_Params);
+                    List<P_Page_Result> ResultList = StaticPublicObjects.ado.P_Get_Generic_List_SP<P_Page_Result>("P_Get_Page_List", ref List_Dynamic_SP_Params);
 
                     reportResponse.TotalRowCount = CustomFunctions.GetValueFromReturnParameter<long>(List_Dynamic_SP_Params, "TotalRowCount", typeof(long));
                     reportResponse.ResultData = ResultList;
@@ -1146,8 +1143,8 @@ namespace EBook_App.Controllers
             string HtmlString = "";
             int PG_ID = Crypto.DecryptNumericToStringWithOutNull(Encrypted_PG_ID);
 
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Edit);
             if ((PG_ID == 0 && IsAdd == false) || (PG_ID > 0 && IsEdit == false))
                 return "No Rights";
 
@@ -1164,7 +1161,7 @@ namespace EBook_App.Controllers
                 Dynamic_SP_Params.ParameterName = "PG_ID";
                 Dynamic_SP_Params.Val = PG_ID;
                 List_Dynamic_SP_Params.Add(Dynamic_SP_Params);
-                PageGroupEdit = ado.ExecuteSelectSQLMap<P_AddOrEdit_PageGroup_Response>("SELECT PG_ID, PageGroupName, IsHide, IsActive Active FROM [EBook_DB].[dbo].[T_Page_Group] with (nolock) WHERE PG_ID = @PG_ID", false, 0, ref List_Dynamic_SP_Params);
+                PageGroupEdit = StaticPublicObjects.ado.ExecuteSelectSQLMap<P_AddOrEdit_PageGroup_Response>("SELECT PG_ID, PageGroupName, IsHide, IsActive Active FROM [EBook_DB].[dbo].[T_Page_Group] with (nolock) WHERE PG_ID = @PG_ID", false, 0, ref List_Dynamic_SP_Params);
             }
 
             getModalDetail.getmodelsize = GetModalSize.modal_md;
@@ -1272,8 +1269,8 @@ namespace EBook_App.Controllers
             DataSet DS = new DataSet();
             int P_ID = Crypto.DecryptNumericToStringWithOutNull(Encrypted_P_ID);
 
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Edit);
             if ((P_ID == 0 && IsAdd == false) || (P_ID > 0 && IsEdit == false))
                 return "No Rights";
 
@@ -1289,15 +1286,15 @@ namespace EBook_App.Controllers
                 Dynamic_SP_Params.ParameterName = "P_ID";
                 Dynamic_SP_Params.Val = P_ID;
                 List_Dynamic_SP_Params.Add(Dynamic_SP_Params);
-                PageEdit = ado.ExecuteSelectSQLMap<P_AddOrEdit_Page_Response>("SELECT P_ID, PG_ID, PageName, PageURL, Application_MTV_ID, IsHide, IsActive Active FROM [EBook_DB].[dbo].[T_Page] with (nolock) WHERE P_ID = @P_ID", false, 0, ref List_Dynamic_SP_Params);
+                PageEdit = StaticPublicObjects.ado.ExecuteSelectSQLMap<P_AddOrEdit_Page_Response>("SELECT P_ID, PG_ID, PageName, PageURL, Application_MTV_ID, IsHide, IsActive Active FROM [EBook_DB].[dbo].[T_Page] with (nolock) WHERE P_ID = @P_ID", false, 0, ref List_Dynamic_SP_Params);
             }
 
-            List<SelectDropDownList> PageGroupList = ado.Get_DropDownList_Result("SELECT PG_ID code, PageGroupName name FROM [EBook_DB].[dbo].[T_Page_Group] with (nolock) WHERE isActive = 1 ORDER BY Sort_");
+            List<SelectDropDownList> PageGroupList = StaticPublicObjects.ado.Get_DropDownList_Result("SELECT PG_ID code, PageGroupName name FROM [EBook_DB].[dbo].[T_Page_Group] with (nolock) WHERE isActive = 1 ORDER BY Sort_");
             List<Dynamic_SP_Params> Application_Parms = new List<Dynamic_SP_Params>()
             {
                 new Dynamic_SP_Params {ParameterName = "MT_ID", Val = 148}
             };
-            List<SelectDropDownList> ApplicationList = ado.Get_DropDownList_Result("SELECT code = MTV_ID, name = Name FROM T_Master_Type_Value where MT_ID = @MT_ID ORDER BY Sort_", Application_Parms);
+            List<SelectDropDownList> ApplicationList = StaticPublicObjects.ado.Get_DropDownList_Result("SELECT code = MTV_ID, name = Name FROM T_Master_Type_Value where MT_ID = @MT_ID ORDER BY Sort_", Application_Parms);
 
             getModalDetail.getmodelsize = GetModalSize.modal_md;
             getModalDetail.modaltitle = (P_ID == 0 ? "Add New Page" : "Edit Page");
@@ -1475,12 +1472,12 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult AddOrEdit_PageGroup([FromBody] P_AddOrEdit_PageGroup_Response res)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Edit);
             if ((IsAdd == false) || (IsEdit == false))
                 return Content(JsonConvert.SerializeObject("No Rights"));
 
-            P_ReturnMessage_Result response = ado.P_SP_MultiParm_Result("P_AddOrEdit_PageGroup", res, _PublicClaimObjects.username);
+            P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_MultiParm_Result("P_AddOrEdit_PageGroup", res, _PublicClaimObjects.username);
             if (response.ReturnCode == false)
                 StaticPublicObjects.logFile.ErrorLog(FunctionName: "AddOrEdit_PageGroup", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
             return Content(JsonConvert.SerializeObject(response));
@@ -1489,12 +1486,12 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult AddOrEdit_Page([FromBody] P_AddOrEdit_Page_Response res)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Edit);
             if ((IsAdd == false) || (IsEdit == false))
                 return Content(JsonConvert.SerializeObject("No Rights"));
 
-            P_ReturnMessage_Result response = ado.P_SP_MultiParm_Result("P_AddOrEdit_Page", res, _PublicClaimObjects.username);
+            P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_MultiParm_Result("P_AddOrEdit_Page", res, _PublicClaimObjects.username);
             if (response.ReturnCode == false)
                 StaticPublicObjects.logFile.ErrorLog(FunctionName: "AddOrEdit_Page", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
             return Content(JsonConvert.SerializeObject(response));
@@ -1503,11 +1500,11 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult Remove_PageGroup([FromBody] string Ery_PG_ID)
         {
-            bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Delete);
+            bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Delete);
             if (IsDelete)
             {
                 int PG_ID = Crypto.DecryptNumericToStringWithOutNull(Ery_PG_ID);
-                P_ReturnMessage_Result response = ado.P_SP_SingleParm_Result("P_Remove_PageGroup", "PG_ID", PG_ID, _PublicClaimObjects.username);
+                P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_SingleParm_Result("P_Remove_PageGroup", "PG_ID", PG_ID, _PublicClaimObjects.username);
                 if (response.ReturnCode == false)
                     StaticPublicObjects.logFile.ErrorLog(FunctionName: "Remove_PageGroup", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
                 return Content(JsonConvert.SerializeObject(response));
@@ -1521,11 +1518,11 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult Remove_Page([FromBody] string Ery_P_ID)
         {
-            bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Delete);
+            bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_Delete);
             if (IsDelete)
             {
                 int P_ID = Crypto.DecryptNumericToStringWithOutNull(Ery_P_ID);
-                P_ReturnMessage_Result response = ado.P_SP_SingleParm_Result("P_Remove_Page", "P_ID", P_ID, _PublicClaimObjects.username);
+                P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_SingleParm_Result("P_Remove_Page", "P_ID", P_ID, _PublicClaimObjects.username);
                 if (response.ReturnCode == false)
                     StaticPublicObjects.logFile.ErrorLog(FunctionName: "Remove_Page", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
                 return Content(JsonConvert.SerializeObject(response));
@@ -1557,7 +1554,7 @@ namespace EBook_App.Controllers
         public ActionResult Update_PageGroup_Sorting([FromBody] List<Sorting_Result> res)
         {
             var json = JsonConvert.SerializeObject(res);
-            P_ReturnMessage_Result response = ado.P_SP_SingleParm_Result("P_Update_PageGroup_Sorting", "json", json, _PublicClaimObjects.username);
+            P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_SingleParm_Result("P_Update_PageGroup_Sorting", "json", json, _PublicClaimObjects.username);
             if (response.ReturnCode == false)
                 StaticPublicObjects.logFile.ErrorLog(FunctionName: "Update_PageGroup_Sorting", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
             return Content(JsonConvert.SerializeObject(response));
@@ -1567,7 +1564,7 @@ namespace EBook_App.Controllers
         public ActionResult Update_Page_Sorting([FromBody] List<Sorting_Result> res)
         {
             var json = JsonConvert.SerializeObject(res);
-            P_ReturnMessage_Result response = ado.P_SP_SingleParm_Result("P_Update_Page_Sorting", "json", json, _PublicClaimObjects.username);
+            P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_SingleParm_Result("P_Update_Page_Sorting", "json", json, _PublicClaimObjects.username);
             if (response.ReturnCode == false)
                 StaticPublicObjects.logFile.ErrorLog(FunctionName: "Update_Page_Sorting", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
             return Content(JsonConvert.SerializeObject(response));
@@ -1578,11 +1575,11 @@ namespace EBook_App.Controllers
         #region Page Chart 
         public IActionResult PageChart()
         {
-            bool IsView = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Chart_View);
+            bool IsView = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Chart_View);
             if (IsView)
             {
                 DataSet DS = new DataSet();
-                DS = ado.ExecuteStoreProcedureDS("P_Get_PageChart_Dropdown_Lists");
+                DS = StaticPublicObjects.ado.ExecuteStoreProcedureDS("P_Get_PageChart_Dropdown_Lists");
                 ViewBag.ApplicationList = DS.Tables[0];
                 ViewBag.RolesList = DS.Tables[1];
                 ViewBag.UserList = DS.Tables[2];
@@ -1607,14 +1604,14 @@ namespace EBook_App.Controllers
                 Dynamic_SP_Params.ParameterName = "UserName";
                 Dynamic_SP_Params.Val = res.UserName;
                 List_Dynamic_SP_Params.Add(Dynamic_SP_Params);
-                res.RoleID = Convert.ToInt32(ado.ExecuteSelectObj("SELECT ROLE_ID FROM [EBook_DB].[dbo].[T_User_Role_Mapping] WITH (NOLOCK) WHERE USERNAME = @UserName", ref List_Dynamic_SP_Params));
+                res.RoleID = Convert.ToInt32(StaticPublicObjects.ado.ExecuteSelectObj("SELECT ROLE_ID FROM [EBook_DB].[dbo].[T_User_Role_Mapping] WITH (NOLOCK) WHERE USERNAME = @UserName", ref List_Dynamic_SP_Params));
             }
             List<Dynamic_SP_Params> parms = new List<Dynamic_SP_Params>()
             {
                 new Dynamic_SP_Params {ParameterName = "RoleID", Val = res.RoleID},
                 new Dynamic_SP_Params {ParameterName = "ApplicationID", Val = res.AppID},
             };
-            string json = ado.P_Get_MultiParm_String_Result("P_Get_PageChart_Json", parms);
+            string json = StaticPublicObjects.ado.P_Get_MultiParm_String_Result("P_Get_PageChart_Json", parms);
             List<P_Get_PageChart_TreeView> treeViewResult = null;
             if (json != "")
             {
@@ -1629,21 +1626,21 @@ namespace EBook_App.Controllers
         [CustomPageSetupAttribute]
         public IActionResult RoleSetup()
         {
-            bool IsView = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_View);
+            bool IsView = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_View);
             if (IsView)
             {
-                bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
-                bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
-                bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Delete);
+                bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
+                bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
+                bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Delete);
                 ViewBag.RightsListObj = new { IsView = IsView, IsAdd = IsAdd, IsEdit = IsEdit, IsDelete = IsDelete };
                 ViewBag.RightsList = JsonConvert.SerializeObject(ViewBag.RightsListObj);
                 DataSet DS = new DataSet();
                 (string Name, object Value)[] ParamsNameValues = new (string, object)[1];
                 ParamsNameValues[0] = ("Username", _PublicClaimObjects.username);
-                DS = ado.ExecuteStoreProcedureDS("[P_Get_Role_Setup_DropDown_Lists]", ParamsNameValues);
+                DS = StaticPublicObjects.ado.ExecuteStoreProcedureDS("[P_Get_Role_Setup_DropDown_Lists]", ParamsNameValues);
                 ViewBag.RoleList = JsonConvert.SerializeObject(DS.Tables[0]);
                 ViewBag.RoleGroupList = JsonConvert.SerializeObject(DS.Tables[1]);
-                ViewBag.DepartmentList = JsonConvert.SerializeObject(DS.Tables[2]);
+                //ViewBag.DepartmentList = JsonConvert.SerializeObject(DS.Tables[2]);
                 return View();
             }
             else
@@ -1661,12 +1658,12 @@ namespace EBook_App.Controllers
             ReportResponse reportResponse = new ReportResponse();
             try
             {
-                if (ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_View))
+                if (StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_View))
                 {
                     List<Dynamic_SP_Params> List_Dynamic_SP_Params = new List<Dynamic_SP_Params>();
                     CustomFunctions.GetKendoFilter(ref _ReportParams, ref List_Dynamic_SP_Params, _PublicClaimObjects, true);
 
-                    List<P_Role_Result> ResultList = ado.P_Get_Generic_List_SP<P_Role_Result>("P_Get_Roles_List", ref List_Dynamic_SP_Params);
+                    List<P_Role_Result> ResultList = StaticPublicObjects.ado.P_Get_Generic_List_SP<P_Role_Result>("P_Get_Roles_List", ref List_Dynamic_SP_Params);
 
                     reportResponse.TotalRowCount = CustomFunctions.GetValueFromReturnParameter<long>(List_Dynamic_SP_Params, "TotalRowCount", typeof(long));
                     reportResponse.ResultData = ResultList;
@@ -1694,12 +1691,12 @@ namespace EBook_App.Controllers
             ReportResponse reportResponse = new ReportResponse();
             try
             {
-                if (ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_View))
+                if (StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_View))
                 {
                     List<Dynamic_SP_Params> List_Dynamic_SP_Params = new List<Dynamic_SP_Params>();
                     CustomFunctions.GetKendoFilter(ref _ReportParams, ref List_Dynamic_SP_Params, _PublicClaimObjects, true);
 
-                    List<P_RoleGroup_Result> ResultList = ado.P_Get_Generic_List_SP<P_RoleGroup_Result>("P_Get_Roles_Group_List", ref List_Dynamic_SP_Params);
+                    List<P_RoleGroup_Result> ResultList = StaticPublicObjects.ado.P_Get_Generic_List_SP<P_RoleGroup_Result>("P_Get_Roles_Group_List", ref List_Dynamic_SP_Params);
 
                     reportResponse.TotalRowCount = CustomFunctions.GetValueFromReturnParameter<long>(List_Dynamic_SP_Params, "TotalRowCount", typeof(long));
                     reportResponse.ResultData = ResultList;
@@ -1727,12 +1724,12 @@ namespace EBook_App.Controllers
             ReportResponse reportResponse = new ReportResponse();
             try
             {
-                if (ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_View))
+                if (StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_View))
                 {
                     List<Dynamic_SP_Params> List_Dynamic_SP_Params = new List<Dynamic_SP_Params>();
                     CustomFunctions.GetKendoFilter(ref _ReportParams, ref List_Dynamic_SP_Params, _PublicClaimObjects, true);
 
-                    List<P_RoleGroupMap_Result> ResultList = ado.P_Get_Generic_List_SP<P_RoleGroupMap_Result>("P_Get_RolesGroupMap_List", ref List_Dynamic_SP_Params);
+                    List<P_RoleGroupMap_Result> ResultList = StaticPublicObjects.ado.P_Get_Generic_List_SP<P_RoleGroupMap_Result>("P_Get_RolesGroupMap_List", ref List_Dynamic_SP_Params);
 
                     reportResponse.TotalRowCount = CustomFunctions.GetValueFromReturnParameter<long>(List_Dynamic_SP_Params, "TotalRowCount", typeof(long));
                     reportResponse.ResultData = ResultList;
@@ -1760,12 +1757,12 @@ namespace EBook_App.Controllers
             ReportResponse reportResponse = new ReportResponse();
             try
             {
-                if (ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_View))
+                if (StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_View))
                 {
                     List<Dynamic_SP_Params> List_Dynamic_SP_Params = new List<Dynamic_SP_Params>();
                     CustomFunctions.GetKendoFilter(ref _ReportParams, ref List_Dynamic_SP_Params, _PublicClaimObjects, true);
 
-                    List<P_DepartmentRoleMap_Result> ResultList = ado.P_Get_Generic_List_SP<P_DepartmentRoleMap_Result>("P_Get_DepartmentRoleMap_List", ref List_Dynamic_SP_Params);
+                    List<P_DepartmentRoleMap_Result> ResultList = StaticPublicObjects.ado.P_Get_Generic_List_SP<P_DepartmentRoleMap_Result>("P_Get_DepartmentRoleMap_List", ref List_Dynamic_SP_Params);
 
                     reportResponse.TotalRowCount = CustomFunctions.GetValueFromReturnParameter<long>(List_Dynamic_SP_Params, "TotalRowCount", typeof(long));
                     reportResponse.ResultData = ResultList;
@@ -1794,8 +1791,8 @@ namespace EBook_App.Controllers
         {
             string HtmlString = "";
 
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
 
             if ((RoleID == 0 && IsAdd == false) || (RoleID > 0 && IsEdit == false))
                 return "No Rights";
@@ -1813,7 +1810,7 @@ namespace EBook_App.Controllers
                 Dynamic_SP_Params.ParameterName = "R_ID";
                 Dynamic_SP_Params.Val = RoleID;
                 List_Dynamic_SP_Params.Add(Dynamic_SP_Params);
-                RoleEdit = ado.ExecuteSelectSQLMap<P_AddOrEdit_Role_Response>("SELECT R_ID RoleID, RoleName, IsActive Active FROM [EBook_DB].[dbo].[T_Roles] with (nolock) WHERE R_ID = @R_ID", false, 0, ref List_Dynamic_SP_Params);
+                RoleEdit = StaticPublicObjects.ado.ExecuteSelectSQLMap<P_AddOrEdit_Role_Response>("SELECT R_ID RoleID, RoleName, IsActive Active FROM [EBook_DB].[dbo].[T_Roles] with (nolock) WHERE R_ID = @R_ID", false, 0, ref List_Dynamic_SP_Params);
             }
 
             getModalDetail.getmodelsize = GetModalSize.modal_md;
@@ -1901,8 +1898,8 @@ namespace EBook_App.Controllers
         {
             string HtmlString = "";
 
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
 
             if ((RoleGroupID == 0 && IsAdd == false) || (RoleGroupID > 0 && IsEdit == false))
                 return "No Rights";
@@ -1919,7 +1916,7 @@ namespace EBook_App.Controllers
                 Dynamic_SP_Params.ParameterName = "RG_ID";
                 Dynamic_SP_Params.Val = RoleGroupID;
                 List_Dynamic_SP_Params.Add(Dynamic_SP_Params);
-                RoleGroupEdit = ado.ExecuteSelectSQLMap<P_AddOrEdit_Role_Group_Response>("SELECT RG_ID RoleGroupID, RoleGroupName, IsActive Active FROM [EBook_DB].[dbo].[T_Role_Group] with (nolock) WHERE RG_ID = @RG_ID", false, 0, ref List_Dynamic_SP_Params);
+                RoleGroupEdit = StaticPublicObjects.ado.ExecuteSelectSQLMap<P_AddOrEdit_Role_Group_Response>("SELECT RG_ID RoleGroupID, RoleGroupName, IsActive Active FROM [EBook_DB].[dbo].[T_Role_Group] with (nolock) WHERE RG_ID = @RG_ID", false, 0, ref List_Dynamic_SP_Params);
             }
 
             getModalDetail.getmodelsize = GetModalSize.modal_md;
@@ -2007,8 +2004,8 @@ namespace EBook_App.Controllers
         {
             string HtmlString = "";
 
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
 
             if ((RoleGroupMappingID == 0 && IsAdd == false) || (RoleGroupMappingID > 0 && IsEdit == false))
                 return "No Rights";
@@ -2025,15 +2022,15 @@ namespace EBook_App.Controllers
                 Dynamic_SP_Params.ParameterName = "RGM_ID";
                 Dynamic_SP_Params.Val = RoleGroupMappingID;
                 List_Dynamic_SP_Params.Add(Dynamic_SP_Params);
-                RoleGroupMappingEdit = ado.ExecuteSelectSQLMap<P_AddOrEdit_Role_Group_Mapping_Response>("SELECT RGM_ID RoleGroupMappingID, R_ID RoleID, RG_ID RoleGroupID, IsActive Active FROM [EBook_DB].[dbo].[T_Role_Group_Mapping] with (nolock) WHERE RGM_ID = @RGM_ID", false, 0, ref List_Dynamic_SP_Params);
+                RoleGroupMappingEdit = StaticPublicObjects.ado.ExecuteSelectSQLMap<P_AddOrEdit_Role_Group_Mapping_Response>("SELECT RGM_ID RoleGroupMappingID, R_ID RoleID, RG_ID RoleGroupID, IsActive Active FROM [EBook_DB].[dbo].[T_Role_Group_Mapping] with (nolock) WHERE RGM_ID = @RGM_ID", false, 0, ref List_Dynamic_SP_Params);
             }
 
             List<Dynamic_SP_Params> RoleGroup_Params = null;
-            List<SelectDropDownList> List_RoleGroup_SelectDropDownList = ado.ExecuteSelectSQLMapList<SelectDropDownList>("SELECT code = RG_ID, name = RoleGroupName FROM [EBook_DB].[dbo].[T_Role_Group] with (nolock) WHERE isActive = 1", false, 0, ref RoleGroup_Params);
+            List<SelectDropDownList> List_RoleGroup_SelectDropDownList = StaticPublicObjects.ado.ExecuteSelectSQLMapList<SelectDropDownList>("SELECT code = RG_ID, name = RoleGroupName FROM [EBook_DB].[dbo].[T_Role_Group] with (nolock) WHERE isActive = 1", false, 0, ref RoleGroup_Params);
             List<SelectDropDownList> List_Role_SelectDropDownList = new List<SelectDropDownList>();
             if (RoleGroupMappingID > 0)
             {
-                List_Role_SelectDropDownList = ado.ExecuteSelectSQLMapList<SelectDropDownList>("SELECT code = R_ID, name = RoleName FROM [EBook_DB].[dbo].[T_Roles] with (nolock) WHERE isActive = 1", false, 0, ref RoleGroup_Params);
+                List_Role_SelectDropDownList = StaticPublicObjects.ado.ExecuteSelectSQLMapList<SelectDropDownList>("SELECT code = R_ID, name = RoleName FROM [EBook_DB].[dbo].[T_Roles] with (nolock) WHERE isActive = 1", false, 0, ref RoleGroup_Params);
             }
 
             getModalDetail.getmodelsize = GetModalSize.modal_md;
@@ -2163,8 +2160,8 @@ namespace EBook_App.Controllers
         {
             string HtmlString = "";
 
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
 
             if ((DepartmentRoleMappingID == 0 && IsAdd == false) || (DepartmentRoleMappingID > 0 && IsEdit == false))
                 return "No Rights";
@@ -2181,15 +2178,15 @@ namespace EBook_App.Controllers
                 Dynamic_SP_Params.ParameterName = "DRM_ID";
                 Dynamic_SP_Params.Val = DepartmentRoleMappingID;
                 List_Dynamic_SP_Params.Add(Dynamic_SP_Params);
-                DeptartmentRoleMappingEdit = ado.ExecuteSelectSQLMap<P_AddOrEdit_Department_Role_Mapping_Response>("SELECT DRM_ID DepartmentRoleMappingID, R_ID RoleID, D_ID DepartmentID, IsActive Active FROM [EBook_DB].[dbo].[T_Department_Role_Mapping] with (nolock) WHERE DRM_ID = @DRM_ID", false, 0, ref List_Dynamic_SP_Params);
+                DeptartmentRoleMappingEdit = StaticPublicObjects.ado.ExecuteSelectSQLMap<P_AddOrEdit_Department_Role_Mapping_Response>("SELECT DRM_ID DepartmentRoleMappingID, R_ID RoleID, D_ID DepartmentID, IsActive Active FROM [EBook_DB].[dbo].[T_Department_Role_Mapping] with (nolock) WHERE DRM_ID = @DRM_ID", false, 0, ref List_Dynamic_SP_Params);
             }
 
             List<Dynamic_SP_Params> RoleGroup_Params = null;
-            List<SelectDropDownList> List_Department_SelectDropDownList = ado.ExecuteSelectSQLMapList<SelectDropDownList>("SELECT code = D_ID, name = DepartmentName FROM [EBook_DB].[dbo].T_Department with (nolock) WHERE isActive = 1", false, 0, ref RoleGroup_Params);
+            List<SelectDropDownList> List_Department_SelectDropDownList = StaticPublicObjects.ado.ExecuteSelectSQLMapList<SelectDropDownList>("SELECT code = D_ID, name = DepartmentName FROM [EBook_DB].[dbo].T_Department with (nolock) WHERE isActive = 1", false, 0, ref RoleGroup_Params);
             List<SelectDropDownList> List_Role_SelectDropDownList = new List<SelectDropDownList>();
             if (DepartmentRoleMappingID > 0)
             {
-                List_Role_SelectDropDownList = ado.ExecuteSelectSQLMapList<SelectDropDownList>("SELECT code = R_ID, name = RoleName FROM [EBook_DB].[dbo].[T_Roles] with (nolock) WHERE isActive = 1", false, 0, ref RoleGroup_Params);
+                List_Role_SelectDropDownList = StaticPublicObjects.ado.ExecuteSelectSQLMapList<SelectDropDownList>("SELECT code = R_ID, name = RoleName FROM [EBook_DB].[dbo].[T_Roles] with (nolock) WHERE isActive = 1", false, 0, ref RoleGroup_Params);
             }
 
             getModalDetail.getmodelsize = GetModalSize.modal_md;
@@ -2317,14 +2314,14 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult AddOrEdit_Role([FromBody] P_AddOrEdit_Role_Response res)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
 
             if ((IsAdd == false) || (IsEdit == false))
                 return Content(JsonConvert.SerializeObject("No Rights"));
 
 
-            P_ReturnMessage_Result response = ado.P_SP_MultiParm_Result("P_AddOrEdit_Roles", res, _PublicClaimObjects.username);
+            P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_MultiParm_Result("P_AddOrEdit_Roles", res, _PublicClaimObjects.username);
             if (response.ReturnCode == false)
                 StaticPublicObjects.logFile.ErrorLog(FunctionName: "AddOrEdit_Role", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
             return Content(JsonConvert.SerializeObject(response));
@@ -2332,13 +2329,13 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult AddOrEdit_Role_Group([FromBody] P_AddOrEdit_Role_Group_Response res)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
 
             if ((IsAdd == false) || (IsEdit == false))
                 return Content(JsonConvert.SerializeObject("No Rights"));
 
-            P_ReturnMessage_Result response = ado.P_SP_MultiParm_Result("P_AddOrEdit_Role_Group", res, _PublicClaimObjects.username);
+            P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_MultiParm_Result("P_AddOrEdit_Role_Group", res, _PublicClaimObjects.username);
             if (response.ReturnCode == false)
                 StaticPublicObjects.logFile.ErrorLog(FunctionName: "AddOrEdit_Role_Group", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
             return Content(JsonConvert.SerializeObject(response));
@@ -2346,13 +2343,13 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult AddOrEdit_Role_Group_Mapping([FromBody] P_AddOrEdit_Role_Group_Mapping_Response res)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
 
             if ((IsAdd == false) || (IsEdit == false))
                 return Content(JsonConvert.SerializeObject("No Rights"));
 
-            P_ReturnMessage_Result response = ado.P_SP_MultiParm_Result("P_AddOrEdit_Role_Group_Mapping", res, _PublicClaimObjects.username);
+            P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_MultiParm_Result("P_AddOrEdit_Role_Group_Mapping", res, _PublicClaimObjects.username);
             if (response.ReturnCode == false)
                 StaticPublicObjects.logFile.ErrorLog(FunctionName: "AddOrEdit_Role_Group_Mapping", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
             return Content(JsonConvert.SerializeObject(response));
@@ -2360,13 +2357,13 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult AddOrEdit_Department_Role_Mapping([FromBody] P_AddOrEdit_Department_Role_Mapping_Response res)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Edit);
 
             if ((IsAdd == false) || (IsEdit == false))
                 return Content(JsonConvert.SerializeObject("No Rights"));
 
-            P_ReturnMessage_Result response = ado.P_SP_MultiParm_Result("P_AddOrEdit_Department_Role_Mapping", res, _PublicClaimObjects.username);
+            P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_MultiParm_Result("P_AddOrEdit_Department_Role_Mapping", res, _PublicClaimObjects.username);
             if (response.ReturnCode == false)
                 StaticPublicObjects.logFile.ErrorLog(FunctionName: "AddOrEdit_Department_Role_Mapping", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
             return Content(JsonConvert.SerializeObject(response));
@@ -2376,10 +2373,10 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult Remove_Role([FromBody] int RoleID)
         {
-            bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Delete);
+            bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Delete);
             if (IsDelete)
             {
-                P_ReturnMessage_Result response = ado.P_SP_SingleParm_Result("P_Remove_Roles", "R_ID", RoleID, _PublicClaimObjects.username);
+                P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_SingleParm_Result("P_Remove_Roles", "R_ID", RoleID, _PublicClaimObjects.username);
                 if (response.ReturnCode == false)
                     StaticPublicObjects.logFile.ErrorLog(FunctionName: "Remove_Role", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
                 return Content(JsonConvert.SerializeObject(response));
@@ -2392,10 +2389,10 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult Remove_Role_Group([FromBody] int RoleGroupID)
         {
-            bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Delete);
+            bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Delete);
             if (IsDelete)
             {
-                P_ReturnMessage_Result response = ado.P_SP_SingleParm_Result("P_Remove_Role_Group", "RoleGroupID", RoleGroupID, _PublicClaimObjects.username);
+                P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_SingleParm_Result("P_Remove_Role_Group", "RoleGroupID", RoleGroupID, _PublicClaimObjects.username);
                 if (response.ReturnCode == false)
                     StaticPublicObjects.logFile.ErrorLog(FunctionName: "Remove_Role_Group", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
                 return Content(JsonConvert.SerializeObject(response));
@@ -2408,10 +2405,10 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult Remove_Role_Group_Mapping([FromBody] int RoleGroupMappingID)
         {
-            bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Delete);
+            bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Delete);
             if (IsDelete)
             {
-                P_ReturnMessage_Result response = ado.P_SP_SingleParm_Result("P_Remove_Role_Group_Mapping", "RGM_ID", RoleGroupMappingID, _PublicClaimObjects.username);
+                P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_SingleParm_Result("P_Remove_Role_Group_Mapping", "RGM_ID", RoleGroupMappingID, _PublicClaimObjects.username);
                 if (response.ReturnCode == false)
                     StaticPublicObjects.logFile.ErrorLog(FunctionName: "Remove_Role_Group_Mapping", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
                 return Content(JsonConvert.SerializeObject(response));
@@ -2424,10 +2421,10 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult Remove_Department_Role_Mapping([FromBody] int DepartmentRoleMappingID)
         {
-            bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Delete);
+            bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Role_Setup_Delete);
             if (IsDelete)
             {
-                P_ReturnMessage_Result response = ado.P_SP_SingleParm_Result("P_Remove_Department_Role_Mapping", "DRM_ID", DepartmentRoleMappingID, _PublicClaimObjects.username);
+                P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_SingleParm_Result("P_Remove_Department_Role_Mapping", "DRM_ID", DepartmentRoleMappingID, _PublicClaimObjects.username);
                 if (response.ReturnCode == false)
                     StaticPublicObjects.logFile.ErrorLog(FunctionName: "Remove_Department_Role_Mapping", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
                 return Content(JsonConvert.SerializeObject(response));
@@ -2457,18 +2454,18 @@ namespace EBook_App.Controllers
         [CustomPageSetup]
         public IActionResult RightsSetup()
         {
-            bool IsView = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_View);
+            bool IsView = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_View);
             if (IsView)
             {
-                bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
-                bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
-                bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Delete);
+                bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
+                bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
+                bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Delete);
                 ViewBag.RightsListObj = new { IsView = IsView, IsAdd = IsAdd, IsEdit = IsEdit, IsDelete = IsDelete };
                 ViewBag.RightsList = JsonConvert.SerializeObject(ViewBag.RightsListObj);
                 DataSet DS = new DataSet();
                 (string Name, object Value)[] ParamsNameValues = new (string, object)[1];
                 ParamsNameValues[0] = ("Username", _PublicClaimObjects.username);
-                DS = ado.ExecuteStoreProcedureDS("[P_Get_Rights_Setup_DropDown_Lists]", ParamsNameValues);
+                DS = StaticPublicObjects.ado.ExecuteStoreProcedureDS("[P_Get_Rights_Setup_DropDown_Lists]", ParamsNameValues);
                 ViewBag.RRoleList = JsonConvert.SerializeObject(DS.Tables[0]);
                 ViewBag.PageList = JsonConvert.SerializeObject(DS.Tables[1]);
                 ViewBag.PageRightList = JsonConvert.SerializeObject(DS.Tables[2]);
@@ -2489,12 +2486,12 @@ namespace EBook_App.Controllers
             ReportResponse reportResponse = new ReportResponse();
             try
             {
-                if (ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_View))
+                if (StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_View))
                 {
                     List<Dynamic_SP_Params> List_Dynamic_SP_Params = new List<Dynamic_SP_Params>();
                     CustomFunctions.GetKendoFilter(ref _ReportParams, ref List_Dynamic_SP_Params, _PublicClaimObjects, true);
 
-                    List<P_PageRight_Result> ResultList = ado.P_Get_Generic_List_SP<P_PageRight_Result>("P_Get_PageRight_List", ref List_Dynamic_SP_Params);
+                    List<P_PageRight_Result> ResultList = StaticPublicObjects.ado.P_Get_Generic_List_SP<P_PageRight_Result>("P_Get_PageRight_List", ref List_Dynamic_SP_Params);
 
                     reportResponse.TotalRowCount = CustomFunctions.GetValueFromReturnParameter<long>(List_Dynamic_SP_Params, "TotalRowCount", typeof(long));
                     reportResponse.ResultData = ResultList;
@@ -2522,12 +2519,12 @@ namespace EBook_App.Controllers
             ReportResponse reportResponse = new ReportResponse();
             try
             {
-                if (ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_View))
+                if (StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_View))
                 {
                     List<Dynamic_SP_Params> List_Dynamic_SP_Params = new List<Dynamic_SP_Params>();
                     CustomFunctions.GetKendoFilter(ref _ReportParams, ref List_Dynamic_SP_Params, _PublicClaimObjects, true);
 
-                    List<P_RolePageRight_Result> ResultList = ado.P_Get_Generic_List_SP<P_RolePageRight_Result>("P_Get_RolePageRightMap_List", ref List_Dynamic_SP_Params);
+                    List<P_RolePageRight_Result> ResultList = StaticPublicObjects.ado.P_Get_Generic_List_SP<P_RolePageRight_Result>("P_Get_RolePageRightMap_List", ref List_Dynamic_SP_Params);
 
                     reportResponse.TotalRowCount = CustomFunctions.GetValueFromReturnParameter<long>(List_Dynamic_SP_Params, "TotalRowCount", typeof(long));
                     reportResponse.ResultData = ResultList;
@@ -2555,12 +2552,12 @@ namespace EBook_App.Controllers
             ReportResponse reportResponse = new ReportResponse();
             try
             {
-                if (ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_View))
+                if (StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_View))
                 {
                     List<Dynamic_SP_Params> List_Dynamic_SP_Params = new List<Dynamic_SP_Params>();
                     CustomFunctions.GetKendoFilter(ref _ReportParams, ref List_Dynamic_SP_Params, _PublicClaimObjects, true);
 
-                    List<P_UserRoleMap_Result> ResultList = ado.P_Get_Generic_List_SP<P_UserRoleMap_Result>("P_Get_UserRoleMap_List", ref List_Dynamic_SP_Params);
+                    List<P_UserRoleMap_Result> ResultList = StaticPublicObjects.ado.P_Get_Generic_List_SP<P_UserRoleMap_Result>("P_Get_UserRoleMap_List", ref List_Dynamic_SP_Params);
 
                     reportResponse.TotalRowCount = CustomFunctions.GetValueFromReturnParameter<long>(List_Dynamic_SP_Params, "TotalRowCount", typeof(long));
                     reportResponse.ResultData = ResultList;
@@ -2589,8 +2586,8 @@ namespace EBook_App.Controllers
         {
             string HtmlString = "";
 
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
             if ((PR_ID == 0 && IsAdd == false) || (PR_ID > 0 && IsEdit == false))
                 return "No Rights";
 
@@ -2606,15 +2603,15 @@ namespace EBook_App.Controllers
                 Dynamic_SP_Params.ParameterName = "PR_ID";
                 Dynamic_SP_Params.Val = PR_ID;
                 List_Dynamic_SP_Params.Add(Dynamic_SP_Params);
-                PageRightEdit = ado.ExecuteSelectSQLMap<P_AddOrEdit_PageRights_Response>("SELECT PR_ID, P_ID, PR_CODE, PageRightName, PageRightType_MTV_CODE PageRightType, IsHide, IsActive Active FROM [EBook_DB].[dbo].[T_Page_Rights] with (nolock) WHERE PR_ID = @PR_ID", false, 0, ref List_Dynamic_SP_Params);
+                PageRightEdit = StaticPublicObjects.ado.ExecuteSelectSQLMap<P_AddOrEdit_PageRights_Response>("SELECT PR_ID, P_ID, PR_CODE, PageRightName, PageRightType_MTV_CODE PageRightType, IsHide, IsActive Active FROM [EBook_DB].[dbo].[T_Page_Rights] with (nolock) WHERE PR_ID = @PR_ID", false, 0, ref List_Dynamic_SP_Params);
             }
 
-            List<SelectDropDownList> PageList = ado.Get_DropDownList_Result("SELECT P_ID code, PageName name FROM [EBook_DB].[dbo].[T_Page] with (nolock) WHERE isActive = 1 ORDER BY Sort_");
+            List<SelectDropDownList> PageList = StaticPublicObjects.ado.Get_DropDownList_Result("SELECT P_ID code, PageName name FROM [EBook_DB].[dbo].[T_Page] with (nolock) WHERE isActive = 1 ORDER BY Sort_");
             List<Dynamic_SP_Params> PageRightTypeList_Parm = new List<Dynamic_SP_Params>
             {
                 new Dynamic_SP_Params(){ ParameterName = "MT_ID", Val = 133 }
             };
-            List<SelectDropDownList> PageRightTypeList = ado.Get_DropDownList_Result("SELECT MTV_CODE code, Name name FROM[EBook_DB].[dbo].[T_Master_Type_Value] with(nolock) Where MT_ID = @MT_ID ORDER BY Sort_", PageRightTypeList_Parm);
+            List<SelectDropDownList> PageRightTypeList = StaticPublicObjects.ado.Get_DropDownList_Result("SELECT MTV_CODE code, Name name FROM[EBook_DB].[dbo].[T_Master_Type_Value] with(nolock) Where MT_ID = @MT_ID ORDER BY Sort_", PageRightTypeList_Parm);
 
             getModalDetail.getmodelsize = GetModalSize.modal_md;
             getModalDetail.modaltitle = (PR_ID == 0 ? "Add Page Rights Setup" : "Edit Add Page Rights Setup");
@@ -2793,12 +2790,12 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult GetAddEditRolePageRightsModal([FromBody] int RoleID)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
             if ((IsAdd == false) || (IsEdit == false))
                 return Content(JsonConvert.SerializeObject("No Rights"));
 
-            string json = ado.P_Get_SingleValue_String_SP("P_Get_Role_Rights_Json", "RoleID", RoleID);
+            string json = StaticPublicObjects.ado.P_Get_SingleValue_String_SP("P_Get_Role_Rights_Json", "RoleID", RoleID);
             P_AddOrEdit_RolePageRights_TreeView treeViewResult = null;
             if (json != "")
             {
@@ -2812,8 +2809,8 @@ namespace EBook_App.Controllers
         {
             string HtmlString = "";
 
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
             if ((URM_ID == 0 && IsAdd == false) || (URM_ID > 0 && IsEdit == false))
                 return "No Rights";
 
@@ -2829,14 +2826,14 @@ namespace EBook_App.Controllers
                 Dynamic_SP_Params.ParameterName = "URM_ID";
                 Dynamic_SP_Params.Val = URM_ID;
                 List_Dynamic_SP_Params.Add(Dynamic_SP_Params);
-                UserRoleMappingEdit = ado.ExecuteSelectSQLMap<P_AddOrEdit_UserRoleMapping_Response>("SELECT URM_ID, USERNAME UNAME, ROLE_ID R_ID, IsGroupRoleID, IsActive Active FROM [EBook_DB].[dbo].[T_User_Role_Mapping] with (nolock) WHERE URM_ID = @URM_ID", false, 0, ref List_Dynamic_SP_Params);
+                UserRoleMappingEdit = StaticPublicObjects.ado.ExecuteSelectSQLMap<P_AddOrEdit_UserRoleMapping_Response>("SELECT URM_ID, USERNAME UNAME, ROLE_ID R_ID, IsGroupRoleID, IsActive Active FROM [EBook_DB].[dbo].[T_User_Role_Mapping] with (nolock) WHERE URM_ID = @URM_ID", false, 0, ref List_Dynamic_SP_Params);
             }
 
             List<SelectDropDownList> UserList = new List<SelectDropDownList>();
-            List<SelectDropDownList> RoleList = ado.Get_DropDownList_Result("SELECT R_ID code, RoleName name FROM [EBook_DB].[dbo].[T_Roles] with (nolock) WHERE isActive = 1 ORDER BY Sort_");
+            List<SelectDropDownList> RoleList = StaticPublicObjects.ado.Get_DropDownList_Result("SELECT R_ID code, RoleName name FROM [EBook_DB].[dbo].[T_Roles] with (nolock) WHERE isActive = 1 ORDER BY Sort_");
             if (URM_ID > 0)
             {
-                UserList = ado.Get_DropDownList_Result("SELECT code = USERNAME, name = USERNAME FROM [EBook_DB].[dbo].[T_Users] with (nolock) WHERE IsActive = 1");
+                UserList = StaticPublicObjects.ado.Get_DropDownList_Result("SELECT code = USERNAME, name = USERNAME FROM [EBook_DB].[dbo].[T_Users] with (nolock) WHERE IsActive = 1");
             }
 
             getModalDetail.getmodelsize = GetModalSize.modal_md;
@@ -2979,8 +2976,8 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult GetAddEditUserRoleMappingModal1([FromBody] string UserName)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
 
             if ((IsAdd == false) || (IsEdit == false))
                 return Content(JsonConvert.SerializeObject("No Rights"));
@@ -2990,8 +2987,8 @@ namespace EBook_App.Controllers
             Dynamic_SP_Params.ParameterName = "UserName";
             Dynamic_SP_Params.Val = UserName;
             List_Dynamic_SP_Params.Add(Dynamic_SP_Params);
-            int RoleID = Convert.ToInt32(ado.ExecuteSelectObj("SELECT ROLE_ID FROM [EBook_DB].[dbo].[T_User_Role_Mapping] WITH (NOLOCK) WHERE USERNAME = @UserName", ref List_Dynamic_SP_Params));
-            string json = ado.P_Get_SingleValue_String_SP("P_Get_Role_Rights_Json", "RoleID", RoleID);
+            int RoleID = Convert.ToInt32(StaticPublicObjects.ado.ExecuteSelectObj("SELECT ROLE_ID FROM [EBook_DB].[dbo].[T_User_Role_Mapping] WITH (NOLOCK) WHERE USERNAME = @UserName", ref List_Dynamic_SP_Params));
+            string json = StaticPublicObjects.ado.P_Get_SingleValue_String_SP("P_Get_Role_Rights_Json", "RoleID", RoleID);
             P_AddOrEdit_RolePageRights_TreeView treeViewResult = null;
             if (json != "")
             {
@@ -3005,13 +3002,13 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult AddOrEdit_PageRights([FromBody] P_AddOrEdit_PageRights_Response res)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
             if ((IsAdd == false) || (IsEdit == false))
                 return Content(JsonConvert.SerializeObject("No Rights"));
 
 
-            P_ReturnMessage_Result response = ado.P_SP_MultiParm_Result("P_AddOrEdit_Page_Rights", res, _PublicClaimObjects.username);
+            P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_MultiParm_Result("P_AddOrEdit_Page_Rights", res, _PublicClaimObjects.username);
             if (response.ReturnCode == false)
                 StaticPublicObjects.logFile.ErrorLog(FunctionName: "AddOrEdit_PageRights", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
             return Content(JsonConvert.SerializeObject(response));
@@ -3019,8 +3016,8 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult AddOrEdit_RolePageRights([FromBody] P_AddOrEdit_RolePageRights_TreeView res)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
             if ((IsAdd == false) || (IsEdit == false))
                 return Content(JsonConvert.SerializeObject("No Rights"));
 
@@ -3035,7 +3032,7 @@ namespace EBook_App.Controllers
                     PR_ID = pr.PR_ID
                 }))).ToList();
             var json = JsonConvert.SerializeObject(RPRM_Response_List);
-            P_ReturnMessage_Result response = ado.P_SP_SingleParm_Result("P_AddOrEdit_RolePageRight_Json", "json", json, _PublicClaimObjects.username);
+            P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_SingleParm_Result("P_AddOrEdit_RolePageRight_Json", "json", json, _PublicClaimObjects.username);
             if (response.ReturnCode == false)
                 StaticPublicObjects.logFile.ErrorLog(FunctionName: "AddOrEdit_RolePageRights", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
             return Content(JsonConvert.SerializeObject(response));
@@ -3043,8 +3040,8 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult Sync_RolePageRights([FromBody] P_Sync_RolePageRights_TreeView res)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
             if ((IsAdd == false) || (IsEdit == false))
             {
                 return Content(JsonConvert.SerializeObject("No Rights"));
@@ -3057,7 +3054,7 @@ namespace EBook_App.Controllers
                     res.Active = null;
                 }
 
-                P_ReturnMessage_Result response = ado.P_SP_MultiParm_Result("P_Sync_RolePageRights", res, _PublicClaimObjects.username);
+                P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_MultiParm_Result("P_Sync_RolePageRights", res, _PublicClaimObjects.username);
                 if (response.ReturnCode == false)
                     StaticPublicObjects.logFile.ErrorLog(FunctionName: "Sync_RolePageRights", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
                 return Content(JsonConvert.SerializeObject(response));
@@ -3066,12 +3063,12 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult AddOrEdit_UserRoleMap([FromBody] P_AddOrEdit_UserRoleMapping_Response res)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Edit);
             if ((IsAdd == false) || (IsEdit == false))
                 return Content(JsonConvert.SerializeObject("No Rights"));
 
-            P_ReturnMessage_Result response = ado.P_SP_MultiParm_Result("P_AddOrEdit_User_Role_Map", res, _PublicClaimObjects.username);
+            P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_MultiParm_Result("P_AddOrEdit_User_Role_Map", res, _PublicClaimObjects.username);
             if (response.ReturnCode == false)
                 StaticPublicObjects.logFile.ErrorLog(FunctionName: "AddOrEdit_UserRoleMap", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
             return Content(JsonConvert.SerializeObject(response));
@@ -3081,10 +3078,10 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult Remove_PageRights([FromBody] int PR_ID)
         {
-            bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Delete);
+            bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Delete);
             if (IsDelete)
             {
-                P_ReturnMessage_Result response = ado.P_SP_SingleParm_Result("P_Remove_Page_Rights", "PR_ID", PR_ID, _PublicClaimObjects.username);
+                P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_SingleParm_Result("P_Remove_Page_Rights", "PR_ID", PR_ID, _PublicClaimObjects.username);
                 if (response.ReturnCode == false)
                     StaticPublicObjects.logFile.ErrorLog(FunctionName: "Remove_PageRights", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
                 return Content(JsonConvert.SerializeObject(response));
@@ -3094,10 +3091,10 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult Remove_RolePageRights([FromBody] int RPRM_ID)
         {
-            bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Delete);
+            bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Delete);
             if (IsDelete)
             {
-                P_ReturnMessage_Result response = ado.P_SP_SingleParm_Result("P_Remove_Role_Page_Rights", "RPRM_ID", RPRM_ID, _PublicClaimObjects.username);
+                P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_SingleParm_Result("P_Remove_Role_Page_Rights", "RPRM_ID", RPRM_ID, _PublicClaimObjects.username);
                 if (response.ReturnCode == false)
                     StaticPublicObjects.logFile.ErrorLog(FunctionName: "Remove_RolePageRights", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
                 return Content(JsonConvert.SerializeObject(response));
@@ -3110,10 +3107,10 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult Remove_UserRoleMap([FromBody] int URM_ID)
         {
-            bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Delete);
+            bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Right_Setup_Delete);
             if (IsDelete)
             {
-                P_ReturnMessage_Result response = ado.P_SP_SingleParm_Result("P_Remove_User_Role_Mapping", "URM_ID", URM_ID, _PublicClaimObjects.username);
+                P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_SingleParm_Result("P_Remove_User_Role_Mapping", "URM_ID", URM_ID, _PublicClaimObjects.username);
                 if (response.ReturnCode == false)
                     StaticPublicObjects.logFile.ErrorLog(FunctionName: "Remove_UserRoleMap", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
                 return Content(JsonConvert.SerializeObject(response));
@@ -3128,7 +3125,7 @@ namespace EBook_App.Controllers
         [HttpPost]
         public ActionResult Get_Roles_Dropdown()
         {
-            List<SelectDropDownList> result = ado.Get_DropDownList_Result("SELECT code = R_ID, name = RoleName FROM [EBook_DB].[dbo].[T_Roles] with (nolock) WHERE R_ID NOT IN (1) ORDER BY Sort_");
+            List<SelectDropDownList> result = StaticPublicObjects.ado.Get_DropDownList_Result("SELECT code = R_ID, name = RoleName FROM [EBook_DB].[dbo].[T_Roles] with (nolock) WHERE R_ID NOT IN (1) ORDER BY Sort_");
             return Content(JsonConvert.SerializeObject(result));
         }
         [HttpPost]
@@ -3149,12 +3146,12 @@ namespace EBook_App.Controllers
         [CustomPageSetupAttribute]
         public IActionResult DepartmentSetup()
         {
-            bool IsView = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_View);
+            bool IsView = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_View);
             if (IsView)
             {
-                bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_Add);
-                bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_Edit);
-                bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_Delete);
+                bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_Add);
+                bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_Edit);
+                bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_Delete);
                 ViewBag.RightsListObj = new { IsView = IsView, IsAdd = IsAdd, IsEdit = IsEdit, IsDelete = IsDelete };
                 ViewBag.RightsList = JsonConvert.SerializeObject(ViewBag.RightsListObj);
                 return View();
@@ -3173,12 +3170,12 @@ namespace EBook_App.Controllers
             ReportResponse reportResponse = new ReportResponse();
             try
             {
-                if (ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_View))
+                if (StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_View))
                 {
                     List<Dynamic_SP_Params> List_Dynamic_SP_Params = new List<Dynamic_SP_Params>();
                     CustomFunctions.GetKendoFilter(ref _ReportParams, ref List_Dynamic_SP_Params, _PublicClaimObjects, true);
 
-                    List<P_Department_Result> ResultList = ado.P_Get_Generic_List_SP<P_Department_Result>("P_Get_Department_List", ref List_Dynamic_SP_Params);
+                    List<P_Department_Result> ResultList = StaticPublicObjects.ado.P_Get_Generic_List_SP<P_Department_Result>("P_Get_Department_List", ref List_Dynamic_SP_Params);
 
                     reportResponse.TotalRowCount = CustomFunctions.GetValueFromReturnParameter<long>(List_Dynamic_SP_Params, "TotalRowCount", typeof(long));
                     reportResponse.ResultData = ResultList;
@@ -3205,8 +3202,8 @@ namespace EBook_App.Controllers
         {
             string HtmlString = "";
 
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_Edit);
             if ((D_ID == 0 && IsAdd == false) || (D_ID > 0 && IsEdit == false))
                 return "No Rights";
 
@@ -3222,7 +3219,7 @@ namespace EBook_App.Controllers
                 Dynamic_SP_Params.ParameterName = "D_ID";
                 Dynamic_SP_Params.Val = D_ID;
                 List_Dynamic_SP_Params.Add(Dynamic_SP_Params);
-                DepartmentEdit = ado.ExecuteSelectSQLMap<P_AddOrEdit_Department_Response>("SELECT D_ID, DepartmentName, IsHidden, IsActive Active FROM [EBook_DB].[dbo].[T_Department] with (nolock) WHERE D_ID = @D_ID", false, 0, ref List_Dynamic_SP_Params);
+                DepartmentEdit = StaticPublicObjects.ado.ExecuteSelectSQLMap<P_AddOrEdit_Department_Response>("SELECT D_ID, DepartmentName, IsHidden, IsActive Active FROM [EBook_DB].[dbo].[T_Department] with (nolock) WHERE D_ID = @D_ID", false, 0, ref List_Dynamic_SP_Params);
             }
 
             getModalDetail.getmodelsize = GetModalSize.modal_md;
@@ -3325,12 +3322,12 @@ namespace EBook_App.Controllers
         [HttpPost]
         public IActionResult AddOrEdit_Department([FromBody] P_AddOrEdit_Department_Response res)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_Edit);
             if ((IsAdd == false) || (IsEdit == false))
                 return Content(JsonConvert.SerializeObject("No Rights"));
 
-            P_ReturnMessage_Result response = ado.P_SP_MultiParm_Result("P_AddOrEdit_Department", res, _PublicClaimObjects.username);
+            P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_MultiParm_Result("P_AddOrEdit_Department", res, _PublicClaimObjects.username);
             if (response.ReturnCode == false)
                 StaticPublicObjects.logFile.ErrorLog(FunctionName: "AddOrEdit_Department", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
             return Content(JsonConvert.SerializeObject(response));
@@ -3338,10 +3335,10 @@ namespace EBook_App.Controllers
         [HttpPost]
         public IActionResult Remove_Department([FromBody] int D_ID)
         {
-            bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_Delete);
+            bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Department_Setup_Delete);
             if (IsDelete)
             {
-                P_ReturnMessage_Result response = ado.P_SP_SingleParm_Result("P_Remove_Department", "D_ID", D_ID, _PublicClaimObjects.username);
+                P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_SingleParm_Result("P_Remove_Department", "D_ID", D_ID, _PublicClaimObjects.username);
                 if (response.ReturnCode == false)
                     StaticPublicObjects.logFile.ErrorLog(FunctionName: "Remove_Department", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
                 return Content(JsonConvert.SerializeObject(response));
@@ -3357,18 +3354,18 @@ namespace EBook_App.Controllers
         [CustomPageSetupAttribute]
         public IActionResult MasterSetup()
         {
-            bool IsView = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_View);
+            bool IsView = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_View);
             if (IsView)
             {
-                bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Add);
-                bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Edit);
-                bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Delete);
+                bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Add);
+                bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Edit);
+                bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Delete);
                 ViewBag.RightsListObj = new { IsView = IsView, IsAdd = IsAdd, IsEdit = IsEdit, IsDelete = IsDelete };
                 ViewBag.RightsList = JsonConvert.SerializeObject(ViewBag.RightsListObj);
                 DataSet DS = new DataSet();
                 (string Name, object Value)[] ParamsNameValues = new (string, object)[1];
                 ParamsNameValues[0] = ("Username", _PublicClaimObjects.username);
-                DS = ado.ExecuteStoreProcedureDS("P_Get_Master_Setup_DropDown_Lists", ParamsNameValues);
+                DS = StaticPublicObjects.ado.ExecuteStoreProcedureDS("P_Get_Master_Setup_DropDown_Lists", ParamsNameValues);
                 ViewBag.MasterTypeList = JsonConvert.SerializeObject(DS.Tables[0]);
                 ViewBag.MasterTypeValueList = JsonConvert.SerializeObject(DS.Tables[1]);
 
@@ -3388,12 +3385,12 @@ namespace EBook_App.Controllers
             ReportResponse reportResponse = new ReportResponse();
             try
             {
-                if (ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_View))
+                if (StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_View))
                 {
                     List<Dynamic_SP_Params> List_Dynamic_SP_Params = new List<Dynamic_SP_Params>();
                     CustomFunctions.GetKendoFilter(ref _ReportParams, ref List_Dynamic_SP_Params, _PublicClaimObjects, true);
 
-                    List<P_MT_Result> ResultList = ado.P_Get_Generic_List_SP<P_MT_Result>("P_Get_MasterType_List", ref List_Dynamic_SP_Params);
+                    List<P_MT_Result> ResultList = StaticPublicObjects.ado.P_Get_Generic_List_SP<P_MT_Result>("P_Get_MasterType_List", ref List_Dynamic_SP_Params);
 
                     reportResponse.TotalRowCount = CustomFunctions.GetValueFromReturnParameter<long>(List_Dynamic_SP_Params, "TotalRowCount", typeof(long));
                     reportResponse.ResultData = ResultList;
@@ -3421,12 +3418,12 @@ namespace EBook_App.Controllers
             ReportResponse reportResponse = new ReportResponse();
             try
             {
-                if (ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_View))
+                if (StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Page_Setup_View))
                 {
                     List<Dynamic_SP_Params> List_Dynamic_SP_Params = new List<Dynamic_SP_Params>();
                     CustomFunctions.GetKendoFilter(ref _ReportParams, ref List_Dynamic_SP_Params, _PublicClaimObjects, true);
 
-                    List<P_MTV_Result> ResultList = ado.P_Get_Generic_List_SP<P_MTV_Result>("P_Get_MasterTypeValue_List", ref List_Dynamic_SP_Params);
+                    List<P_MTV_Result> ResultList = StaticPublicObjects.ado.P_Get_Generic_List_SP<P_MTV_Result>("P_Get_MasterTypeValue_List", ref List_Dynamic_SP_Params);
 
                     reportResponse.TotalRowCount = CustomFunctions.GetValueFromReturnParameter<long>(List_Dynamic_SP_Params, "TotalRowCount", typeof(long));
                     reportResponse.ResultData = ResultList;
@@ -3455,8 +3452,8 @@ namespace EBook_App.Controllers
         {
             string HtmlString = "";
 
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Edit);
             if ((MT_ID == 0 && IsAdd == false) || (MT_ID > 0 && IsEdit == false))
                 return "No Rights";
 
@@ -3472,7 +3469,7 @@ namespace EBook_App.Controllers
                 Dynamic_SP_Params.ParameterName = "MT_ID";
                 Dynamic_SP_Params.Val = MT_ID;
                 List_Dynamic_SP_Params.Add(Dynamic_SP_Params);
-                MTEdit = ado.ExecuteSelectSQLMap<P_AddOrEdit_MT_Response>("SELECT MT_ID, MasterTypeName = Name, Description, IsActive Active FROM [EBook_DB].[dbo].[T_Master_Type] with (nolock) WHERE MT_ID = @MT_ID ORDER BY [Name]", false, 0, ref List_Dynamic_SP_Params);
+                MTEdit = StaticPublicObjects.ado.ExecuteSelectSQLMap<P_AddOrEdit_MT_Response>("SELECT MT_ID, MasterTypeName = Name, Description, IsActive Active FROM [EBook_DB].[dbo].[T_Master_Type] with (nolock) WHERE MT_ID = @MT_ID ORDER BY [Name]", false, 0, ref List_Dynamic_SP_Params);
             }
 
             getModalDetail.getmodelsize = GetModalSize.modal_md;
@@ -3580,8 +3577,8 @@ namespace EBook_App.Controllers
         {
             string HtmlString = "";
 
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Edit);
             if ((MTV_ID == 0 && IsAdd == false) || (MTV_ID > 0 && IsEdit == false))
                 return "No Rights";
 
@@ -3600,16 +3597,16 @@ namespace EBook_App.Controllers
                 Dynamic_SP_Params.ParameterName = "MTV_ID";
                 Dynamic_SP_Params.Val = MTV_ID;
                 List_Dynamic_SP_Params.Add(Dynamic_SP_Params);
-                MTVEdit = ado.ExecuteSelectSQLMap<P_AddOrEdit_MTV_Response>("SELECT MTV_ID, MT_ID, MTV_CODE, MasterTypeValueName = Name, Sub_MTV_ID ,IsActive Active FROM [EBook_DB].[dbo].[T_Master_Type_Value] with (nolock) WHERE MTV_ID = @MTV_ID ORDER BY [Name]", false, 0, ref List_Dynamic_SP_Params);
+                MTVEdit = StaticPublicObjects.ado.ExecuteSelectSQLMap<P_AddOrEdit_MTV_Response>("SELECT MTV_ID, MT_ID, MTV_CODE, MasterTypeValueName = Name, Sub_MTV_ID ,IsActive Active FROM [EBook_DB].[dbo].[T_Master_Type_Value] with (nolock) WHERE MTV_ID = @MTV_ID ORDER BY [Name]", false, 0, ref List_Dynamic_SP_Params);
 
                 List<Dynamic_SP_Params> mtv_parms = new List<Dynamic_SP_Params>()
                 {
                     new Dynamic_SP_Params {ParameterName = "MT_ID", Val = MTVEdit.MT_ID}
                 };
-                MTVDropDownList = ado.Get_DropDownList_Result("SELECT code = MTV_ID , name = Name FROM [EBook_DB].[dbo].[T_Master_Type_Value] with (nolock) WHERE isActive = 1 AND MT_ID = @MT_ID ORDER BY [Name]", mtv_parms);
+                MTVDropDownList = StaticPublicObjects.ado.Get_DropDownList_Result("SELECT code = MTV_ID , name = Name FROM [EBook_DB].[dbo].[T_Master_Type_Value] with (nolock) WHERE isActive = 1 AND MT_ID = @MT_ID ORDER BY [Name]", mtv_parms);
             }
 
-            List<SelectDropDownList> MTList = ado.Get_DropDownList_Result("SELECT code = MT_ID , name = Name FROM [EBook_DB].[dbo].[T_Master_Type] with (nolock) WHERE isActive = 1 ORDER BY [Name]");
+            List<SelectDropDownList> MTList = StaticPublicObjects.ado.Get_DropDownList_Result("SELECT code = MT_ID , name = Name FROM [EBook_DB].[dbo].[T_Master_Type] with (nolock) WHERE isActive = 1 ORDER BY [Name]");
 
             getModalDetail.getmodelsize = GetModalSize.modal_md;
             getModalDetail.modaltitle = (MTV_ID == 0 ? "Add New Master Type Value" : "Edit Master Type Value");
@@ -3721,7 +3718,7 @@ namespace EBook_App.Controllers
                 object Sub_MT_ID_obj;
                 (string Name, object Value)[] ParamsNameValues = new (string, object)[1];
                 ParamsNameValues[0] = ("Sub_MTV_ID", MTVEdit.Sub_MTV_ID);
-                Sub_MT_ID_obj = ado.ExecuteSelectObj("select MT_ID from [EBook_DB].[dbo].[T_Master_Type_Value] mtv with (nolock) where mtv.MTV_ID = @Sub_MTV_ID ORDER BY [MT_ID]", ParamsNameValues);
+                Sub_MT_ID_obj = StaticPublicObjects.ado.ExecuteSelectObj("select MT_ID from [EBook_DB].[dbo].[T_Master_Type_Value] mtv with (nolock) where mtv.MTV_ID = @Sub_MTV_ID ORDER BY [MT_ID]", ParamsNameValues);
                 if (Sub_MT_ID_obj != null)
                 {
                     Sub_MT_ID = Convert.ToInt32(Sub_MT_ID_obj);
@@ -3758,7 +3755,7 @@ namespace EBook_App.Controllers
                 {
                     new Dynamic_SP_Params {ParameterName = "Sub_MT_ID", Val = Sub_MT_ID}
                 };
-                SubMTVDropDownList = ado.Get_DropdownList_MT_ID(Sub_MT_ID, _PublicClaimObjects.username);
+                SubMTVDropDownList = StaticPublicObjects.ado.Get_DropdownList_MT_ID(Sub_MT_ID, _PublicClaimObjects.username);
             }
             else
             {
@@ -3795,12 +3792,12 @@ namespace EBook_App.Controllers
         [HttpPost]
         public IActionResult AddOrEdit_MT([FromBody] P_AddOrEdit_MT_Response res)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Edit);
             if ((IsAdd == false) || (IsEdit == false))
                 return Content(JsonConvert.SerializeObject("No Rights"));
 
-            P_ReturnMessage_Result response = ado.P_SP_MultiParm_Result("P_AddOrEdit_MasterType", res, _PublicClaimObjects.username, "");
+            P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_MultiParm_Result("P_AddOrEdit_MasterType", res, _PublicClaimObjects.username, "");
             if (response.ReturnCode == false)
                 StaticPublicObjects.logFile.ErrorLog(FunctionName: "AddOrEdit_MT", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
             return Content(JsonConvert.SerializeObject(response));
@@ -3808,12 +3805,12 @@ namespace EBook_App.Controllers
         [HttpPost]
         public IActionResult AddOrEdit_MTV([FromBody] P_AddOrEdit_MTV_Response res)
         {
-            bool IsAdd = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Add);
-            bool IsEdit = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Edit);
+            bool IsAdd = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Add);
+            bool IsEdit = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Edit);
             if ((IsAdd == false) || (IsEdit == false))
                 return Content(JsonConvert.SerializeObject("No Rights"));
 
-            P_ReturnMessage_Result response = ado.P_SP_MultiParm_Result("P_AddOrEdit_MasterTypeValue", res, _PublicClaimObjects.username);
+            P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_MultiParm_Result("P_AddOrEdit_MasterTypeValue", res, _PublicClaimObjects.username);
             if (response.ReturnCode == false)
                 StaticPublicObjects.logFile.ErrorLog(FunctionName: "AddOrEdit_MTV", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
             return Content(JsonConvert.SerializeObject(response));
@@ -3823,10 +3820,10 @@ namespace EBook_App.Controllers
         [HttpPost]
         public IActionResult Remove_MT([FromBody] int MT_ID)
         {
-            bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Delete);
+            bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Delete);
             if (IsDelete)
             {
-                P_ReturnMessage_Result response = ado.P_SP_SingleParm_Result("P_Remove_MasterType", "MT_ID", MT_ID, _PublicClaimObjects.username);
+                P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_SingleParm_Result("P_Remove_MasterType", "MT_ID", MT_ID, _PublicClaimObjects.username);
                 if (response.ReturnCode == false)
                     StaticPublicObjects.logFile.ErrorLog(FunctionName: "Remove_MT", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
                 return Content(JsonConvert.SerializeObject(response));
@@ -3839,10 +3836,10 @@ namespace EBook_App.Controllers
         [HttpPost]
         public IActionResult Remove_MTV([FromBody] int MTV_ID)
         {
-            bool IsDelete = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Delete);
+            bool IsDelete = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Master_Setup_Delete);
             if (IsDelete)
             {
-                P_ReturnMessage_Result response = ado.P_SP_SingleParm_Result("P_Remove_MasterTypeValue", "MTV_ID", MTV_ID, _PublicClaimObjects.username);
+                P_ReturnMessage_Result response = StaticPublicObjects.ado.P_SP_SingleParm_Result("P_Remove_MasterTypeValue", "MTV_ID", MTV_ID, _PublicClaimObjects.username);
                 if (response.ReturnCode == false)
                     StaticPublicObjects.logFile.ErrorLog(FunctionName: "Remove_MTV", SmallMessage: response.ReturnText!, Message: response.ReturnText!);
                 return Content(JsonConvert.SerializeObject(response));
@@ -3861,7 +3858,7 @@ namespace EBook_App.Controllers
             {
                 new Dynamic_SP_Params {ParameterName = "MT_ID", Val = MT_ID}
             };
-            List<SelectDropDownList> result = ado.Get_DropDownList_Result("SELECT code = MTV_ID , name = Name FROM [EBook_DB].[dbo].[T_Master_Type_Value] with (nolock) WHERE isActive = 1 AND MT_ID = @MT_ID ORDER BY [Name]", parms);
+            List<SelectDropDownList> result = StaticPublicObjects.ado.Get_DropDownList_Result("SELECT code = MTV_ID , name = Name FROM [EBook_DB].[dbo].[T_Master_Type_Value] with (nolock) WHERE isActive = 1 AND MT_ID = @MT_ID ORDER BY [Name]", parms);
             return Content(JsonConvert.SerializeObject(result));
         }
         #endregion  Master Setup
@@ -3870,7 +3867,7 @@ namespace EBook_App.Controllers
         [CustomPageSetupAttribute]
         public IActionResult AuditHistory()
         {
-            bool IsView = ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Audit_History_View);
+            bool IsView = StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Audit_History_View);
             if (IsView)
             {
                 ViewBag.RightsListObj = new { IsView = IsView };
@@ -3878,7 +3875,7 @@ namespace EBook_App.Controllers
                 DataSet DS = new DataSet();
                 (string Name, object Value)[] ParamsNameValues = new (string, object)[1];
                 ParamsNameValues[0] = ("Username", _PublicClaimObjects.username);
-                DS = ado.ExecuteStoreProcedureDS("P_Get_Audit_History_DropDown_Lists", ParamsNameValues);
+                DS = StaticPublicObjects.ado.ExecuteStoreProcedureDS("P_Get_Audit_History_DropDown_Lists", ParamsNameValues);
                 ViewBag.AuditTypeList = JsonConvert.SerializeObject(DS.Tables[0]);
                 ViewBag.AuditSourceList = JsonConvert.SerializeObject(DS.Tables[1]);
 
@@ -3898,12 +3895,12 @@ namespace EBook_App.Controllers
             ReportResponse reportResponse = new ReportResponse();
             try
             {
-                if (ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Audit_History_View))
+                if (StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Audit_History_View))
                 {
                     List<Dynamic_SP_Params> List_Dynamic_SP_Params = new List<Dynamic_SP_Params>();
                     CustomFunctions.GetKendoFilter(ref _ReportParams, ref List_Dynamic_SP_Params, _PublicClaimObjects, true);
 
-                    List<P_AuditHistory_Result> ResultList = ado.P_Get_Generic_List_SP<P_AuditHistory_Result>("P_Get_AuditHistory_List", ref List_Dynamic_SP_Params);
+                    List<P_AuditHistory_Result> ResultList = StaticPublicObjects.ado.P_Get_Generic_List_SP<P_AuditHistory_Result>("P_Get_AuditHistory_List", ref List_Dynamic_SP_Params);
 
                     reportResponse.TotalRowCount = CustomFunctions.GetValueFromReturnParameter<long>(List_Dynamic_SP_Params, "TotalRowCount", typeof(long));
                     reportResponse.ResultData = ResultList;
@@ -3932,12 +3929,12 @@ namespace EBook_App.Controllers
             ReportResponse reportResponse = new ReportResponse();
             try
             {
-                if (ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Audit_History_View))
+                if (StaticPublicObjects.ado.P_Is_Has_Right_From_Username_And_PR_ID_From_Memory(_PublicClaimObjects.username, RightsList_ID.Audit_History_View))
                 {
                     List<Dynamic_SP_Params> List_Dynamic_SP_Params = new List<Dynamic_SP_Params>();
                     CustomFunctions.GetKendoFilter(ref _ReportParams, ref List_Dynamic_SP_Params, _PublicClaimObjects, true);
 
-                    List<P_AuditColumn_Result> ResultList = ado.P_Get_Generic_List_SP<P_AuditColumn_Result>("P_Get_AuditColumn_List", ref List_Dynamic_SP_Params);
+                    List<P_AuditColumn_Result> ResultList = StaticPublicObjects.ado.P_Get_Generic_List_SP<P_AuditColumn_Result>("P_Get_AuditColumn_List", ref List_Dynamic_SP_Params);
 
                     reportResponse.TotalRowCount = CustomFunctions.GetValueFromReturnParameter<long>(List_Dynamic_SP_Params, "TotalRowCount", typeof(long));
                     reportResponse.ResultData = ResultList;

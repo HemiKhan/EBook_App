@@ -1,6 +1,7 @@
 ﻿using EBook_App.Helper;
 using EBook_Data.Common;
 using EBook_Data.DataAccess;
+using EBook_Data.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.VisualBasic;
@@ -135,7 +136,7 @@ namespace EBook_App.Extension
 
                 dynamic_SP_Params = new Dynamic_SP_Params();
                 dynamic_SP_Params.ParameterName = "Application_MTV_ID";
-                dynamic_SP_Params.Val = "148100";
+                dynamic_SP_Params.Val = AppEnum.ApplicationId.AppID;
                 List_dynamic_SP_Params.Add(dynamic_SP_Params);
 
                 dynamic_SP_Params = new Dynamic_SP_Params();

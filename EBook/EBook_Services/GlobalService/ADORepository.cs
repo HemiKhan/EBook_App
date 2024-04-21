@@ -1776,6 +1776,21 @@ namespace EBook_Services.GlobalService
             return result;
 
         }
+        public bool IsValidToken(PublicClaimObjects _PublicClaimObjects, int Seconds)
+        {
+            bool Ret = true;
+            if (_PublicClaimObjects.iswebtoken)
+            {
+                string cachekey = $"{_PublicClaimObjects.jit}{_PublicClaimObjects.key}";
+                Ret = MemoryCaches.GetCacheValue(cachekey, _cache, Seconds);
+            }
+            else if (_PublicClaimObjects.iswebtoken == false)
+                Ret = false;
+            else if (false && _PublicClaimObjects.iswebtoken)
+                Ret = false;
+
+            return Ret;
+        }
         public P_Get_User_Info P_Get_User_Info(string UserName, int ApplicationID, MemoryCacheValueType? _MemoryCacheValueType = null)
         {
             List<Dynamic_SP_Params> parms = new List<Dynamic_SP_Params>()

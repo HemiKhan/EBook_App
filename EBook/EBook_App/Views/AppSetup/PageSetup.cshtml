@@ -22,13 +22,13 @@
 
     <div class="row tabs-container">
         <div class="col-lg-12 col-md-12 col-sm-12 tab-content">
-            @if (ViewBag.RightsListObj.IsView)
-            {
+            @* @if (ViewBag.RightsListObj.IsView)
+            {*@
                 <input id="tab1" type="radio" name="tabs" checked>
                 <label for="tab1" class="tabs-label"><i>PG</i>Page Group</label>
                 <input id="tab2" type="radio" name="tabs">
                 <label for="tab2" class="tabs-label"><i>P</i>Page</label>
-            }
+            @* } *@
             @Html.Hidden("PageGroupList", (object)ViewBag.PageGroupList)
             @Html.Hidden("PageList", (object)ViewBag.PageList)
             @Html.Hidden("RightsList", (object)ViewBag.RightsList)
@@ -143,7 +143,7 @@
                 IsHide: { type: KendoFilterTypes.Boolean, srtype: SRVTypes.Boolean },
                 IsActive: { type: KendoFilterTypes.Boolean, srtype: SRVTypes.Boolean },
             }
-            var _griddatasource = GetGridDataSourceAjaxCommon(kendogridid, pagesize, "/Account/GetPageGroupsList", true, true, true, PageGroupfieldstype, false, false);
+            var _griddatasource = GetGridDataSourceAjaxCommon(kendogridid, pagesize, "/AppSetup/GetPageGroupsList", true, true, true, PageGroupfieldstype, false, false);
             $("#" + kendogridid).kendoGrid({
                 dataSource: _griddatasource,
                 responsive: false,
@@ -271,7 +271,7 @@
         }
         function GetAddEditPageGroupModal(Encrypted_PG_ID) {
             if ((RightsList.IsAdd == true) || (RightsList.IsEdit == true)) {
-                GetAddEditModalAjaxCommon(Encrypted_PG_ID, "/Account/GetAddEditPageGroupModal");
+                GetAddEditModalAjaxCommon(Encrypted_PG_ID, "/AppSetup/GetAddEditPageGroupModal");
             } else{
                 WarningMessage('No Rights', "You Don't Have Rights To Access.", true, "Ok");
                 $("#PageLoader").hide();
@@ -289,7 +289,7 @@
             if (!validateRequiredFields(ObjJson, requiredFields)) {
                 return;
             }
-            AddEditRemoveAjaxCommon(JsonData, "/Account/AddOrEdit_PageGroup", null, false, 'grid');
+            AddEditRemoveAjaxCommon(JsonData, "/AppSetup/AddOrEdit_PageGroup", null, false, 'grid');
         }
         function PageGroup_Remove(this_, Ery_PG_ID, RowNo, IsActive) {
             if (RightsList.IsDelete) {
@@ -297,7 +297,7 @@
                     return;
                 }
                 $(this_).attr("disabled", "disabled");
-                IsActiveEditCommon(Ery_PG_ID, "/Account/Remove_PageGroup", null, RowNo, IsActive, "Row No", 'gird');
+                IsActiveEditCommon(Ery_PG_ID, "/AppSetup/Remove_PageGroup", null, RowNo, IsActive, "Row No", 'gird');
             } else {
                 WarningMessage('No Rights', "You Don't Have Rights To Access.", true, "Ok");
                 $("#PageLoader").hide();
@@ -305,7 +305,7 @@
             }
         }
         function GetPageGroupSorting() {
-            GetSortingAjaxCommon(null, "/Account/Get_PageGroup_Sorting", "Update_PageGroup_Sorting()");
+            GetSortingAjaxCommon(null, "/AppSetup/Get_PageGroup_Sorting", "Update_PageGroup_Sorting()");
             $('#Sorting-modal').modal({
                 backdrop: false
             });
@@ -313,7 +313,7 @@
         }
         function Update_PageGroup_Sorting() {
             var json = JSON.stringify(getSortingValues());
-            AddEditRemoveAjaxCommon(json, "/Account/Update_PageGroup_Sorting", null, false, 'grid');
+            AddEditRemoveAjaxCommon(json, "/AppSetup/Update_PageGroup_Sorting", null, false, 'grid');
         }
 
         function PageGridLoad() {
@@ -334,7 +334,7 @@
                 IsHide: { type: KendoFilterTypes.Boolean, srtype: SRVTypes.Boolean },
                 IsActive: { type: KendoFilterTypes.Boolean, srtype: SRVTypes.Boolean },
             }
-            var _griddatasource = GetGridDataSourceAjaxCommon(kendogridid, pagesize, "/Account/GetPagesList", true, true, true, Pagefieldstype, false, false);
+            var _griddatasource = GetGridDataSourceAjaxCommon(kendogridid, pagesize, "/AppSetup/GetPagesList", true, true, true, Pagefieldstype, false, false);
             $("#" + kendogridid).kendoGrid({
                 dataSource: _griddatasource,
                 responsive: false,
@@ -485,7 +485,7 @@
         }
         function GetAddEditPageModal(Encrypted_P_ID) {
             if ((RightsList.IsAdd == true) || (RightsList.IsEdit == true)) {
-                GetAddEditModalAjaxCommon(Encrypted_P_ID, "/Account/GetAddEditPageModal");
+                GetAddEditModalAjaxCommon(Encrypted_P_ID, "/AppSetup/GetAddEditPageModal");
             } else {
                 WarningMessage('No Rights', "You Don't Have Rights To Access.", true, "Ok");
                 $("#PageLoader").hide();
@@ -506,7 +506,7 @@
             if (!validateRequiredFields(ObjJson, requiredFields)) {
                 return;
             }
-            AddEditRemoveAjaxCommon(JsonData, "/Account/AddOrEdit_Page", null, false, 'grid1');
+            AddEditRemoveAjaxCommon(JsonData, "/AppSetup/AddOrEdit_Page", null, false, 'grid1');
         }
         function Page_Remove(this_, Ery_P_ID, RowNo, IsActive) {
             if (RightsList.IsDelete) {
@@ -514,7 +514,7 @@
                     return;
                 }
                 $(this_).attr("disabled", "disabled");
-                IsActiveEditCommon(Ery_P_ID, "/Account/Remove_Page", null, RowNo, IsActive, "Row No", 'grid1');
+                IsActiveEditCommon(Ery_P_ID, "/AppSetup/Remove_Page", null, RowNo, IsActive, "Row No", 'grid1');
             } else {
                 WarningMessage('No Rights', "You Don't Have Rights To Access.", true, "Ok");
                 $("#PageLoader").hide();
@@ -527,7 +527,7 @@
                 return;
             }
             $(this_).attr("disabled", "disabled");
-            GetSortingAjaxCommon(Ery_PG_ID, "/Account/Get_Page_Sorting", "Update_Page_Sorting()");
+            GetSortingAjaxCommon(Ery_PG_ID, "/AppSetup/Get_Page_Sorting", "Update_Page_Sorting()");
             $('#Sorting-modal').modal({
                 backdrop: true
             });
@@ -535,7 +535,7 @@
         }
         function Update_Page_Sorting() {
             var json = JSON.stringify(getSortingValues());
-            AddEditRemoveAjaxCommon(json, "/Account/Update_Page_Sorting", null, false, 'grid1');
+            AddEditRemoveAjaxCommon(json, "/AppSetup/Update_Page_Sorting", null, false, 'grid1');
         }
 
         function onCustomFilterValidate(id, IsRun, IsClearFilter) {
